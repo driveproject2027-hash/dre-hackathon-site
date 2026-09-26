@@ -2735,6 +2735,19 @@ section[id], header[id] {
     padding-bottom: 0.75rem;
     padding-right: 0;
   }
+  .hero-partners-strip {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.25rem;
+  }
+  .hero-partners-logos {
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: flex-start;
+  }
+  .hero-partner-logo { max-width: 140px; }
+  .partner-logo-divider { display: none; }
   .chapter-cards-grid {
     grid-template-columns: 1fr;
   }
