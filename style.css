@@ -2696,94 +2696,101 @@ section[id], header[id] {
     grid-template-columns: 1fr 1fr;
   }
 }
-
+/* ── COMPREHENSIVE MOBILE OPTIMIZATION ── */
 @media (max-width: 768px) {
-  .timeline-editorial-strip {
-    grid-template-columns: 1fr;
-  }
-  .whatsapp-community-banner {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .wa-banner-left {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.75rem;
-  }
-  .nav-menu, .nav-actions .btn {
-    display: none;
-  }
-  .mobile-menu-btn {
-    display: block;
-  }
-  .hero-headline {
-    font-size: 2.15rem;
-  }
-  .hero-campaign-line {
-    font-size: 1.25rem;
-  }
-  .hero-prize-pill {
-    font-size: 0.72rem;
-  }
-  .editorial-data-strip {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-  }
-  .data-strip-item:not(:last-child) {
-    border-right: none;
-    border-bottom: 1px solid var(--border-editorial);
-    padding-bottom: 0.75rem;
-    padding-right: 0;
-  }
-  .hero-cta-group {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  .hero-cta-group .btn {
-    width: 100%;
-    text-align: center;
-  }
-  .hero-partners-strip {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
-    padding: 1.25rem;
-  }
-  .hero-partners-logos {
-    flex-wrap: wrap;
-    gap: 1rem;
-    justify-content: flex-start;
-  }
-  .hero-partner-logo { max-width: 140px; }
+  /* Layout Spacing */
+  .container { padding: 0 16px; }
+  
+  /* Navigation */
+  .nav-menu, .nav-actions .btn { display: none; }
+  .mobile-menu-btn { display: block; font-size: 1.5rem; }
+  .mobile-nav-drawer { top: 60px; padding: 1.25rem 1rem; }
+  
+  /* Hero Section */
+  .hero-section { padding: 40px 0 60px; }
+  .hero-headline { font-size: clamp(2rem, 8vw, 2.8rem); line-height: 1.1; }
+  .hero-campaign-line { font-size: clamp(1.1rem, 5vw, 1.35rem); margin-top: 8px; display: block; }
+  .hero-support-text { font-size: 1rem; padding-right: 0; }
+  .hero-cta-group { flex-direction: column; align-items: stretch; gap: 12px; }
+  .hero-cta-group .btn { width: 100%; text-align: center; padding: 14px; font-size: 1rem; }
+  
+  /* Partners */
+  .hero-partners-strip { flex-direction: column; gap: 12px; padding: 16px; border-radius: 8px; }
+  .hero-partners-logos { flex-wrap: wrap; gap: 16px; justify-content: flex-start; width: 100%; }
+  .hero-partner-logo { max-height: 35px; width: auto; object-fit: contain; }
   .partner-logo-divider { display: none; }
-  .chapter-cards-grid {
-    grid-template-columns: 1fr;
+  
+  /* Statistics Data Strip */
+  .editorial-data-strip { grid-template-columns: repeat(2, 1fr); gap: 16px; padding: 24px 16px; }
+  .data-strip-item { border: none !important; padding: 0 !important; }
+  .data-strip-num { font-size: 2.5rem; }
+  
+  /* Timeline */
+  .timeline-editorial-strip { grid-template-columns: 1fr; gap: 24px; padding: 24px 16px; }
+  .timeline-step { padding-left: 0; border-left: none; padding-bottom: 24px; border-bottom: 1px solid var(--border-light); }
+  .timeline-step:last-child { border-bottom: none; padding-bottom: 0; }
+  
+  /* Map & Andhra Section */
+  .andhra-pill-bar {
+    display: flex; overflow-x: auto; flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    gap: 8px; padding-bottom: 8px;
   }
-  .rule-doc-row {
-    grid-template-columns: 1fr;
-    gap: 0.5rem;
-  }
-  .form-row-2 {
-    grid-template-columns: 1fr;
-  }
-  .receipt-props-grid {
-    grid-template-columns: 1fr;
-  }
-  .contact-card-main, .contact-card-side {
-    padding: 1.75rem 1.25rem;
-  }
-  .footer-columns-grid {
-    grid-template-columns: 1fr;
-  }
-  .footer-bottom-bar {
-    flex-direction: column;
-    gap: 0.75rem;
-    text-align: center;
-  }
-  .mobile-sticky-bar {
-    display: block;
-  }
-  body {
-    padding-bottom: 60px;
-  }
+  .andhra-pill-bar::-webkit-scrollbar { display: none; }
+  .corridor-pill { white-space: nowrap; font-size: 0.85rem; padding: 8px 14px; flex-shrink: 0; }
+  .real-leaflet-map { min-height: 350px; height: 50vh; }
+  .map-header-left { flex-direction: column; align-items: flex-start; gap: 6px; }
+  
+  /* Challenge Cards */
+  .chapter-cards-grid { grid-template-columns: 1fr; gap: 16px; }
+  .editorial-challenge-card { padding: 20px 16px; }
+  .challenge-card-footer { flex-direction: column; }
+  .challenge-card-footer .btn { width: 100%; text-align: center; }
+  
+  /* Rules & Guidelines */
+  .rule-doc-row { grid-template-columns: 1fr; gap: 8px; padding-bottom: 24px; }
+  .rule-doc-number { font-size: 2rem; padding-bottom: 4px; border-bottom: 2px solid var(--brand-forest); margin-bottom: 8px; width: fit-content; }
+  
+  /* Registration Form */
+  .form-row-2 { grid-template-columns: 1fr; gap: 16px; }
+  .field-input, select.field-input, textarea.field-input { width: 100%; font-size: 16px; /* Prevents iOS zoom */ padding: 12px; }
+  .submit-row { flex-direction: column; }
+  .submit-row .btn { width: 100%; padding: 16px; font-size: 1.1rem; }
+  
+  /* Receipt / Success */
+  .receipt-props-grid { grid-template-columns: 1fr; gap: 12px; }
+  .receipt-buttons-row { flex-direction: column; }
+  .receipt-buttons-row .btn { width: 100%; justify-content: center; }
+  .poc-url-row { flex-direction: column; }
+  .poc-url-input { width: 100%; margin-bottom: 8px; border-radius: 6px; }
+  .poc-url-row .btn { width: 100%; border-radius: 6px; }
+  
+  /* FAQ */
+  .faq-question { font-size: 1.05rem; padding: 16px; padding-right: 48px; }
+  .faq-icon { right: 16px; }
+  
+  /* Footer & Sticky */
+  .footer-columns-grid { grid-template-columns: 1fr; gap: 32px; }
+  .footer-bottom-bar { flex-direction: column; gap: 12px; text-align: center; }
+  .mobile-sticky-bar { display: block; }
+  body { padding-bottom: 70px; }
+}
+
+@media (max-width: 480px) {
+  /* Smaller Phones (320px - 480px) */
+  .editorial-data-strip { grid-template-columns: 1fr; text-align: center; gap: 24px; }
+  .data-strip-item { align-items: center; }
+  
+  .hero-headline { font-size: clamp(1.8rem, 10vw, 2.2rem); }
+  .hero-campaign-line { font-size: 1.1rem; }
+  
+  .hero-partners-logos { gap: 12px; }
+  .hero-partner-logo { max-height: 28px; }
+  
+  .editorial-section-header .editorial-title { font-size: 2rem; }
+  .editorial-lead { font-size: 1rem; }
+  
+  .prizes-grid, .prizes-consolation-row { gap: 16px; }
+  .prize-card-large { padding: 24px 16px; }
+  .prize-amount { font-size: 2.5rem; }
 }
