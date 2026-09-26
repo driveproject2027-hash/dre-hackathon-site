@@ -2944,9 +2944,12 @@ section[id], header[id] {
   .hero-cta-group .btn-primary { display: none !important; }
   
   /* Partners */
-  .hero-partners-strip { flex-direction: column; gap: 12px; padding: 16px; border-radius: 8px; }
-  .hero-partners-logos { flex-wrap: wrap; gap: 16px; justify-content: flex-start; width: 100%; }
-  .hero-partner-logo { max-height: 35px; width: auto; object-fit: contain; }
+  .hero-partners-strip { flex-direction: column; gap: 10px; padding: 14px; border-radius: 8px; }
+  .hero-partners-logos { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; align-items: center; justify-items: center; width: 100%; }
+  .hero-partner-logo { max-height: 30px; width: auto; max-width: 100%; object-fit: contain; }
+  .hero-partner-logo-game { max-height: 22px; max-width: 100%; }
+  .hero-partner-logo-round { height: 30px; width: 30px; }
+  .hero-partner-logo-lb { height: 30px; max-width: 100%; }
   .partner-logo-divider { display: none; }
   
   /* Statistics Data Strip - Mobile Grid Restructure */
