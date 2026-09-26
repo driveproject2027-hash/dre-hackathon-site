@@ -90,6 +90,27 @@ function doPost(e) {
       return jsonResponse({ ok: false, error: "not_found" });
     }
 
+    // Handle Contact Form
+    if (p.action === "contact") {
+      var querySheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Queries");
+      if (!querySheet) {
+        querySheet = SpreadsheetApp.getActiveSpreadsheet().insertSheet("Queries");
+        querySheet.appendRow(["Timestamp", "Name", "Email", "Message"]);
+      }
+      var timestamp = new Date().toISOString();
+      querySheet.appendRow([timestamp, p.name || "", p.email || "", p.message || ""]);
+      
+      var adminEmail = Session.getEffectiveUser().getEmail();
+      if (adminEmail) {
+        MailApp.sendEmail({
+          to: adminEmail,
+          subject: "New Hackathon Query from " + (p.name || "Participant"),
+          body: "Name: " + (p.name || "") + "\nEmail: " + (p.email || "") + "\n\nMessage:\n" + (p.message || "")
+        });
+      }
+      return jsonResponse({ ok: true });
+    }
+
     // Required-field sanity check
     if (!p.lead_email) {
       return jsonResponse({ ok: false, error: "missing_email" });

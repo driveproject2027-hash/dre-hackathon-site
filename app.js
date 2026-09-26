@@ -1215,3 +1215,48 @@ document.addEventListener("DOMContentLoaded", () => {
     observer.observe(regSection);
   }
 });
+
+/* ── Contact Form Handler ── */
+document.addEventListener("DOMContentLoaded", () => {
+  const contactForm = document.getElementById("contactQueryForm");
+  if (contactForm) {
+    contactForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById("cqSubmitBtn");
+      const status = document.getElementById("cqStatus");
+      btn.disabled = true;
+      btn.textContent = "Sending...";
+      status.style.display = "none";
+      
+      const payload = new URLSearchParams();
+      payload.append("action", "contact");
+      payload.append("name", document.getElementById("cqName").value.trim());
+      payload.append("email", document.getElementById("cqEmail").value.trim());
+      payload.append("message", document.getElementById("cqMessage").value.trim());
+      
+      try {
+        const res = await fetch(BACKEND_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: payload.toString()
+        });
+        const data = await res.json();
+        if (data.ok) {
+          status.textContent = "Query sent successfully! We will get back to you soon.";
+          status.style.color = "var(--brand-forest)";
+          status.style.display = "block";
+          contactForm.reset();
+        } else {
+          throw new Error("Failed to send");
+        }
+      } catch (err) {
+        status.textContent = "Error sending query. Please try again.";
+        status.style.color = "#D32F2F";
+        status.style.display = "block";
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "Send Query →";
+      }
+    });
+  }
+});
