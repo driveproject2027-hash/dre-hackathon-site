@@ -73,6 +73,23 @@ function doPost(e) {
     var sheet = getSheet();
     var p = e.parameter;                               // form-encoded fields
 
+    // Handle Delete Action
+    if (p.action === "delete") {
+      if (!p.reg_id) return jsonResponse({ ok: false, error: "missing_reg_id" });
+      
+      var lastRow = sheet.getLastRow();
+      if (lastRow < 2) return jsonResponse({ ok: false, error: "not_found" });
+      
+      var ids = sheet.getRange(2, 1, lastRow - 1, 1).getValues(); // col A (reg_id)
+      for (var i = 0; i < ids.length; i++) {
+        if (String(ids[i][0]).trim() === p.reg_id) {
+          sheet.deleteRow(i + 2); // i is 0-indexed, rows are 1-indexed, +1 for header
+          return jsonResponse({ ok: true, deleted_id: p.reg_id });
+        }
+      }
+      return jsonResponse({ ok: false, error: "not_found" });
+    }
+
     // Required-field sanity check
     if (!p.lead_email) {
       return jsonResponse({ ok: false, error: "missing_email" });

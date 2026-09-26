@@ -114,6 +114,8 @@
   .btn-primary:hover{background:var(--brand-forest);}
   .btn-ghost{background:transparent; color:var(--brand-forest); border:1.5px solid var(--brand-forest);}
   .btn-ghost:hover{background:var(--bg-sage-tint);}
+  .btn-danger{background:#fff; color:#B3261E; border:1px solid #B3261E; padding:8px 14px; font-size:0.8rem;}
+  .btn-danger:hover{background:#FCE8E8;}
 
   /* ── Table ──────────────────────────────────────────── */
   .table-wrap{
@@ -413,18 +415,57 @@
             <div class="full-width"><div class="field-label">Motivation & Approach</div><div class="field-value">${esc(r.why_reason) || '<span style="color:var(--text-subtle);">Not provided</span>'}</div></div>
             <div class="full-width"><div class="field-label">Tech Stack & Skills</div><div class="field-value">${esc(r.skills)}</div></div>
             <div><div class="field-label">Registered At</div><div class="field-value">${formatDate(r.created_at)}</div></div>
+            <div style="text-align:right; align-self:end;">
+              <button class="btn btn-danger delete-btn" data-id="${esc(id)}">🗑 Delete Team</button>
+            </div>
           </div>
         </td></tr>` : ""}`;
       }).join("");
     }
 
     // Expand/collapse detail rows
-    tbody.addEventListener("click", e => {
-      const btn = e.target.closest(".expand-btn");
-      if (!btn) return;
-      const id = btn.dataset.id;
-      expandedId = expandedId === id ? null : id;
-      render();
+    tbody.addEventListener("click", async e => {
+      // Handle expand
+      const expandBtn = e.target.closest(".expand-btn");
+      if (expandBtn) {
+        const id = expandBtn.dataset.id;
+        expandedId = expandedId === id ? null : id;
+        render();
+        return;
+      }
+
+      // Handle delete
+      const deleteBtn = e.target.closest(".delete-btn");
+      if (deleteBtn) {
+        const id = deleteBtn.dataset.id;
+        if (!confirm(`Are you sure you want to completely delete team ${id}? This cannot be undone.`)) return;
+        
+        const originalText = deleteBtn.innerHTML;
+        deleteBtn.innerHTML = "Deleting...";
+        deleteBtn.disabled = true;
+
+        try {
+          const res = await fetch(WEB_APP_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: `action=delete&reg_id=${encodeURIComponent(id)}`
+          });
+          const json = await res.json();
+          if (json.ok) {
+            allRows = allRows.filter(r => r.reg_id !== id);
+            expandedId = null;
+            render();
+          } else {
+            alert("Failed to delete: " + (json.error || "Unknown error"));
+            deleteBtn.innerHTML = originalText;
+            deleteBtn.disabled = false;
+          }
+        } catch (err) {
+          alert("Error: " + err.message);
+          deleteBtn.innerHTML = originalText;
+          deleteBtn.disabled = false;
+        }
+      }
     });
 
     // Sorting
