@@ -412,6 +412,11 @@ function initDelegatedHandlers() {
         chooseChallengeFromModal(selectBtn.getAttribute("data-ps-id"));
         return;
       }
+      const viewBtn = e.target.closest("[data-action='view']");
+      if (viewBtn) {
+        openProblemModal(viewBtn.getAttribute("data-ps-id"));
+        return;
+      }
       const row = e.target.closest(".report-row");
       if (row) highlightMatrixRow(row.getAttribute("data-id"));
     });
