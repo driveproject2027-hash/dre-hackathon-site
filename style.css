@@ -2735,6 +2735,14 @@ section[id], header[id] {
     padding-bottom: 0.75rem;
     padding-right: 0;
   }
+  .hero-cta-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .hero-cta-group .btn {
+    width: 100%;
+    text-align: center;
+  }
   .hero-partners-strip {
     flex-direction: column;
     align-items: flex-start;
