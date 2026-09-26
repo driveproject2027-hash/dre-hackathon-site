@@ -122,7 +122,7 @@
 
 <script>
   // Paste your Apps Script Web App /exec URL here.
-  const WEB_APP_URL = "PASTE-YOUR-APPS-SCRIPT-WEB-APP-URL-HERE"; // same URL as BACKEND_URL in app.js
+  const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwQtvtlaLITtHfdxYddY1lo-ym3wALnEUehN1n8mnfaPO9rRfhKSgNIqKkx19Nbr-miOw/exec"; // same URL as BACKEND_URL in app.js
 
   const form = document.getElementById("regForm");
   const statusEl = document.getElementById("status");
@@ -140,10 +140,6 @@
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    if (WEB_APP_URL.includes("PASTE_YOUR_EXEC_URL_HERE")) {
-      showStatus("err", "This form isn't connected yet — set WEB_APP_URL in the page source to your Apps Script /exec URL.");
-      return;
-    }
     if (!form.checkValidity()) {
       form.reportValidity();
       return;

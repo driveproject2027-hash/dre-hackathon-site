@@ -3,84 +3,255 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>DRE Hackathon — Registrations</title>
+<title>DRE Hackathon — Admin Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
-
+  /* ── Design tokens (matches main site) ──────────────── */
   :root{
-    --ink:#161A1F; --paper:#EEF1F6; --line:#C7CEDA;
-    --teal:#0F8B8D; --teal-dark:#0B6668; --navy:#142433; --muted:#5B6472;
+    --bg-ivory:#F5F3ED; --bg-white:#FFFFFF; --bg-deep-forest:#0E3B2F;
+    --bg-forest-card:#14493B; --bg-sage-tint:#EBF1EE;
+    --text-charcoal:#17211D; --text-muted:#5E6964; --text-subtle:#8A9690;
+    --text-cream:#F5F3ED; --text-cream-muted:#A8B5AF;
+    --brand-forest:#14634D; --brand-forest-dark:#0E4737;
+    --brand-muted:#71877D; --brand-ochre:#C99A32;
+    --border-editorial:#D9D6CD; --border-light:#ECEAE4;
+    --font-main:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    --font-heading:'Outfit','Plus Jakarta Sans',sans-serif;
+    --font-mono:'JetBrains Mono',monospace;
+    --radius-sm:6px; --radius-md:8px; --radius-lg:10px;
+    --transition-fast:0.16s ease-in-out;
   }
-  *{box-sizing:border-box;}
-  body{margin:0; background:var(--paper); color:var(--ink); font-family:'Inter',sans-serif;}
-  .wrap{max-width:1180px; margin:0 auto; padding:40px 24px 80px;}
+  *,*::before,*::after{box-sizing:border-box; margin:0; padding:0;}
+  html{font-size:16px; background:var(--bg-ivory);}
+  body{background:var(--bg-ivory); color:var(--text-charcoal); font-family:var(--font-main);
+    line-height:1.6; -webkit-font-smoothing:antialiased;}
 
-  .top{display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:16px; margin-bottom:24px;}
-  h1{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:28px; margin:0 0 4px; letter-spacing:-0.01em;}
-  .sub{color:var(--muted); margin:0; font-size:14px;}
-  .count{font-family:'JetBrains Mono',monospace; font-size:14px; color:var(--teal-dark); background:#E4F3F1; padding:6px 12px; border-radius:3px; border:1px solid var(--teal);}
-
-  .controls{display:flex; gap:10px; margin-bottom:18px; flex-wrap:wrap;}
-  input[type="search"]{
-    flex:1; min-width:220px; padding:10px 12px; font:inherit; font-size:14px;
-    border:1px solid var(--line); border-radius:3px; background:#fff;
+  /* ── Auth overlay ───────────────────────────────────── */
+  .auth-overlay{
+    position:fixed; inset:0; z-index:9999;
+    display:flex; align-items:center; justify-content:center;
+    background:linear-gradient(145deg, #0E3B2F 0%, #17211D 60%, #14634D 100%);
   }
-  input[type="search"]:focus{outline:2px solid var(--teal); outline-offset:1px;}
-  select{padding:10px 12px; font:inherit; font-size:14px; border:1px solid var(--line); border-radius:3px; background:#fff;}
-  button{
-    font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:14px;
-    background:var(--navy); color:#fff; border:0; border-radius:3px; padding:10px 18px; cursor:pointer;
+  .auth-card{
+    background:var(--bg-white); border-radius:var(--radius-lg); padding:48px 40px;
+    width:400px; max-width:90vw; text-align:center;
+    box-shadow:0 32px 80px rgba(0,0,0,0.35);
   }
-  button:hover{background:var(--teal-dark);}
+  .auth-icon{font-size:52px; margin-bottom:16px; filter:drop-shadow(0 4px 12px rgba(0,0,0,0.08));}
+  .auth-card h2{font-family:var(--font-heading); font-weight:700; font-size:1.5rem; margin:0 0 8px; color:var(--text-charcoal);}
+  .auth-card>p{color:var(--text-muted); font-size:0.9rem; margin:0 0 28px; line-height:1.5;}
+  .auth-card input[type="password"]{
+    width:100%; padding:13px 16px; font-family:var(--font-main); font-size:0.95rem;
+    border:1.5px solid var(--border-editorial); border-radius:var(--radius-sm);
+    margin-bottom:14px; text-align:center; letter-spacing:2px; background:var(--bg-ivory);
+    transition:border var(--transition-fast);
+  }
+  .auth-card input:focus{outline:none; border-color:var(--brand-forest);}
+  .auth-card button{
+    width:100%; padding:13px; font-family:var(--font-heading); font-weight:600; font-size:0.95rem;
+    border:0; border-radius:var(--radius-sm); background:var(--bg-deep-forest); color:var(--text-cream);
+    cursor:pointer; transition:background var(--transition-fast);
+  }
+  .auth-card button:hover{background:var(--brand-forest);}
+  .auth-error{color:#B3261E; font-size:0.82rem; margin:14px 0 0; min-height:20px;}
+  .auth-overlay.hidden{display:none;}
 
-  .table-scroll{overflow-x:auto; border:1px solid var(--line); border-radius:4px; background:#fff;}
-  table{border-collapse:collapse; width:100%; min-width:1000px; font-size:13.5px;}
+  /* ── Page shell ─────────────────────────────────────── */
+  .page{max-width:1400px; margin:0 auto; padding:36px 32px 80px;}
+
+  /* ── Top bar ────────────────────────────────────────── */
+  .top-bar{
+    display:flex; align-items:flex-end; justify-content:space-between;
+    flex-wrap:wrap; gap:12px; margin-bottom:28px;
+    padding-bottom:20px; border-bottom:1.5px solid var(--border-editorial);
+  }
+  .top-bar h1{font-family:var(--font-heading); font-weight:700; font-size:1.65rem;
+    letter-spacing:-0.02em; color:var(--text-charcoal);}
+  .top-bar .sub{color:var(--text-muted); font-size:0.85rem; margin-top:2px;}
+  .badge{
+    font-family:var(--font-mono); font-size:0.82rem; font-weight:500;
+    color:var(--brand-forest); background:var(--bg-sage-tint);
+    padding:7px 14px; border-radius:var(--radius-sm);
+    border:1px solid var(--brand-forest); white-space:nowrap;
+  }
+
+  /* ── Stats row ──────────────────────────────────────── */
+  .stats-row{display:flex; gap:16px; margin-bottom:24px; flex-wrap:wrap;}
+  .stat-card{
+    flex:1; min-width:140px; background:var(--bg-white); border:1px solid var(--border-editorial);
+    border-radius:var(--radius-md); padding:18px 20px;
+  }
+  .stat-card .label{font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em;
+    color:var(--text-muted); font-weight:600; margin-bottom:4px;}
+  .stat-card .value{font-family:var(--font-heading); font-size:1.6rem; font-weight:700;
+    color:var(--text-charcoal);}
+  .stat-card .value.forest{color:var(--brand-forest);}
+
+  /* ── Controls ───────────────────────────────────────── */
+  .controls{display:flex; gap:10px; margin-bottom:20px; flex-wrap:wrap; align-items:center;}
+  .search-wrap{
+    flex:1; min-width:260px; position:relative;
+  }
+  .search-wrap svg{position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--text-subtle); pointer-events:none;}
+  .search-wrap input{
+    width:100%; padding:11px 12px 11px 38px; font:inherit; font-size:0.88rem;
+    border:1.5px solid var(--border-editorial); border-radius:var(--radius-sm);
+    background:var(--bg-white); transition:border var(--transition-fast);
+  }
+  .search-wrap input:focus{outline:none; border-color:var(--brand-forest);}
+  select{
+    padding:11px 14px; font:inherit; font-size:0.88rem; border:1.5px solid var(--border-editorial);
+    border-radius:var(--radius-sm); background:var(--bg-white); color:var(--text-charcoal);
+    cursor:pointer;
+  }
+  .btn{
+    font-family:var(--font-heading); font-weight:600; font-size:0.85rem;
+    padding:11px 18px; border:0; border-radius:var(--radius-sm); cursor:pointer;
+    transition:all var(--transition-fast); white-space:nowrap;
+  }
+  .btn-primary{background:var(--bg-deep-forest); color:var(--text-cream);}
+  .btn-primary:hover{background:var(--brand-forest);}
+  .btn-ghost{background:transparent; color:var(--brand-forest); border:1.5px solid var(--brand-forest);}
+  .btn-ghost:hover{background:var(--bg-sage-tint);}
+
+  /* ── Table ──────────────────────────────────────────── */
+  .table-wrap{
+    overflow-x:auto; border:1px solid var(--border-editorial);
+    border-radius:var(--radius-md); background:var(--bg-white);
+    box-shadow:0 2px 12px rgba(0,0,0,0.04);
+  }
+  table{border-collapse:collapse; width:100%; min-width:1100px;}
   thead th{
-    position:sticky; top:0; background:var(--navy); color:#fff; text-align:left;
-    font-family:'Space Grotesk',sans-serif; font-weight:500; font-size:12.5px;
-    padding:10px 12px; white-space:nowrap; cursor:pointer; user-select:none;
+    position:sticky; top:0; z-index:2;
+    background:var(--bg-deep-forest); color:var(--text-cream);
+    font-family:var(--font-heading); font-weight:600; font-size:0.72rem;
+    text-transform:uppercase; letter-spacing:0.06em;
+    padding:13px 16px; text-align:left; white-space:nowrap;
+    cursor:pointer; user-select:none; transition:background var(--transition-fast);
   }
-  thead th:hover{background:var(--teal-dark);}
-  tbody td{padding:9px 12px; border-top:1px solid var(--line); vertical-align:top; max-width:260px;}
-  tbody tr:hover{background:#F4F7FA;}
-  .mono{font-family:'JetBrains Mono',monospace; font-size:12.5px; color:var(--muted);}
-  .wrap-cell{white-space:normal; word-break:break-word;}
+  thead th:hover{background:var(--brand-forest);}
+  thead th.sorted-asc::after{content:" ↑"; font-size:0.7rem;}
+  thead th.sorted-desc::after{content:" ↓"; font-size:0.7rem;}
+  tbody td{
+    padding:14px 16px; border-top:1px solid var(--border-light);
+    vertical-align:top; font-size:0.86rem; color:var(--text-charcoal);
+  }
+  tbody tr{transition:background var(--transition-fast);}
+  tbody tr:hover{background:var(--bg-sage-tint);}
+  .cell-mono{font-family:var(--font-mono); font-size:0.78rem; color:var(--text-muted);}
+  .cell-team{font-weight:600; color:var(--text-charcoal);}
+  .cell-name{font-weight:500;}
+  .cell-email{font-family:var(--font-mono); font-size:0.78rem; color:var(--brand-forest);}
+  .cell-phone{font-family:var(--font-mono); font-size:0.78rem; color:var(--text-muted); white-space:nowrap;}
+  .cell-org{color:var(--text-muted); font-size:0.84rem;}
+  .cell-loc{font-size:0.84rem;}
+  .cell-ps{
+    font-family:var(--font-mono); font-size:0.75rem; font-weight:500;
+    background:var(--bg-sage-tint); color:var(--brand-forest);
+    padding:3px 8px; border-radius:4px; display:inline-block; white-space:nowrap;
+  }
+  .cell-title{font-size:0.84rem; max-width:220px; line-height:1.4;}
+  .cell-skills{font-size:0.82rem; color:var(--text-muted); max-width:180px; line-height:1.4;}
+  .cell-date{font-family:var(--font-mono); font-size:0.76rem; color:var(--text-subtle); white-space:nowrap;}
 
-  .empty, .loading, .error{padding:48px 24px; text-align:center; color:var(--muted);}
-  .error{color:#B3261E;}
+  /* ── Registration detail (expandable row) ──────────── */
+  .expand-btn{
+    background:none; border:none; cursor:pointer; color:var(--text-subtle);
+    font-size:0.85rem; padding:2px 6px; border-radius:4px;
+    transition:all var(--transition-fast);
+  }
+  .expand-btn:hover{background:var(--bg-sage-tint); color:var(--brand-forest);}
+  tr.detail-row td{
+    padding:0; border-top:none; background:var(--bg-ivory);
+  }
+  .detail-inner{
+    padding:16px 24px 20px; display:grid;
+    grid-template-columns:1fr 1fr; gap:12px 32px;
+    font-size:0.86rem; border-top:1px dashed var(--border-editorial);
+  }
+  .detail-inner .field-label{
+    font-size:0.7rem; text-transform:uppercase; letter-spacing:0.06em;
+    color:var(--text-muted); font-weight:600; margin-bottom:2px;
+  }
+  .detail-inner .field-value{color:var(--text-charcoal); line-height:1.5;}
+  .detail-inner .full-width{grid-column:1 / -1;}
+
+  /* ── States ─────────────────────────────────────────── */
+  .empty-state,.loading-state,.error-state{
+    padding:64px 24px; text-align:center; font-size:0.95rem; color:var(--text-muted);
+  }
+  .error-state{color:#B3261E;}
+  .loading-state .spinner{
+    width:28px; height:28px; border:3px solid var(--border-editorial);
+    border-top-color:var(--brand-forest); border-radius:50%;
+    animation:spin 0.7s linear infinite; margin:0 auto 16px;
+  }
+  @keyframes spin{to{transform:rotate(360deg);}}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="top">
+
+<!-- ── Auth Gate ──────────────────────────────────────── -->
+<div id="authGate" class="auth-overlay">
+  <div class="auth-card">
+    <div class="auth-icon">🔒</div>
+    <h2>Admin Dashboard</h2>
+    <p>Enter the organiser passphrase to view registration data.</p>
+    <form id="authForm">
+      <input type="password" id="authPass" placeholder="Passphrase" autocomplete="off" required>
+      <button type="submit">Unlock Dashboard</button>
+    </form>
+    <p class="auth-error" id="authError"></p>
+  </div>
+</div>
+
+<!-- ── Dashboard (hidden until auth) ─────────────────── -->
+<div class="page" id="dashboard" style="display:none;">
+
+  <header class="top-bar">
     <div>
       <h1>DRE Hackathon Registrations</h1>
-      <p class="sub">Live from the registration sheet — click a column to sort.</p>
+      <p class="sub">Live from Google Sheets — click any column to sort.</p>
     </div>
-    <span class="count" id="count">— teams</span>
+    <span class="badge" id="totalBadge">— teams</span>
+  </header>
+
+  <!-- Stats -->
+  <div class="stats-row" id="statsRow">
+    <div class="stat-card"><div class="label">Total Teams</div><div class="value forest" id="statTotal">—</div></div>
+    <div class="stat-card"><div class="label">States</div><div class="value" id="statStates">—</div></div>
+    <div class="stat-card"><div class="label">Problem Tracks</div><div class="value" id="statTracks">—</div></div>
+    <div class="stat-card"><div class="label">Latest Registration</div><div class="value" id="statLatest" style="font-size:0.95rem;">—</div></div>
   </div>
 
+  <!-- Controls -->
   <div class="controls">
-    <input type="search" id="search" placeholder="Search team, lead, email, city, problem statement…">
+    <div class="search-wrap">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="search" id="search" placeholder="Search by team, lead, email, city, PS…">
+    </div>
     <select id="stateFilter"><option value="">All states</option></select>
-    <button id="refreshBtn">Refresh</button>
-    <button id="exportBtn">Export CSV</button>
+    <select id="trackFilter"><option value="">All tracks</option></select>
+    <button class="btn btn-primary" id="refreshBtn">↻ Refresh</button>
+    <button class="btn btn-ghost" id="exportBtn">⬇ Export CSV</button>
   </div>
 
-  <div class="table-scroll">
+  <!-- Table -->
+  <div class="table-wrap">
     <table id="dataTable">
       <thead>
         <tr>
-          <th data-key="reg_id">Reg ID</th>
+          <th style="width:36px;"></th>
           <th data-key="team_name">Team</th>
           <th data-key="team_lead">Lead</th>
           <th data-key="lead_email">Email</th>
           <th data-key="lead_phone">Phone</th>
-          <th data-key="lead_org">Org</th>
+          <th data-key="lead_org">Organization</th>
           <th data-key="city">City</th>
           <th data-key="state">State</th>
-          <th data-key="chosen_ps">PS</th>
-          <th data-key="ps_title">PS Title</th>
+          <th data-key="chosen_ps">Track</th>
+          <th data-key="ps_title">Problem Statement</th>
           <th data-key="skills">Skills</th>
           <th data-key="created_at">Registered</th>
         </tr>
@@ -88,119 +259,228 @@
       <tbody id="tbody"></tbody>
     </table>
   </div>
-  <div id="empty" class="empty" style="display:none;">No registrations match your search.</div>
-  <div id="loading" class="loading">Loading registrations…</div>
-  <div id="error" class="error" style="display:none;"></div>
+
+  <div id="emptyState" class="empty-state" style="display:none;">No registrations match your filters.</div>
+  <div id="loadingState" class="loading-state"><div class="spinner"></div>Loading registrations…</div>
+  <div id="errorState" class="error-state" style="display:none;"></div>
 </div>
 
 <script>
-  // Paste your Apps Script Web App /exec URL here.
-  const WEB_APP_URL = "PASTE-YOUR-APPS-SCRIPT-WEB-APP-URL-HERE"; // same URL as BACKEND_URL in app.js
+  // ── Auth ────────────────────────────────────────────────
+  // Only the SHA-256 hash is stored — the passphrase never appears in source.
+  const _H = "e698968faa3c8469e8b5993832f1e57e3bde65139e0f30a0c7a0f9732ed13cd8";
+  const _S = "dre_adm_tkn";
 
-  const COLS = ["reg_id","team_name","team_lead","lead_email","lead_phone","lead_org","city","state","chosen_ps","ps_title","skills","created_at"];
-  let allRows = [];
-  let sortKey = "created_at";
-  let sortDir = -1;
-
-  const tbody = document.getElementById("tbody");
-  const countEl = document.getElementById("count");
-  const emptyEl = document.getElementById("empty");
-  const loadingEl = document.getElementById("loading");
-  const errorEl = document.getElementById("error");
-  const searchEl = document.getElementById("search");
-  const stateFilterEl = document.getElementById("stateFilter");
-
-  function escapeHtml(s){
-    return String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  async function _sha(t) {
+    const d = new TextEncoder().encode(t);
+    const b = await crypto.subtle.digest("SHA-256", d);
+    return Array.from(new Uint8Array(b)).map(x => x.toString(16).padStart(2,"0")).join("");
   }
 
-  function render(){
-    const q = searchEl.value.trim().toLowerCase();
-    const st = stateFilterEl.value;
-    let rows = allRows.filter(r => {
-      if (st && r.state !== st) return false;
-      if (!q) return true;
-      return COLS.some(k => String(r[k] ?? "").toLowerCase().includes(q));
-    });
-    rows.sort((a,b) => {
-      const av = String(a[sortKey] ?? ""), bv = String(b[sortKey] ?? "");
-      return av.localeCompare(bv, undefined, {numeric:true}) * sortDir;
-    });
+  const authGate = document.getElementById("authGate");
+  const dashboardEl = document.getElementById("dashboard");
 
-    tbody.innerHTML = rows.map(r => `
-      <tr>
-        <td class="mono">${escapeHtml(r.reg_id)}</td>
-        <td>${escapeHtml(r.team_name)}</td>
-        <td>${escapeHtml(r.team_lead)}</td>
-        <td class="mono">${escapeHtml(r.lead_email)}</td>
-        <td class="mono">${escapeHtml(r.lead_phone)}</td>
-        <td>${escapeHtml(r.lead_org)}</td>
-        <td>${escapeHtml(r.city)}</td>
-        <td>${escapeHtml(r.state)}</td>
-        <td class="mono">${escapeHtml(r.chosen_ps)}</td>
-        <td class="wrap-cell">${escapeHtml(r.ps_title)}</td>
-        <td class="wrap-cell">${escapeHtml(r.skills)}</td>
-        <td class="mono">${escapeHtml(r.created_at)}</td>
-      </tr>`).join("");
-
-    countEl.textContent = rows.length + (rows.length === 1 ? " team" : " teams") + (allRows.length !== rows.length ? " (of " + allRows.length + ")" : "");
-    emptyEl.style.display = rows.length === 0 ? "block" : "none";
+  // Resume session if already authenticated
+  if (sessionStorage.getItem(_S) === _H) {
+    authGate.classList.add("hidden");
+    dashboardEl.style.display = "";
+    initDashboard();
   }
 
-  function populateStateFilter(){
-    const states = [...new Set(allRows.map(r => r.state).filter(Boolean))].sort();
-    stateFilterEl.innerHTML = '<option value="">All states</option>' + states.map(s => `<option value="${escapeHtml(s)}">${escapeHtml(s)}</option>`).join("");
-  }
-
-  async function load(){
-    loadingEl.style.display = "block";
-    errorEl.style.display = "none";
-    if (WEB_APP_URL.includes("PASTE_YOUR_EXEC_URL_HERE")) {
-      loadingEl.style.display = "none";
-      errorEl.style.display = "block";
-      errorEl.textContent = "This dashboard isn't connected yet — set WEB_APP_URL in the page source to your Apps Script /exec URL.";
-      return;
+  document.getElementById("authForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const input = document.getElementById("authPass");
+    const hash = await _sha(input.value);
+    if (hash === _H) {
+      sessionStorage.setItem(_S, _H);
+      authGate.classList.add("hidden");
+      dashboardEl.style.display = "";
+      initDashboard();
+    } else {
+      document.getElementById("authError").textContent = "Wrong passphrase. Try again.";
+      input.value = "";
+      input.focus();
     }
-    try {
-      const res = await fetch(WEB_APP_URL, { method: "GET" });
-      const json = await res.json();
-      if (!json.ok) throw new Error(json.error || "Unknown error");
-      allRows = json.data || [];
-      populateStateFilter();
-      render();
-      loadingEl.style.display = "none";
-    } catch (err) {
-      loadingEl.style.display = "none";
-      errorEl.style.display = "block";
-      errorEl.textContent = "Couldn't load registrations: " + err.message;
-    }
-  }
-
-  function exportCsv(){
-    const header = COLS.join(",");
-    const lines = allRows.map(r => COLS.map(k => `"${String(r[k] ?? "").replace(/"/g,'""')}"`).join(","));
-    const blob = new Blob([header + "\n" + lines.join("\n")], {type:"text/csv"});
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url; a.download = "dre_hackathon_registrations.csv"; a.click();
-    URL.revokeObjectURL(url);
-  }
-
-  document.querySelectorAll("thead th").forEach(th => {
-    th.addEventListener("click", () => {
-      const key = th.dataset.key;
-      sortDir = (sortKey === key) ? sortDir * -1 : 1;
-      sortKey = key;
-      render();
-    });
   });
 
-  searchEl.addEventListener("input", render);
-  stateFilterEl.addEventListener("change", render);
-  document.getElementById("refreshBtn").addEventListener("click", load);
-  document.getElementById("exportBtn").addEventListener("click", exportCsv);
+  // ── Dashboard ──────────────────────────────────────────
+  function initDashboard() {
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwQtvtlaLITtHfdxYddY1lo-ym3wALnEUehN1n8mnfaPO9rRfhKSgNIqKkx19Nbr-miOw/exec";
 
-  load();
+    const COLS = ["reg_id","team_name","team_lead","lead_email","lead_phone","lead_org",
+                  "city","state","chosen_ps","ps_title","why_reason","skills","created_at"];
+    let allRows = [];
+    let sortKey = "created_at";
+    let sortDir = -1;
+    let expandedId = null;
+
+    const tbody    = document.getElementById("tbody");
+    const searchEl = document.getElementById("search");
+    const stateF   = document.getElementById("stateFilter");
+    const trackF   = document.getElementById("trackFilter");
+    const emptyEl  = document.getElementById("emptyState");
+    const loadEl   = document.getElementById("loadingState");
+    const errorEl  = document.getElementById("errorState");
+
+    const esc = s => String(s ?? "").replace(/[&<>"']/g, c =>
+      ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+    function formatDate(d) {
+      if (!d) return "—";
+      const dt = new Date(d);
+      if (isNaN(dt)) return String(d);
+      return dt.toLocaleDateString("en-IN", {day:"2-digit",month:"short",year:"numeric"})
+        + " " + dt.toLocaleTimeString("en-IN", {hour:"2-digit",minute:"2-digit",hour12:true});
+    }
+
+    function updateStats(rows) {
+      document.getElementById("statTotal").textContent = rows.length;
+      document.getElementById("totalBadge").textContent = rows.length + (rows.length === 1 ? " team" : " teams");
+      const states = new Set(rows.map(r => r.state).filter(Boolean));
+      document.getElementById("statStates").textContent = states.size;
+      const tracks = new Set(rows.map(r => r.chosen_ps).filter(Boolean));
+      document.getElementById("statTracks").textContent = tracks.size;
+      if (rows.length > 0) {
+        const sorted = [...rows].sort((a,b) => String(b.created_at||"").localeCompare(String(a.created_at||"")));
+        document.getElementById("statLatest").textContent = formatDate(sorted[0].created_at);
+      }
+    }
+
+    function populateFilters() {
+      const states = [...new Set(allRows.map(r => r.state).filter(Boolean))].sort();
+      stateF.innerHTML = '<option value="">All states</option>' +
+        states.map(s => `<option value="${esc(s)}">${esc(s)}</option>`).join("");
+      const tracks = [...new Set(allRows.map(r => r.chosen_ps).filter(Boolean))].sort();
+      trackF.innerHTML = '<option value="">All tracks</option>' +
+        tracks.map(t => `<option value="${esc(t)}">${esc(t)}</option>`).join("");
+    }
+
+    function getFiltered() {
+      const q = searchEl.value.trim().toLowerCase();
+      const st = stateF.value;
+      const tr = trackF.value;
+      return allRows.filter(r => {
+        if (st && r.state !== st) return false;
+        if (tr && r.chosen_ps !== tr) return false;
+        if (!q) return true;
+        return COLS.some(k => String(r[k] ?? "").toLowerCase().includes(q));
+      });
+    }
+
+    function render() {
+      let rows = getFiltered();
+      rows.sort((a,b) => {
+        const av = String(a[sortKey] ?? ""), bv = String(b[sortKey] ?? "");
+        return av.localeCompare(bv, undefined, {numeric:true}) * sortDir;
+      });
+
+      updateStats(rows);
+
+      if (rows.length === 0) {
+        tbody.innerHTML = "";
+        emptyEl.style.display = "block";
+        return;
+      }
+      emptyEl.style.display = "none";
+
+      tbody.innerHTML = rows.map(r => {
+        const id = r.reg_id || "";
+        const isOpen = expandedId === id;
+        return `
+        <tr>
+          <td><button class="expand-btn" data-id="${esc(id)}" title="Details">${isOpen ? "▾" : "▸"}</button></td>
+          <td class="cell-team">${esc(r.team_name)}</td>
+          <td class="cell-name">${esc(r.team_lead)}</td>
+          <td class="cell-email">${esc(r.lead_email)}</td>
+          <td class="cell-phone">${esc(r.lead_phone)}</td>
+          <td class="cell-org">${esc(r.lead_org)}</td>
+          <td class="cell-loc">${esc(r.city)}</td>
+          <td class="cell-loc">${esc(r.state)}</td>
+          <td><span class="cell-ps">${esc(r.chosen_ps)}</span></td>
+          <td class="cell-title">${esc(r.ps_title)}</td>
+          <td class="cell-skills">${esc(r.skills)}</td>
+          <td class="cell-date">${formatDate(r.created_at)}</td>
+        </tr>
+        ${isOpen ? `<tr class="detail-row"><td colspan="12">
+          <div class="detail-inner">
+            <div><div class="field-label">Registration ID</div><div class="field-value" style="font-family:var(--font-mono);font-size:0.82rem;">${esc(id)}</div></div>
+            <div><div class="field-label">Full Name</div><div class="field-value">${esc(r.team_lead)}</div></div>
+            <div><div class="field-label">Email</div><div class="field-value">${esc(r.lead_email)}</div></div>
+            <div><div class="field-label">Phone</div><div class="field-value">${esc(r.lead_phone)}</div></div>
+            <div><div class="field-label">Organization</div><div class="field-value">${esc(r.lead_org)}</div></div>
+            <div><div class="field-label">Location</div><div class="field-value">${esc(r.city)}, ${esc(r.state)}</div></div>
+            <div class="full-width"><div class="field-label">Problem Statement</div><div class="field-value"><strong>${esc(r.chosen_ps)}</strong> — ${esc(r.ps_title)}</div></div>
+            <div class="full-width"><div class="field-label">Motivation & Approach</div><div class="field-value">${esc(r.why_reason) || '<span style="color:var(--text-subtle);">Not provided</span>'}</div></div>
+            <div class="full-width"><div class="field-label">Tech Stack & Skills</div><div class="field-value">${esc(r.skills)}</div></div>
+            <div><div class="field-label">Registered At</div><div class="field-value">${formatDate(r.created_at)}</div></div>
+          </div>
+        </td></tr>` : ""}`;
+      }).join("");
+    }
+
+    // Expand/collapse detail rows
+    tbody.addEventListener("click", e => {
+      const btn = e.target.closest(".expand-btn");
+      if (!btn) return;
+      const id = btn.dataset.id;
+      expandedId = expandedId === id ? null : id;
+      render();
+    });
+
+    // Sorting
+    document.querySelectorAll("thead th[data-key]").forEach(th => {
+      th.addEventListener("click", () => {
+        const key = th.dataset.key;
+        // Clear sort indicators
+        document.querySelectorAll("thead th").forEach(t => t.classList.remove("sorted-asc","sorted-desc"));
+        sortDir = (sortKey === key) ? sortDir * -1 : 1;
+        sortKey = key;
+        th.classList.add(sortDir === 1 ? "sorted-asc" : "sorted-desc");
+        render();
+      });
+    });
+
+    searchEl.addEventListener("input", render);
+    stateF.addEventListener("change", render);
+    trackF.addEventListener("change", render);
+    document.getElementById("refreshBtn").addEventListener("click", load);
+    document.getElementById("exportBtn").addEventListener("click", exportCsv);
+
+    function exportCsv() {
+      const rows = getFiltered();
+      if (!rows.length) return alert("Nothing to export.");
+      const header = COLS.join(",");
+      const lines = rows.map(r =>
+        COLS.map(k => `"${String(r[k] ?? "").replace(/"/g,'""')}"`).join(",")
+      );
+      const blob = new Blob([header + "\n" + lines.join("\n")], {type:"text/csv"});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url; a.download = "dre_hackathon_registrations.csv"; a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    async function load() {
+      loadEl.style.display = "block";
+      errorEl.style.display = "none";
+      emptyEl.style.display = "none";
+      try {
+        const res = await fetch(WEB_APP_URL, { method: "GET" });
+        const json = await res.json();
+        if (!json.ok) throw new Error(json.error || "Unknown error");
+        allRows = json.data || [];
+        populateFilters();
+        render();
+        loadEl.style.display = "none";
+      } catch (err) {
+        loadEl.style.display = "none";
+        errorEl.style.display = "block";
+        errorEl.textContent = "Couldn't load registrations: " + err.message;
+      }
+    }
+
+    load();
+  }
 </script>
 </body>
 </html>

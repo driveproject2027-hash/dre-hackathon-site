@@ -1,0 +1,135 @@
+/**
+ * DRE Enterprise Hackathon '26 — Google Apps Script Backend
+ * ──────────────────────────────────────────────────────────
+ * This script turns a Google Sheet into a free registration API.
+ *
+ * POST  →  Appends a new registration row (rejects duplicate emails)
+ * GET   →  Returns every registration as JSON
+ *
+ * SETUP
+ * 1. Create a Google Sheet named "DRE Hackathon Registrations"
+ * 2. Add headers in row 1, columns A–M:
+ *      reg_id | team_name | team_lead | lead_email | lead_phone |
+ *      lead_org | city | state | chosen_ps | ps_title | why_reason |
+ *      skills | created_at
+ * 3. Extensions → Apps Script → paste this file → Save
+ * 4. Deploy → New deployment → Web app
+ *       Execute as: Me  |  Who has access: Anyone
+ * 5. Copy the /exec URL into BACKEND_URL / WEB_APP_URL in the site files.
+ *
+ * See DRIVE-BACKEND-SETUP.md for the full walkthrough.
+ */
+
+// ── Column order (must match the Sheet headers in row 1) ──
+var FIELDS = [
+  "reg_id",
+  "team_name",
+  "team_lead",
+  "lead_email",
+  "lead_phone",
+  "lead_org",
+  "city",
+  "state",
+  "chosen_ps",
+  "ps_title",
+  "why_reason",
+  "skills",
+  "created_at"
+];
+
+// ── Helpers ────────────────────────────────────────────────
+
+/** Return the first sheet of the active spreadsheet. */
+function getSheet() {
+  return SpreadsheetApp.getActiveSpreadsheet().getSheets()[0];
+}
+
+/** Build a CORS-friendly JSON response. */
+function jsonResponse(payload) {
+  return ContentService
+    .createTextOutput(JSON.stringify(payload))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
+/**
+ * Check whether an email already exists in the sheet.
+ * Scans column D (lead_email, index 4 if 1-based).
+ */
+function emailExists(sheet, email) {
+  var lastRow = sheet.getLastRow();
+  if (lastRow < 2) return false;                       // only the header row
+  var emails = sheet.getRange(2, 4, lastRow - 1, 1).getValues();  // col D
+  email = email.trim().toLowerCase();
+  for (var i = 0; i < emails.length; i++) {
+    if (String(emails[i][0]).trim().toLowerCase() === email) return true;
+  }
+  return false;
+}
+
+// ── POST handler — new registration ───────────────────────
+
+function doPost(e) {
+  try {
+    var sheet = getSheet();
+    var p = e.parameter;                               // form-encoded fields
+
+    // Required-field sanity check
+    if (!p.lead_email) {
+      return jsonResponse({ ok: false, error: "missing_email" });
+    }
+
+    // Duplicate guard
+    if (emailExists(sheet, p.lead_email)) {
+      return jsonResponse({ ok: false, error: "duplicate_email" });
+    }
+
+    // Timestamp (IST)
+    var now = Utilities.formatDate(
+      new Date(),
+      "Asia/Kolkata",
+      "yyyy-MM-dd HH:mm:ss"
+    );
+
+    // Build a row array matching the FIELDS order
+    var row = FIELDS.map(function (key) {
+      if (key === "created_at") return now;
+      return p[key] || "";
+    });
+
+    sheet.appendRow(row);
+
+    return jsonResponse({ ok: true, reg_id: p.reg_id || "" });
+
+  } catch (err) {
+    return jsonResponse({ ok: false, error: err.message });
+  }
+}
+
+// ── GET handler — list all registrations ──────────────────
+
+function doGet(e) {
+  try {
+    var sheet = getSheet();
+    var lastRow = sheet.getLastRow();
+
+    if (lastRow < 2) {
+      // No data rows yet
+      return jsonResponse({ ok: true, data: [] });
+    }
+
+    var data = sheet.getRange(2, 1, lastRow - 1, FIELDS.length).getValues();
+
+    var result = data.map(function (row) {
+      var obj = {};
+      FIELDS.forEach(function (key, i) {
+        obj[key] = row[i];
+      });
+      return obj;
+    });
+
+    return jsonResponse({ ok: true, data: result });
+
+  } catch (err) {
+    return jsonResponse({ ok: false, error: err.message });
+  }
+}

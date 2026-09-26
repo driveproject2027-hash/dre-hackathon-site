@@ -54,10 +54,51 @@
     @media (max-width: 800px) {
       .table-scroll { overflow-x: auto; }
     }
+
+    /* ── Auth overlay ── */
+    .auth-overlay{
+      position:fixed; inset:0; z-index:9999;
+      display:flex; align-items:center; justify-content:center;
+      background:linear-gradient(135deg, #0E3B2F 0%, #17211D 50%, #14634D 100%);
+    }
+    .auth-card{
+      background:#fff; border-radius:12px; padding:48px 40px; width:380px; max-width:90vw;
+      text-align:center; box-shadow:0 24px 64px rgba(0,0,0,0.3);
+    }
+    .auth-icon{font-size:48px; margin-bottom:12px;}
+    .auth-card h2{font-size:22px; margin:0 0 8px; color:#17211D;}
+    .auth-card p{color:#5E6964; font-size:14px; margin:0 0 24px; line-height:1.5;}
+    .auth-card input[type="password"]{
+      width:100%; padding:12px 14px; font:inherit; font-size:15px;
+      border:1px solid #D9D6CD; border-radius:6px; margin-bottom:12px;
+      text-align:center; letter-spacing:2px;
+    }
+    .auth-card input[type="password"]:focus{outline:2px solid #14634D; outline-offset:1px;}
+    .auth-card button{
+      width:100%; padding:12px; font-weight:700; font-size:15px; border:0; border-radius:6px;
+      background:#0E3B2F; color:#fff; cursor:pointer; transition:background 0.2s;
+    }
+    .auth-card button:hover{background:#14634D;}
+    .auth-error{color:#B3261E; font-size:13px; margin:12px 0 0; min-height:20px;}
+    .auth-overlay.hidden{display:none;}
   </style>
 </head>
 <body>
-  <div class="wrap">
+
+<div id="authGate" class="auth-overlay">
+  <div class="auth-card">
+    <div class="auth-icon">🔒</div>
+    <h2>Admin Access</h2>
+    <p>Enter the organiser passphrase to view registrations.</p>
+    <form id="authForm">
+      <input type="password" id="authPass" placeholder="Passphrase" autocomplete="off" required>
+      <button type="submit">Unlock Dashboard</button>
+    </form>
+    <p class="auth-error" id="authError"></p>
+  </div>
+</div>
+
+<div class="wrap" id="dashboard" style="display:none;">
     <h1>Registered Teams — DRE Hackathon '26</h1>
     <p class="sub">Live data from the Supabase <code>registrations</code> table. Click Refresh after new registrations come in.</p>
 
@@ -84,106 +125,130 @@
     <div class="empty" id="empty" hidden>No registrations yet.</div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <script>
-    // ==== SAME CREDENTIALS AS app.js — KEEP IN SYNC ====
-    const SUPABASE_URL = "https://YOUR-PROJECT-ID.supabase.co";
-    const SUPABASE_ANON_KEY = "YOUR-ANON-PUBLIC-KEY";
-    // ===================================================
+    // ── Auth gate ──────────────────────────────────────────
+    // Only the SHA-256 hash is stored — passphrase never appears in source.
+    const _H = "e698968faa3c8469e8b5993832f1e57e3bde65139e0f30a0c7a0f9732ed13cd8";
+    const _S = "dre_adm_tkn";
 
-    const configured = !SUPABASE_URL.includes("YOUR-PROJECT-ID") && !SUPABASE_ANON_KEY.includes("YOUR-ANON");
-    const client = configured ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
-
-    let allRows = [];
-
-    const esc = (v) => String(v ?? "").replace(/[&<>"']/g, (c) => ({
-      "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
-    })[c]);
-
-    async function load() {
-      const status = document.getElementById("status");
-      const table = document.getElementById("table");
-      const empty = document.getElementById("empty");
-
-      if (!configured) {
-        status.textContent = "⚠️ Supabase not configured. Set SUPABASE_URL and SUPABASE_ANON_KEY in admin.html (and app.js).";
-        status.className = "status err";
-        return;
-      }
-
-      status.textContent = "Loading registrations…";
-      status.className = "status";
-
-      const { data, error } = await client
-        .from("registrations")
-        .select("*")
-        .order("created_at", { ascending: false });
-
-      if (error) {
-        status.textContent = "❌ Error: " + error.message;
-        status.className = "status err";
-        return;
-      }
-
-      allRows = data || [];
-      render(allRows);
-      status.textContent = `✅ Loaded ${allRows.length} registration${allRows.length === 1 ? "" : "s"}.`;
+    async function _sha(t) {
+      const d = new TextEncoder().encode(t);
+      const b = await crypto.subtle.digest("SHA-256", d);
+      return Array.from(new Uint8Array(b)).map(x => x.toString(16).padStart(2,"0")).join("");
     }
 
-    function render(rows) {
-      const table = document.getElementById("table");
-      const empty = document.getElementById("empty");
-      const tbody = document.getElementById("tbody");
-      document.getElementById("countLabel").textContent = `${rows.length} shown`;
+    const authGate = document.getElementById("authGate");
+    const dashboardEl = document.getElementById("dashboard");
 
-      if (!rows.length) {
-        table.hidden = true; empty.hidden = false; tbody.innerHTML = "";
-        return;
-      }
-      table.hidden = false; empty.hidden = true;
-      tbody.innerHTML = rows.map(r => `
-        <tr>
-          <td class="regid">${esc(r.reg_id)}</td>
-          <td><strong>${esc(r.team_name)}</strong></td>
-          <td>${esc(r.team_lead)}</td>
-          <td>${esc(r.lead_email)}</td>
-          <td>${esc(r.lead_phone)}</td>
-          <td>${esc(r.lead_org)}</td>
-          <td>${esc(r.city)}</td>
-          <td>${esc(r.state)}</td>
-          <td>${esc(r.chosen_ps)}${r.ps_title ? `<br><small style="color:#5E6964">${esc(r.ps_title)}</small>` : ""}</td>
-          <td>${r.created_at ? new Date(r.created_at).toLocaleString() : "—"}</td>
-        </tr>`).join("");
+    if (sessionStorage.getItem(_S) === _H) {
+      authGate.classList.add("hidden");
+      dashboardEl.style.display = "";
+      initDashboard();
     }
 
-    document.getElementById("search").addEventListener("input", (e) => {
-      const q = e.target.value.trim().toLowerCase();
-      if (!q) return render(allRows);
-      render(allRows.filter(r =>
-        Object.values(r).some(v => String(v ?? "").toLowerCase().includes(q))
-      ));
+    document.getElementById("authForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const input = document.getElementById("authPass");
+      const hash = await _sha(input.value);
+      if (hash === _H) {
+        sessionStorage.setItem(_S, _H);
+        authGate.classList.add("hidden");
+        dashboardEl.style.display = "";
+        initDashboard();
+      } else {
+        document.getElementById("authError").textContent = "Wrong passphrase. Try again.";
+        input.value = "";
+        input.focus();
+      }
     });
 
-    document.getElementById("refreshBtn").addEventListener("click", load);
+    // ── Dashboard logic (only runs after auth) ─────────────
+    function initDashboard() {
+      const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwQtvtlaLITtHfdxYddY1lo-ym3wALnEUehN1n8mnfaPO9rRfhKSgNIqKkx19Nbr-miOw/exec";
 
-    document.getElementById("csvBtn").addEventListener("click", () => {
-      if (!allRows.length) return alert("Nothing to export yet.");
-      const cols = ["reg_id","team_name","team_lead","lead_email","lead_phone","lead_org","city","state","chosen_ps","ps_title","why_reason","skills","created_at"];
-      const csv = [cols.join(",")].concat(
-        allRows.map(r => cols.map(c => {
-          const v = String(r[c] ?? "");
-          return /[",\n]/.test(v) ? `"${v.replace(/"/g, '""')}"` : v;
-        }).join(","))
-      ).join("\n");
-      const blob = new Blob([csv], { type: "text/csv" });
-      const a = document.createElement("a");
-      a.href = URL.createObjectURL(blob);
-      a.download = "dre-hackathon-registrations.csv";
-      a.click();
-      URL.revokeObjectURL(a.href);
-    });
+      let allRows = [];
 
-    load();
+      const esc = (v) => String(v ?? "").replace(/[&<>"']/g, (c) => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+      })[c]);
+
+      async function load() {
+        const status = document.getElementById("status");
+        const table = document.getElementById("table");
+        const empty = document.getElementById("empty");
+
+        status.textContent = "Loading registrations…";
+        status.className = "status";
+
+        try {
+          const res = await fetch(WEB_APP_URL, { method: "GET" });
+          const json = await res.json();
+          if (!json.ok) throw new Error(json.error || "Unknown error");
+          allRows = json.data || [];
+          render(allRows);
+          status.textContent = `✅ Loaded ${allRows.length} registration${allRows.length === 1 ? "" : "s"}.`;
+        } catch (err) {
+          status.textContent = "❌ Error: " + err.message;
+          status.className = "status err";
+        }
+      }
+
+      function render(rows) {
+        const table = document.getElementById("table");
+        const empty = document.getElementById("empty");
+        const tbody = document.getElementById("tbody");
+        document.getElementById("countLabel").textContent = `${rows.length} shown`;
+
+        if (!rows.length) {
+          table.hidden = true; empty.hidden = false; tbody.innerHTML = "";
+          return;
+        }
+        table.hidden = false; empty.hidden = true;
+        tbody.innerHTML = rows.map(r => `
+          <tr>
+            <td class="regid">${esc(r.reg_id)}</td>
+            <td><strong>${esc(r.team_name)}</strong></td>
+            <td>${esc(r.team_lead)}</td>
+            <td>${esc(r.lead_email)}</td>
+            <td>${esc(r.lead_phone)}</td>
+            <td>${esc(r.lead_org)}</td>
+            <td>${esc(r.city)}</td>
+            <td>${esc(r.state)}</td>
+            <td>${esc(r.chosen_ps)}${r.ps_title ? `<br><small style="color:#5E6964">${esc(r.ps_title)}</small>` : ""}</td>
+            <td>${r.created_at ? new Date(r.created_at).toLocaleString() : "—"}</td>
+          </tr>`).join("");
+      }
+
+      document.getElementById("search").addEventListener("input", (e) => {
+        const q = e.target.value.trim().toLowerCase();
+        if (!q) return render(allRows);
+        render(allRows.filter(r =>
+          Object.values(r).some(v => String(v ?? "").toLowerCase().includes(q))
+        ));
+      });
+
+      document.getElementById("refreshBtn").addEventListener("click", load);
+
+      document.getElementById("csvBtn").addEventListener("click", () => {
+        if (!allRows.length) return alert("Nothing to export yet.");
+        const cols = ["reg_id","team_name","team_lead","lead_email","lead_phone","lead_org","city","state","chosen_ps","ps_title","why_reason","skills","created_at"];
+        const csv = [cols.join(",")].concat(
+          allRows.map(r => cols.map(c => {
+            const v = String(r[c] ?? "");
+            return /[",\n]/.test(v) ? `"${v.replace(/"/g, '""')}"` : v;
+          }).join(","))
+        ).join("\n");
+        const blob = new Blob([csv], { type: "text/csv" });
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = "dre-hackathon-registrations.csv";
+        a.click();
+        URL.revokeObjectURL(a.href);
+      });
+
+      load();
+    }
   </script>
 </body>
 </html>
+

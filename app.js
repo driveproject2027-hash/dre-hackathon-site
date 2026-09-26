@@ -11,14 +11,9 @@
 // SETUP: see DRIVE-BACKEND-SETUP.md in the project root.
 // Paste your Apps Script Web App URL below (ends in /exec):
 // ============================================================
-const BACKEND_URL = "PASTE-YOUR-APPS-SCRIPT-WEB-APP-URL-HERE"; // <-- REPLACE
+const BACKEND_URL = "https://script.google.com/macros/s/AKfycbwQtvtlaLITtHfdxYddY1lo-ym3wALnEUehN1n8mnfaPO9rRfhKSgNIqKkx19Nbr-miOw/exec";
 
-const backendReady = !BACKEND_URL.includes("PASTE-YOUR");
-
-if (!backendReady) {
-  console.warn("[DRE] Backend not configured — registrations save to localStorage only. " +
-    "Follow DRIVE-BACKEND-SETUP.md and paste the Web App URL in BACKEND_URL.");
-}
+const backendReady = true;
 
 // Push a registration record to the Google Sheet via Apps Script.
 // Uses form-encoded POST so no CORS preflight problems occur.
