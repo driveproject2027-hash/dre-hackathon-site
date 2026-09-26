@@ -1185,3 +1185,28 @@ window.focusMapLocation = function(id) {
     }, 600);
   }
 };
+
+/* ── Mobile Sticky CTA Visibility Handler ── */
+document.addEventListener("DOMContentLoaded", () => {
+  const regSection = document.getElementById("registration");
+  const mobileStickyBar = document.querySelector(".mobile-sticky-bar");
+  
+  if (regSection && mobileStickyBar) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // Registration form is in view -> hide duplicate sticky CTA
+          mobileStickyBar.style.display = "none";
+        } else {
+          // Registration form is out of view -> show sticky CTA (reverts to CSS media query display logic)
+          mobileStickyBar.style.display = "";
+        }
+      });
+    }, {
+      root: null,
+      threshold: 0.1 // Triggers when at least 10% of registration section is visible
+    });
+    
+    observer.observe(regSection);
+  }
+});
