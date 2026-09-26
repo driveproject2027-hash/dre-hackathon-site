@@ -2592,6 +2592,12 @@ section[id], header[id] {
   flex-shrink: 0;
 }
 
+.hero-partner-logo-game {
+  height: 44px;
+  max-width: 160px;
+  object-fit: contain;
+}
+
 .footer-partner-card {
   margin-top: 1.25rem;
   display: inline-flex;
