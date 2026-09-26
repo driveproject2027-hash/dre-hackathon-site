@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DRE Hackathon — Registrations</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  :root{
+    --ink:#161A1F; --paper:#EEF1F6; --line:#C7CEDA;
+    --teal:#0F8B8D; --teal-dark:#0B6668; --navy:#142433; --muted:#5B6472;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; background:var(--paper); color:var(--ink); font-family:'Inter',sans-serif;}
+  .wrap{max-width:1180px; margin:0 auto; padding:40px 24px 80px;}
+
+  .top{display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:16px; margin-bottom:24px;}
+  h1{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:28px; margin:0 0 4px; letter-spacing:-0.01em;}
+  .sub{color:var(--muted); margin:0; font-size:14px;}
+  .count{font-family:'JetBrains Mono',monospace; font-size:14px; color:var(--teal-dark); background:#E4F3F1; padding:6px 12px; border-radius:3px; border:1px solid var(--teal);}
+
+  .controls{display:flex; gap:10px; margin-bottom:18px; flex-wrap:wrap;}
+  input[type="search"]{
+    flex:1; min-width:220px; padding:10px 12px; font:inherit; font-size:14px;
+    border:1px solid var(--line); border-radius:3px; background:#fff;
+  }
+  input[type="search"]:focus{outline:2px solid var(--teal); outline-offset:1px;}
+  select{padding:10px 12px; font:inherit; font-size:14px; border:1px solid var(--line); border-radius:3px; background:#fff;}
+  button{
+    font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:14px;
+    background:var(--navy); color:#fff; border:0; border-radius:3px; padding:10px 18px; cursor:pointer;
+  }
+  button:hover{background:var(--teal-dark);}
+
+  .table-scroll{overflow-x:auto; border:1px solid var(--line); border-radius:4px; background:#fff;}
+  table{border-collapse:collapse; width:100%; min-width:1000px; font-size:13.5px;}
+  thead th{
+    position:sticky; top:0; background:var(--navy); color:#fff; text-align:left;
+    font-family:'Space Grotesk',sans-serif; font-weight:500; font-size:12.5px;
+    padding:10px 12px; white-space:nowrap; cursor:pointer; user-select:none;
+  }
+  thead th:hover{background:var(--teal-dark);}
+  tbody td{padding:9px 12px; border-top:1px solid var(--line); vertical-align:top; max-width:260px;}
+  tbody tr:hover{background:#F4F7FA;}
+  .mono{font-family:'JetBrains Mono',monospace; font-size:12.5px; color:var(--muted);}
+  .wrap-cell{white-space:normal; word-break:break-word;}
+
+  .empty, .loading, .error{padding:48px 24px; text-align:center; color:var(--muted);}
+  .error{color:#B3261E;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div>
+      <h1>DRE Hackathon Registrations</h1>
+      <p class="sub">Live from the registration sheet — click a column to sort.</p>
+    </div>
+    <span class="count" id="count">— teams</span>
+  </div>
+
+  <div class="controls">
+    <input type="search" id="search" placeholder="Search team, lead, email, city, problem statement…">
+    <select id="stateFilter"><option value="">All states</option></select>
+    <button id="refreshBtn">Refresh</button>
+    <button id="exportBtn">Export CSV</button>
+  </div>
+
+  <div class="table-scroll">
+    <table id="dataTable">
+      <thead>
+        <tr>
+          <th data-key="reg_id">Reg ID</th>
+          <th data-key="team_name">Team</th>
+          <th data-key="team_lead">Lead</th>
+          <th data-key="lead_email">Email</th>
+          <th data-key="lead_phone">Phone</th>
+          <th data-key="lead_org">Org</th>
+          <th data-key="city">City</th>
+          <th data-key="state">State</th>
+          <th data-key="chosen_ps">PS</th>
+          <th data-key="ps_title">PS Title</th>
+          <th data-key="skills">Skills</th>
+          <th data-key="created_at">Registered</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
+  <div id="empty" class="empty" style="display:none;">No registrations match your search.</div>
+  <div id="loading" class="loading">Loading registrations…</div>
+  <div id="error" class="error" style="display:none;"></div>
+</div>
+
+<script>
+  // Paste your Apps Script Web App /exec URL here.
+  const WEB_APP_URL = "PASTE-YOUR-APPS-SCRIPT-WEB-APP-URL-HERE"; // same URL as BACKEND_URL in app.js
+
+  const COLS = ["reg_id","team_name","team_lead","lead_email","lead_phone","lead_org","city","state","chosen_ps","ps_title","skills","created_at"];
+  let allRows = [];
+  let sortKey = "created_at";
+  let sortDir = -1;
+
+  const tbody = document.getElementById("tbody");
+  const countEl = document.getElementById("count");
+  const emptyEl = document.getElementById("empty");
+  const loadingEl = document.getElementById("loading");
+  const errorEl = document.getElementById("error");
+  const searchEl = document.getElementById("search");
+  const stateFilterEl = document.getElementById("stateFilter");
+
+  function escapeHtml(s){
+    return String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  }
+
+  function render(){
+    const q = searchEl.value.trim().toLowerCase();
+    const st = stateFilterEl.value;
+    let rows = allRows.filter(r => {
+      if (st && r.state !== st) return false;
+      if (!q) return true;
+      return COLS.some(k => String(r[k] ?? "").toLowerCase().includes(q));
+    });
+    rows.sort((a,b) => {
+      const av = String(a[sortKey] ?? ""), bv = String(b[sortKey] ?? "");
+      return av.localeCompare(bv, undefined, {numeric:true}) * sortDir;
+    });
+
+    tbody.innerHTML = rows.map(r => `
+      <tr>
+        <td class="mono">${escapeHtml(r.reg_id)}</td>
+        <td>${escapeHtml(r.team_name)}</td>
+        <td>${escapeHtml(r.team_lead)}</td>
+        <td class="mono">${escapeHtml(r.lead_email)}</td>
+        <td class="mono">${escapeHtml(r.lead_phone)}</td>
+        <td>${escapeHtml(r.lead_org)}</td>
+        <td>${escapeHtml(r.city)}</td>
+        <td>${escapeHtml(r.state)}</td>
+        <td class="mono">${escapeHtml(r.chosen_ps)}</td>
+        <td class="wrap-cell">${escapeHtml(r.ps_title)}</td>
+        <td class="wrap-cell">${escapeHtml(r.skills)}</td>
+        <td class="mono">${escapeHtml(r.created_at)}</td>
+      </tr>`).join("");
+
+    countEl.textContent = rows.length + (rows.length === 1 ? " team" : " teams") + (allRows.length !== rows.length ? " (of " + allRows.length + ")" : "");
+    emptyEl.style.display = rows.length === 0 ? "block" : "none";
+  }
+
+  function populateStateFilter(){
+    const states = [...new Set(allRows.map(r => r.state).filter(Boolean))].sort();
+    stateFilterEl.innerHTML = '<option value="">All states</option>' + states.map(s => `<option value="${escapeHtml(s)}">${escapeHtml(s)}</option>`).join("");
+  }
+
+  async function load(){
+    loadingEl.style.display = "block";
+    errorEl.style.display = "none";
+    if (WEB_APP_URL.includes("PASTE_YOUR_EXEC_URL_HERE")) {
+      loadingEl.style.display = "none";
+      errorEl.style.display = "block";
+      errorEl.textContent = "This dashboard isn't connected yet — set WEB_APP_URL in the page source to your Apps Script /exec URL.";
+      return;
+    }
+    try {
+      const res = await fetch(WEB_APP_URL, { method: "GET" });
+      const json = await res.json();
+      if (!json.ok) throw new Error(json.error || "Unknown error");
+      allRows = json.data || [];
+      populateStateFilter();
+      render();
+      loadingEl.style.display = "none";
+    } catch (err) {
+      loadingEl.style.display = "none";
+      errorEl.style.display = "block";
+      errorEl.textContent = "Couldn't load registrations: " + err.message;
+    }
+  }
+
+  function exportCsv(){
+    const header = COLS.join(",");
+    const lines = allRows.map(r => COLS.map(k => `"${String(r[k] ?? "").replace(/"/g,'""')}"`).join(","));
+    const blob = new Blob([header + "\n" + lines.join("\n")], {type:"text/csv"});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url; a.download = "dre_hackathon_registrations.csv"; a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  document.querySelectorAll("thead th").forEach(th => {
+    th.addEventListener("click", () => {
+      const key = th.dataset.key;
+      sortDir = (sortKey === key) ? sortDir * -1 : 1;
+      sortKey = key;
+      render();
+    });
+  });
+
+  searchEl.addEventListener("input", render);
+  stateFilterEl.addEventListener("change", render);
+  document.getElementById("refreshBtn").addEventListener("click", load);
+  document.getElementById("exportBtn").addEventListener("click", exportCsv);
+
+  load();
+</script>
+</body>
+</html>

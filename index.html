@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DRE Enterprise Hackathon '26 | Decentralized Renewable Energy for Enterprise</title>
+  <meta name="description" content="Decentralized Renewable Energy (DRE) for Enterprise Hackathon: 10 real-world engineering challenges across agriculture, aquaculture, industrial MSMEs, tribal livelihoods and eco-tourism.">
+
+  <!-- Google Fonts: Outfit & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+
+  <!-- Leaflet CSS for Real Map -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+
+  <link rel="stylesheet" href="style.css?v=10">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="#overview" class="brand-wrapper">
+        <img src="assets/lgv-logo.png" alt="LGV - Growth With You" class="brand-logo-img">
+        <div class="brand-divider"></div>
+        <div class="brand-text-block">
+          <span class="brand-main">DRE ENTERPRISE</span>
+          <span class="brand-sub">HACKATHON '26</span>
+        </div>
+      </a>
+
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="#overview" class="nav-link">Overview</a></li>
+        
+        <li class="nav-item-dropdown">
+          <button class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+            The Problem <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="dropdown-chevron"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a href="#challenges" class="dropdown-link">Challenges</a></li>
+            <li><a href="#why-dre" class="dropdown-link">Why DRE</a></li>
+            <li><a href="#ground-reality" class="dropdown-link">Andhra Context</a></li>
+            <li><a href="#bottlenecks" class="dropdown-link">Bottleneck Matrix</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item-dropdown">
+          <button class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+            Event Details <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="dropdown-chevron"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a href="#prizes" class="dropdown-link">Prizes</a></li>
+            <li><a href="#rules" class="dropdown-link">Rules</a></li>
+            <li><a href="#faq" class="dropdown-link">FAQ</a></li>
+          </ul>
+        </li>
+        
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="#registration" class="btn btn-primary btn-sm">
+          REGISTER NOW
+        </a>
+        <button class="mobile-menu-btn" id="mobileNavBtn" aria-label="Toggle menu">☰</button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-nav-drawer" id="mobileNavMenu">
+      <div style="display: flex; align-items: center; gap: 0.65rem; margin-bottom: 0.5rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border-light);">
+        <img src="assets/lgv-logo.png" alt="LGV - Growth With You" style="height: 22px; width: auto; object-fit: contain;">
+        <span style="font-size: 0.72rem; font-weight: 700; color: var(--brand-forest);">LGV PARTNERSHIP</span>
+      </div>
+      <a href="#overview" class="mobile-nav-link">Overview</a>
+      <a href="#challenges" class="mobile-nav-link">Challenges</a>
+      <a href="#why-dre" class="mobile-nav-link">Why DRE</a>
+      <a href="#ground-reality" class="mobile-nav-link">Andhra Context</a>
+      <a href="#bottlenecks" class="mobile-nav-link">Bottleneck Matrix</a>
+      <a href="#prizes" class="mobile-nav-link">Prizes &amp; Grants</a>
+      <a href="#rules" class="mobile-nav-link">Rules &amp; Guidelines</a>
+      <a href="#contact" class="mobile-nav-link">Contact &amp; Venue</a>
+      <a href="#faq" class="mobile-nav-link">FAQ</a>
+      <a href="#registration" class="btn btn-primary" style="margin-top: 0.5rem;">REGISTER YOUR TEAM →</a>
+    </div>
+  </nav>
+
+  <!-- SECTION: HERO (TYPE A - EDITORIAL) -->
+  <header class="hero-section" id="overview">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-text-block">
+          <span class="hero-eyebrow">
+            DRE HACKATHON 2026 • DECENTRALIZED RENEWABLE ENERGY FOR ENTERPRISE
+          </span>
+
+          <!-- Partner Logos Strip -->
+          <div class="hero-partners-strip">
+            <span class="hero-partner-label">IN PARTNERSHIP WITH</span>
+            <div class="hero-partners-logos">
+              <img src="assets/lgv-logo.png" alt="LGV - Growth With You" class="hero-partner-logo">
+              <div class="partner-logo-divider"></div>
+              <img src="assets/prajna-logo.png" alt="Prajna Resources Pvt Ltd" class="hero-partner-logo">
+              <div class="partner-logo-divider"></div>
+              <img src="assets/iic-logo.jpg" alt="Institution's Innovation Council" class="hero-partner-logo hero-partner-logo-round">
+              <div class="partner-logo-divider"></div>
+              <img src="assets/new-partner-logo.jpeg" alt="Dr. L.B. College of Engineering" class="hero-partner-logo hero-partner-logo-lb">
+            </div>
+          </div>
+
+
+          <h1 class="hero-headline">
+            DECENTRALIZED <span class="headline-accent">RENEWABLE</span><br>ENERGY FOR ENTERPRISE
+            <span class="hero-campaign-line">An Inevitable Next Step.</span>
+          </h1>
+
+          <p class="hero-support-text">
+            Build practical technology solutions for real-world energy challenges across agriculture, aquaculture, industrial MSMEs, tribal livelihoods and eco-tourism. The hackathon begins the moment your team registers!
+          </p>
+
+          <div class="hero-cta-group">
+            <a href="#registration" class="btn btn-primary">
+              Register Your Team →
+            </a>
+            <a href="assets/DRE_Hackathon_Problem_Statements.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+              Download Problems (PDF) ↗
+            </a>
+            <a href="#rules" class="text-link-subtle">
+              Rules &amp; Timelines →
+            </a>
+          </div>
+
+          <!-- Clean Editorial Data Strip -->
+          <div class="editorial-data-strip">
+            <div class="data-strip-item">
+              <div class="data-strip-num">10</div>
+              <div class="data-strip-label">real-world challenges</div>
+            </div>
+            <div class="data-strip-item">
+              <div class="data-strip-num">₹36K</div>
+              <div class="data-strip-label">total cash prize purse</div>
+            </div>
+            <div class="data-strip-item">
+              <div class="data-strip-num">5 Oct</div>
+              <div class="data-strip-label">last date to register</div>
+            </div>
+            <div class="data-strip-item">
+              <div class="data-strip-num">9 Oct</div>
+              <div class="data-strip-label">prototype deadline</div>
+            </div>
+            <div class="data-strip-item">
+              <div class="data-strip-num">10 Oct</div>
+              <div class="data-strip-label">hackathon finals</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Visual: Authentic Documentary Photography -->
+        <div class="hero-photo-wrapper">
+          <div class="hero-image-header-label">
+            <span>FIELD CONTEXT • NORTH COASTAL ANDHRA</span>
+            <span>PRODUCTIVE ENERGY</span>
+          </div>
+          <img src="assets/field_hero.jpg" alt="Agro-processing workshop with rooftop solar in rural Andhra Pradesh" class="hero-authentic-img">
+          <div class="hero-photo-caption">
+            Decentralized renewable energy is enabling productive enterprises closer to where people live and work.
+          </div>
+        </div>
+      </div>
+
+      <!-- Official Competition Timeline & Key Milestones Strip -->
+      <div class="timeline-editorial-strip">
+        <div class="timeline-step active">
+          <span class="timeline-step-tag">IMMEDIATE START</span>
+          <div class="timeline-step-date">Open Now</div>
+          <div class="timeline-step-name">Registration &amp; Solution Build</div>
+          <div class="timeline-step-desc">The hackathon begins from the moment teams register. The sooner you register, the more time you have to work on problem statements.</div>
+        </div>
+
+        <div class="timeline-step">
+          <span class="timeline-step-tag">DEADLINE 01</span>
+          <div class="timeline-step-date">5th October</div>
+          <div class="timeline-step-name">Registration Closes</div>
+          <div class="timeline-step-desc">Last day to register your team for the hackathon and lock your problem statement selection.</div>
+        </div>
+
+        <div class="timeline-step highlight">
+          <span class="timeline-step-tag">DEADLINE 02</span>
+          <div class="timeline-step-date">9th October</div>
+          <div class="timeline-step-name">Prototype (PoC) Submission</div>
+          <div class="timeline-step-desc">Submit your presentation and/or video demonstration using the PoC submission link received upon registration.</div>
+        </div>
+
+        <div class="timeline-step finals">
+          <span class="timeline-step-tag">FINAL EVENT</span>
+          <div class="timeline-step-date">10th October</div>
+          <div class="timeline-step-name">In-Person Finals</div>
+          <div class="timeline-step-desc">Top 15–25 teams present live demos to the judges at the AU Incubation Center (ā hub). Report by 8:45 AM.</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- EDITORIAL TRANSITION BREAK -->
+  <div class="editorial-visual-break">
+    <div class="container" style="display: flex; align-items: center; gap: 1.5rem;">
+      <div class="break-line"></div>
+      <div class="break-label">FROM THE GRID TO THE ENTERPRISE</div>
+      <div class="break-line"></div>
+    </div>
+  </div>
+
+  <!-- SECTION: WHY DRE? (TYPE A - EDITORIAL THREE COLUMNS) -->
+  <section class="section-type-editorial" id="why-dre">
+    <div class="container">
+      <div class="editorial-section-header">
+        <span class="editorial-eyebrow">WHY DRE?</span>
+        <h2 class="editorial-title">The Energy Challenge Is No Longer Just About Generation.</h2>
+        <p class="editorial-lead">
+          Enterprises increasingly face challenges related to grid instability, thermal overload, fluctuating tariffs, carbon emissions and unreliable energy access.
+        </p>
+      </div>
+
+      <div class="why-dre-columns">
+        <!-- 01 Grid Instability -->
+        <div class="why-dre-col">
+          <div class="why-col-header">
+            <span class="num">01</span>
+            <span class="name">GRID INSTABILITY</span>
+          </div>
+          <div class="why-col-divider"></div>
+          <p class="why-col-text">
+            Centralized distribution networks suffer from thermal overloads, localized voltage fluctuations, and vulnerability to transmission failure. Heavy commercial rooftop feed-ins exacerbate reverse power spikes during sunny afternoons.
+          </p>
+        </div>
+
+        <!-- 02 Energy Cost & Reliability -->
+        <div class="why-dre-col">
+          <div class="why-col-header">
+            <span class="num">02</span>
+            <span class="name">ENERGY COST &amp; RELIABILITY</span>
+          </div>
+          <div class="why-col-divider"></div>
+          <p class="why-col-text">
+            Fluctuating commercial tariffs drive operational expenses high during peak hours. High inductive machine inrush currents trip fragile rural solar microgrids and accelerate battery bank degradation, straining MSME cash flow.
+          </p>
+        </div>
+
+        <!-- 03 Last-Mile Energy Access -->
+        <div class="why-dre-col">
+          <div class="why-col-header">
+            <span class="num">03</span>
+            <span class="name">LAST-MILE ENERGY ACCESS</span>
+          </div>
+          <div class="why-col-divider"></div>
+          <p class="why-col-text">
+            Hilly topography and dense forest cover make central grid extension economically prohibitive. Isolated agro-processing machinery in tribal valleys experiences weeks of downtime when an inverter trips due to lack of local diagnostic tools.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: GROUND REALITY IN ANDHRA PRADESH (TYPE B - FIELD CONTRAST) -->
+  <section class="section-type-field" id="ground-reality">
+    <div class="container">
+      <div class="editorial-section-header">
+        <span class="editorial-eyebrow light">GROUND REALITY</span>
+        <h2 class="editorial-title light">WHY THIS MATTERS IN ANDHRA PRADESH</h2>
+        <p class="editorial-lead light">
+          Here is where the challenge becomes real. Andhra Pradesh holds 9.1% of India's renewable energy potential, but localized ground realities throw specific operational bottlenecks that demand engineered solutions.
+        </p>
+      </div>
+
+      <div class="andhra-real-grid">
+        <!-- Left: Real Interactive Leaflet Map Card -->
+        <div class="andhra-map-card">
+          <!-- Map Header / Toolbar -->
+          <div class="andhra-map-header">
+            <div class="map-header-left">
+              <span class="map-badge-live">● REAL CARTOGRAPHIC VIEW</span>
+              <span class="map-title-text">Andhra Pradesh Regional DRE Corridors</span>
+            </div>
+            <div class="map-header-actions">
+              <button class="btn-map-control" id="resetMapBtn" title="Reset View">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+                <span>Reset View</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Quick Corridor Selector Pills -->
+          <div class="andhra-pill-bar">
+            <button class="corridor-pill active" data-id="all">All Corridors</button>
+            <button class="corridor-pill" data-id="gajuwaka">Gajuwaka</button>
+            <button class="corridor-pill" data-id="atchutapuram">Atchutapuram</button>
+            <button class="corridor-pill" data-id="paderu">Paderu</button>
+            <button class="corridor-pill" data-id="chintapalli">Chintapalli</button>
+            <button class="corridor-pill" data-id="aquaculture">Coastal Aquaculture</button>
+            <button class="corridor-pill" data-id="secretariat">📍 Secretariat (Visakhapatnam)</button>
+          </div>
+
+          <!-- Real Interactive Leaflet Map -->
+          <div id="andhraRealMap" class="real-leaflet-map" role="region" aria-label="Interactive map of Andhra Pradesh showing DRE field sites"></div>
+
+          <!-- Active Location Detail Panel (Dynamic Inspector) -->
+          <div class="map-inspector-panel" id="mapInspectorPanel">
+            <div class="inspector-badge-row">
+              <span class="inspector-badge" id="inspCategory">CORRIDOR FOCUS</span>
+              <span class="inspector-coord" id="inspCoords">17.69° N, 83.21° E</span>
+            </div>
+            <h4 class="inspector-title" id="inspTitle">Gajuwaka Industrial Cluster (Visakhapatnam)</h4>
+            <p class="inspector-desc" id="inspDesc">
+              Heavy commercial rooftop solar adoption pushes reverse power back into distribution networks during sunny afternoons, risking transformer failure and tripping feeder breakers.
+            </p>
+            <div class="inspector-footer">
+              <div class="inspector-ps-tag" id="inspPsTag">Addressed in <strong>PS 06 &amp; PS 07</strong></div>
+              <button class="inspector-action-btn" id="inspActionBtn" onclick="openProblemModal('PS 06')">Explore Challenge →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Typographic Verified Statistics & Corridors List -->
+        <div class="andhra-stats-col">
+          <div class="andhra-stat-block">
+            <div class="andhra-stat-figure stat-counter" data-target="55.3" data-suffix=" GW" data-decimals="1">55.3 GW</div>
+            <div class="andhra-stat-title">India's Non-Fossil Capacity Additions</div>
+            <div class="andhra-stat-subtext">Installed in the last fiscal year; India now stands third globally in renewable capacity.</div>
+          </div>
+
+          <div class="andhra-stat-block">
+            <div class="andhra-stat-figure stat-counter" data-target="9.1" data-suffix="%" data-decimals="1">9.1%</div>
+            <div class="andhra-stat-title">Andhra Pradesh Share of National Potential</div>
+            <div class="andhra-stat-subtext">The state ranks among India's top leaders in total clean energy generation potential.</div>
+          </div>
+
+          <div class="andhra-stat-block">
+            <div class="andhra-stat-figure stat-counter" data-target="167" data-suffix=" GW" data-decimals="0">167 GW</div>
+            <div class="andhra-stat-title">Total Andhra Pradesh Renewable Potential</div>
+            <div class="andhra-stat-subtext">Massive identified potential spanning wind, pumped hydro storage, and solar systems.</div>
+          </div>
+
+          <div class="andhra-stat-block">
+            <div class="andhra-stat-figure stat-counter" data-target="6" data-suffix="%" data-decimals="0">&lt;6%</div>
+            <div class="andhra-stat-title">Current State Capacity Utilized</div>
+            <div class="andhra-stat-subtext">Less than 6% of this capacity is being utilized, leaving over 94% untapped.</div>
+          </div>
+
+          <!-- Regional Corridors Quick Jump Cards -->
+          <div class="andhra-corridors-interactive">
+            <div class="corridor-card-interactive" onclick="focusMapLocation('gajuwaka')">
+              <div class="cci-header">
+                <span class="cci-name">Gajuwaka / Atchutapuram</span>
+                <span class="cci-jump">Zoom Map ↗</span>
+              </div>
+              <div class="cci-desc">Commercial solar pushes heavy reverse power back into distribution transformers during midday sunny hours.</div>
+            </div>
+
+            <div class="corridor-card-interactive" onclick="focusMapLocation('paderu')">
+              <div class="cci-header">
+                <span class="cci-name">Paderu / Chintapalli</span>
+                <span class="cci-jump">Zoom Map ↗</span>
+              </div>
+              <div class="cci-desc">Tribal coffee, pepper, and millet cooperatives face weeks of harvest spoilage when machinery trips in off-grid agency valleys.</div>
+            </div>
+
+            <div class="corridor-card-interactive" onclick="focusMapLocation('aquaculture')">
+              <div class="cci-header">
+                <span class="cci-name">Coastal Aquaculture Belts</span>
+                <span class="cci-jump">Zoom Map ↗</span>
+              </div>
+              <div class="cci-desc">High inrush starting currents from aerators and refrigeration units destabilize low-cost solar microgrids and drain battery banks.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: THE CHALLENGE BOARD (TYPE C - DATA & VISUAL CHAPTERS) -->
+  <section class="section-type-data" id="challenges">
+    <div class="container">
+      <div class="editorial-section-header">
+        <span class="editorial-eyebrow">THE CHALLENGE BOARD</span>
+        <h2 class="editorial-title">10 Problems. 4 Themes.<br>Real-World DRE Challenges.</h2>
+        <p class="editorial-lead">
+          Explore the challenges organized by enterprise chapter. Select one problem, understand its root constraint, and build a working solution.
+        </p>
+      </div>
+
+      <!-- Controls: Chapter Filter Tabs & Live Search -->
+      <div class="challenge-controls-bar">
+        <div class="chapter-filter-tabs">
+          <button class="chapter-tab-btn active" data-theme="all">ALL CHAPTERS</button>
+          <button class="chapter-tab-btn" data-theme="agri">01 AGRICULTURE &amp; HORTICULTURE</button>
+          <button class="chapter-tab-btn" data-theme="aqua">02 AQUACULTURE &amp; COLD CHAIN</button>
+          <button class="chapter-tab-btn" data-theme="msme">03 INDUSTRIAL MSMEs</button>
+          <button class="chapter-tab-btn" data-theme="tribal">04 TRIBAL &amp; FIELD OPS</button>
+        </div>
+
+        <div class="challenge-search-field">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" id="challengeSearchInput" placeholder="Search by crop, machinery, or bottleneck...">
+        </div>
+      </div>
+
+      <!-- Four Visual Chapters Container (Populated dynamically via app.js) -->
+      <div class="chapters-container" id="chaptersContainer">
+        <!-- Rendered via app.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: PROBLEM DETAIL MODAL -->
+  <div class="modal-overlay" id="modalOverlay"></div>
+  <div class="editorial-modal-dialog" id="editorialProblemModal" role="dialog" aria-modal="true">
+    <div class="modal-head">
+      <div>
+        <span class="card-ps-num" id="modalPsId">PS 01</span>
+        <span class="card-theme-tag" id="modalThemeBadge" style="margin-left: 0.5rem;">Theme</span>
+        <h3 class="modal-title" id="modalTitle"></h3>
+      </div>
+      <button class="modal-close-btn" id="modalCloseBtn" aria-label="Close dialog">✕</button>
+    </div>
+
+    <div class="modal-content-area">
+      <div class="modal-field-block">
+        <div class="modal-field-label">VALUE CHAIN</div>
+        <p class="modal-field-text" id="modalValueChain" style="font-weight: 700;"></p>
+      </div>
+
+      <div class="modal-field-block">
+        <div class="modal-field-label">THE CHALLENGE</div>
+        <p class="modal-field-text" id="modalChallenge"></p>
+      </div>
+
+      <div class="modal-field-block">
+        <div class="modal-field-label">BUILD</div>
+        <p class="modal-field-text" id="modalBuild"></p>
+      </div>
+
+      <div class="modal-field-block">
+        <div class="modal-field-label">DELIVERABLES</div>
+        <ul class="modal-deliverables-list" id="modalDeliverables"></ul>
+      </div>
+
+      <div class="modal-field-block">
+        <div class="modal-field-label">TECHNICAL FOCUS</div>
+        <p class="modal-field-text" id="modalTechFocus"></p>
+      </div>
+
+      <div class="modal-field-block">
+        <div class="modal-field-label">PRIMARY GLOBAL BOTTLENECK ADDRESSED</div>
+        <p class="modal-field-text" id="modalBottleneck" style="color: var(--brand-forest); font-weight: 700;"></p>
+      </div>
+    </div>
+
+    <div class="modal-bottom-bar">
+      <button class="btn btn-primary" id="modalChooseBtn">
+        CHOOSE THIS CHALLENGE →
+      </button>
+    </div>
+  </div>
+
+  <!-- SECTION: BOTTLENECK MATRIX (TYPE C - DATA) -->
+  <section class="section-type-data" id="bottlenecks" style="background: var(--bg-ivory);">
+    <div class="container">
+      <div class="editorial-section-header">
+        <span class="editorial-eyebrow">CONSULTING &amp; RESEARCH REPORT</span>
+        <h2 class="editorial-title">FROM BOTTLENECK TO BUILDABLE SOLUTION</h2>
+        <p class="editorial-lead">
+          Click any row to inspect its primary global bottleneck and technical focus.
+        </p>
+      </div>
+
+      <div class="report-matrix-wrapper">
+        <table class="report-table">
+          <thead>
+            <tr>
+              <th style="width: 75px;">PS</th>
+              <th style="width: 300px;">PROBLEM</th>
+              <th style="width: 260px;">GLOBAL BOTTLENECK</th>
+              <th>TECHNICAL FOCUS</th>
+              <th style="width: 100px; text-align: right;">ACTION</th>
+            </tr>
+          </thead>
+          <tbody id="matrixTableBody">
+            <!-- Populated via app.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <div id="matrixDetailBox" style="display: none;"></div>
+    </div>
+  </section>
+
+  <!-- SECTION: PRIZES & AWARDS (TYPE A - EDITORIAL PODIUM) -->
+  <section class="section-type-editorial" id="prizes" style="background: var(--bg-ivory); border-bottom: 1px solid var(--border-editorial);">
+    <div class="container">
+      <div class="editorial-section-header">
+        <span class="editorial-eyebrow">COMPETITION AWARDS</span>
+        <h2 class="editorial-title">Prizes &amp; Implementation Grants</h2>
+        <p class="editorial-lead">
+          A total cash prize purse of ₹36,000 INR awarded to standout engineering teams, including consolation prizes and participation certificates for all participants.
+        </p>
+      </div>
+
+      <div class="prizes-grid">
+        <!-- 1st Prize -->
+        <div class="prize-card prize-card-featured">
+          <div class="prize-card-header">
+            <div class="prize-rank-tag gold">
+              <span>🥇 FIRST PRIZE</span>
+            </div>
+            <div class="prize-amount-box">
+              <span class="prize-currency-symbol">₹</span>
+              <span class="prize-amount-val">10,000</span>
+              <span class="prize-currency-code">INR</span>
+            </div>
+            <div class="prize-title-sub">Grand Winner Award</div>
+          </div>
+          <p class="prize-summary-text">
+            Conferred upon the top-ranked technological solution demonstrating highest innovation, field robustness, and local enterprise scalability.
+          </p>
+          <ul class="prize-perks-list">
+            <li class="prize-perk-item">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span><strong>₹10,000 INR (10k)</strong> Direct Cash Award</span>
+            </li>
+            <li class="prize-perk-item">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Grand Champion Trophy &amp; Citation</span>
+            </li>
+            <li class="prize-perk-item">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Direct Pilot Evaluation for Enterprise Deployment</span>
+            </li>
+            <li class="prize-perk-item">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>1-on-1 Clean Energy Advisory &amp; Acceleration</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- 2nd Prize -->
+        <div class="prize-card">
+          <div class="prize-card-header">
+            <div class="prize-rank-tag silver">
+              <span>🥈 SECOND PRIZE</span>
+            </div>
+            <div class="prize-amount-box">
+              <span class="prize-currency-symbol">₹</span>
+              <span class="prize-amount-val">8,000</span>
+              <span class="prize-currency-code">INR</span>
+            </div>
+            <div class="prize-title-sub">First Runner-Up Award</div>
+          </div>
+          <p class="prize-summary-text">
+            Awarded to the second standout solution demonstrating sound software/IoT system architecture and clear operating cost-benefit parity.
+          </p>
+          <ul class="prize-perks-list">
+            <li class="prize-perk-item">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span><strong>₹8,000 INR (8k)</strong> Direct Cash Award</span>
+            </li>
+            <li class="prize-perk-item">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>First Runner-Up Certificate of Merit</span>
+            </li>
+            <li class="prize-perk-item">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Prototype Refinement &amp; Architecture Advisory</span>
+            </li>
+            <li class="prize-perk-item">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Networking with Sector Industry Partners</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- 3rd Prize -->
+        <div class="prize-card">
+          <div class="prize-card-header">
+            <div class="prize-rank-tag bronze">
+              <span>🥉 THIRD PRIZE</span>
+            </div>
+            <div class="prize-amount-box">
+              <span class="prize-currency-symbol">₹</span>
+              <span class="prize-amount-val">6,000</span>
+              <span class="prize-currency-code">INR</span>
+            </div>
+            <div class="prize-title-sub">Second Runner-Up Award</div>
+          </div>
+          <p class="prize-summary-text">
+            Awarded for distinguished problem-solving in tackling localized renewable energy bottlenecks in rural and MSME contexts.
+          </p>
+          <ul class="prize-perks-list">
+            <li class="prize-perk-item">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span><strong>₹6,000 INR (6k)</strong> Direct Cash Award</span>
+            </li>
+            <li class="prize-perk-item">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Second Runner-Up Certificate of Merit</span>
+            </li>
+            <li class="prize-perk-item">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Jury Commendation for Technological Innovation</span>
+            </li>
+            <li class="prize-perk-item">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Inclusion in State DRE Innovation Showcase</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Consolation Prizes -->
+      <div class="prizes-consolation-row">
+        <div class="prize-card prize-card-consolation">
+          <div class="prize-card-header">
+            <div class="prize-rank-tag consolation">
+              <span>🎖️ CONSOLATION PRIZES</span>
+            </div>
+            <div class="prize-amount-box">
+              <span class="prize-currency-symbol">₹</span>
+              <span class="prize-amount-val">4,000</span>
+              <span class="prize-currency-code">INR × 3 Teams</span>
+            </div>
+            <div class="prize-title-sub">3 Consolation Awards (₹12,000 Total)</div>
+          </div>
+          <p class="prize-summary-text">
+            Awarded to three additional teams demonstrating notable effort, creative approaches, and strong problem-solving ability across any challenge theme.
+          </p>
+          <ul class="prize-perks-list">
+            <li class="prize-perk-item">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span><strong>₹4,000 INR each</strong> for 3 teams</span>
+            </li>
+            <li class="prize-perk-item">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Consolation Certificate of Recognition</span>
+            </li>
+            <li class="prize-perk-item">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Acknowledgement at Valedictory Ceremony</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="prize-card prize-card-participation">
+          <div class="prize-card-header">
+            <div class="prize-rank-tag participation">
+              <span>📜 PARTICIPATION CERTIFICATES</span>
+            </div>
+            <div class="prize-title-sub" style="margin-top: 0.5rem; font-size: 1.15rem; font-weight: 700;">For All Participants</div>
+          </div>
+          <p class="prize-summary-text">
+            Every registered team that submits their deliverables will receive official Participation &amp; Problem Solving Certificates recognizing their contribution to the DRE innovation ecosystem.
+          </p>
+          <ul class="prize-perks-list">
+            <li class="prize-perk-item">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Official Participation Certificate</span>
+            </li>
+            <li class="prize-perk-item">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Problem Solving Recognition</span>
+            </li>
+            <li class="prize-perk-item">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Must be present at valedictory to collect</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="prizes-overall-banner">
+        <div class="prizes-banner-text">
+          <span class="prizes-banner-icon">💡</span>
+          <div class="prizes-banner-desc">
+            <strong>Total Cash Prize Pool: ₹36,000 INR</strong> (1st: ₹10k + 2nd: ₹8k + 3rd: ₹6k + 3 Consolation: ₹4k each). All registered teams will also receive official Participation &amp; Problem Solving Certificates.
+          </div>
+        </div>
+        <a href="#registration" class="btn btn-primary btn-sm">Register Team For Awards →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: RULES & GUIDELINES (TYPE A - EDITORIAL DOCUMENT) -->
+  <section class="section-type-editorial" id="rules">
+    <div class="container">
+      <div class="editorial-section-header">
+        <span class="editorial-eyebrow">OFFICIAL FRAMEWORK</span>
+        <h2 class="editorial-title">Rules &amp; Guidelines</h2>
+        <p class="editorial-lead">
+          Official competition boundaries, participation standards, and submission guidelines.
+        </p>
+      </div>
+
+      <div class="rules-doc-list">
+        <!-- 01 Immediate Start & Registration Window -->
+        <div class="rule-doc-row">
+          <div class="rule-doc-number">01</div>
+          <div class="rule-doc-content">
+            <h3 class="rule-doc-title">Immediate Start &amp; Registration Deadline (5th October)</h3>
+            <p class="rule-doc-desc">
+              The hackathon begins from the moment teams register. So, the sooner your team registers, the more time you will have to work on the problem statements. The last day to register for the hackathon is on <strong>5th October</strong>.
+            </p>
+          </div>
+        </div>
+
+        <!-- 02 Problem Statements & Scope -->
+        <div class="rule-doc-row">
+          <div class="rule-doc-number">02</div>
+          <div class="rule-doc-content">
+            <h3 class="rule-doc-title">Problem Statements &amp; Prototype / MVP Scope</h3>
+            <p class="rule-doc-desc">
+              Participating teams are to find a solution to any one of the problems. Participants should submit prototypes or a minimum viable product (MVP) of their solution. The official problem statements can be found here: <a href="assets/DRE_Hackathon_Problem_Statements.pdf" target="_blank" rel="noopener noreferrer" class="rule-inline-link"><strong>Download Problem Statements (PDF) ↗</strong></a>.
+            </p>
+          </div>
+        </div>
+
+        <!-- 03 Phase 1: Prototype Submission & PoC Link -->
+        <div class="rule-doc-row">
+          <div class="rule-doc-number">03</div>
+          <div class="rule-doc-content">
+            <h3 class="rule-doc-title">Phase 1: Prototype Submission &amp; PoC Link (Deadline: 9th October)</h3>
+            <p class="rule-doc-desc">
+              In Phase 1 of the hackathon, teams will submit their presentation and/or a video demonstrating their solution. The last day to submit your prototype is on <strong>9th October</strong>. This must be completed by the prototype submission deadline as ONLY the top 15–25 teams selected in the first round will be invited to the finals.<br>
+              <strong>IMPORTANT:</strong> Please make sure that you keep a copy of the PoC submission link which you will see in the confirmation notice on completing your team registration.
+            </p>
+          </div>
+        </div>
+
+        <!-- 04 Evaluation Standard & Top 15-25 Selection -->
+        <div class="rule-doc-row">
+          <div class="rule-doc-number">04</div>
+          <div class="rule-doc-content">
+            <h3 class="rule-doc-title">Evaluation Standard &amp; Top 15–25 Teams Selection</h3>
+            <p class="rule-doc-desc">
+              Once the submission deadline ends, depending on the quality of the solutions, the top 15–25 teams will be invited to appear for the finals.<br>
+              <strong>NOTE:</strong> If the judges do not believe the proposed MVP/Prototype/PoC of a team is up to the mark, they will NOT invite such teams to the finals. Hence the range of “top 15–25 teams”.
+            </p>
+          </div>
+        </div>
+
+        <!-- 05 Phase 2: In-Person Finals at AU Incubation Center -->
+        <div class="rule-doc-row">
+          <div class="rule-doc-number">05</div>
+          <div class="rule-doc-content">
+            <h3 class="rule-doc-title">Phase 2: In-Person Finals at AU Incubation Center (ā hub) — 10th October</h3>
+            <p class="rule-doc-desc">
+              The in-person finals will be held on <strong>10th October</strong>. All teams invited to the finals should report in person to the <strong>AU Incubation Center (ā hub) at 8:45 AM</strong>. Late comers may lose their spot to standby teams or face space limitations. At the finals, the invited teams will present their solution in person to the judges. This will involve a live demo of the solution. Each team will be given a maximum of <strong>5 minutes</strong> to present their solution.
+            </p>
+          </div>
+        </div>
+
+        <!-- 06 Equipment, Consumables & Originality -->
+        <div class="rule-doc-row">
+          <div class="rule-doc-number">06</div>
+          <div class="rule-doc-content">
+            <h3 class="rule-doc-title">Originality, Equipment &amp; Consumables</h3>
+            <p class="rule-doc-desc">
+              The solutions must be the own work of participating teams. Participants should have their own equipment and consumables to help them develop a solution.
+            </p>
+          </div>
+        </div>
+
+        <!-- 07 Valedictory & Participation Certificates -->
+        <div class="rule-doc-row">
+          <div class="rule-doc-number">07</div>
+          <div class="rule-doc-content">
+            <h3 class="rule-doc-title">Valedictory &amp; Certificates of Participation</h3>
+            <p class="rule-doc-desc">
+              <strong>ONLY participating teams that are present for the valedictory</strong> will be awarded certificates of participation.
+            </p>
+          </div>
+        </div>
+
+        <!-- 08 Cash Awards & Implementation Grants -->
+        <div class="rule-doc-row">
+          <div class="rule-doc-number">08</div>
+          <div class="rule-doc-content">
+            <h3 class="rule-doc-title">Cash Prizes &amp; Implementation Grants</h3>
+            <p class="rule-doc-desc">
+              Cash prizes are awarded to the top winning solutions: <strong>1st Prize: ₹10,000 INR (10k)</strong>, <strong>2nd Prize: ₹8,000 INR (8k)</strong>, <strong>3rd Prize: ₹6,000 INR (6k)</strong>, and <strong>3 Consolation Prizes: ₹4,000 INR each (4k × 3 = ₹12,000)</strong>. Total cash purse: <strong>₹36,000 INR</strong>. All participants will also receive official Participation Certificates.
+            </p>
+          </div>
+        </div>
+
+        <!-- 09 WhatsApp Notification Groups -->
+        <div class="rule-doc-row">
+          <div class="rule-doc-number">09</div>
+          <div class="rule-doc-content">
+            <h3 class="rule-doc-title">Official WhatsApp Notification Groups</h3>
+            <p class="rule-doc-desc">
+              You can join the HackAP Hackathon group to receive notifications for this and other hackathons: <a href="https://chat.whatsapp.com/DltHWrTLHpJHOanOm7AX8e" target="_blank" rel="noopener noreferrer" class="rule-inline-link"><strong>Join HackAP WhatsApp Group ↗</strong></a>.<br>
+              If the group is full, please join the HackAP Hackathon 2 group instead: <a href="https://chat.whatsapp.com/KQIIa7JDaSe7KlImP3D7SJ" target="_blank" rel="noopener noreferrer" class="rule-inline-link"><strong>Join HackAP Hackathon 2 Group ↗</strong></a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: REGISTRATION (TYPE C - DATA FORM) -->
+  <section class="section-type-data" id="registration" style="background: var(--bg-ivory);">
+    <div class="container registration-container">
+      <div class="editorial-section-header">
+        <span class="editorial-eyebrow">REGISTRATION</span>
+        <h2 class="editorial-title">BUILD THE NEXT STEP.</h2>
+        <p class="editorial-lead">
+          Choose a challenge. Build a solution. Create measurable impact.
+        </p>
+      </div>
+
+      <div id="existingRegBanner" style="display: none;"></div>
+
+      <!-- Registration Form Sheet -->
+      <div class="registration-sheet" id="registrationFormSheet">
+        <form id="dreRegistrationForm">
+
+          <!-- Team Information -->
+          <div class="form-segment-label">TEAM INFORMATION</div>
+          <div class="form-row-2">
+            <div class="form-field-group full">
+              <label class="field-label" for="regTeamName">Team Name <span class="req">*</span></label>
+              <input type="text" id="regTeamName" class="field-input" placeholder="e.g. Araku Energy Systems" required>
+            </div>
+            <div class="form-field-group full">
+              <label class="field-label" for="regTeamMembers">Team Members (Names &amp; Roles)</label>
+              <textarea id="regTeamMembers" class="field-textarea" placeholder="List your members: e.g. 1. Ramesh Varma (Lead - IoT), 2. Priya Rao (Backend), 3. Ananya S. (Data)"></textarea>
+            </div>
+          </div>
+
+          <!-- Team Lead Details -->
+          <div class="form-segment-label">TEAM LEAD DETAILS</div>
+          <div class="form-row-2">
+            <div class="form-field-group">
+              <label class="field-label" for="regLeadName">Full Name <span class="req">*</span></label>
+              <input type="text" id="regLeadName" class="field-input" placeholder="e.g. Ramesh Varma" required>
+            </div>
+            <div class="form-field-group">
+              <label class="field-label" for="regLeadEmail">Official Email <span class="req">*</span></label>
+              <input type="email" id="regLeadEmail" class="field-input" placeholder="e.g. ramesh@institute.edu" required>
+            </div>
+            <div class="form-field-group">
+              <label class="field-label" for="regLeadPhone">Phone / WhatsApp Number <span class="req">*</span></label>
+              <input type="tel" id="regLeadPhone" class="field-input" placeholder="e.g. +91 98765 43210" required>
+            </div>
+            <div class="form-field-group">
+              <label class="field-label" for="regLeadOrg">College / Organization <span class="req">*</span></label>
+              <input type="text" id="regLeadOrg" class="field-input" placeholder="e.g. Andhra University" required>
+            </div>
+            <div class="form-field-group">
+              <label class="field-label" for="regCity">City</label>
+              <input type="text" id="regCity" class="field-input" placeholder="e.g. Visakhapatnam">
+            </div>
+            <div class="form-field-group">
+              <label class="field-label" for="regState">State</label>
+              <input type="text" id="regState" class="field-input" value="Andhra Pradesh">
+            </div>
+            <div class="form-field-group full">
+              <label class="field-label" for="regLinks">GitHub / LinkedIn Profile</label>
+              <input type="url" id="regLinks" class="field-input" placeholder="https://github.com/your-profile">
+            </div>
+          </div>
+
+          <!-- Challenge Selection -->
+          <div class="form-segment-label">CHALLENGE SELECTION</div>
+          <div class="form-row-2">
+            <div class="form-field-group full">
+              <label class="field-label" for="regProblemDropdown">Preferred Problem Statement <span class="req">*</span></label>
+              <select id="regProblemDropdown" class="field-select" required>
+                <!-- Populated via JavaScript -->
+              </select>
+              <div id="selectedProblemPreview"></div>
+            </div>
+
+            <div class="form-field-group full">
+              <label class="field-label" for="regWhyChosen">Why did your team choose this challenge?</label>
+              <textarea id="regWhyChosen" class="field-textarea" placeholder="Explain your interest, domain familiarity, or prior work related to this specific problem..."></textarea>
+            </div>
+
+            <div class="form-field-group full">
+              <label class="field-label" for="regSkills">Technology / Skills Planned</label>
+              <input type="text" id="regSkills" class="field-input" placeholder="e.g. ESP32, Python, BLE GATT, React, Leaflet, Thermodynamic modeling">
+            </div>
+          </div>
+
+          <!-- Terms Check -->
+          <label class="terms-agreement-row">
+            <input type="checkbox" id="regTerms" required>
+            <span>I confirm that the provided team information is accurate and agree to follow all official hackathon rules and guidelines.</span>
+          </label>
+
+          <button type="submit" class="btn btn-primary btn-form-submit">
+            REGISTER YOUR TEAM →
+          </button>
+        </form>
+      </div>
+
+      <!-- Success Receipt Card -->
+      <div class="registration-receipt-box" id="registrationSuccessCard">
+        <div class="receipt-header-row">
+          <div class="receipt-check-icon">✓</div>
+          <div>
+            <h3 style="font-size: 1.35rem; color: var(--text-charcoal); margin-bottom: 0.2rem;">REGISTRATION RECEIVED</h3>
+            <p style="color: var(--brand-forest); font-size: 0.88rem;">Your team entry has been recorded in the hackathon registry.</p>
+          </div>
+        </div>
+
+        <div class="receipt-props-grid">
+          <div>
+            <div class="receipt-key">REGISTRATION ID</div>
+            <div class="receipt-value" id="confRegId" style="color: var(--brand-forest); font-family: var(--font-heading);"></div>
+          </div>
+          <div>
+            <div class="receipt-key">TEAM NAME</div>
+            <div class="receipt-value" id="confTeamName"></div>
+          </div>
+          <div>
+            <div class="receipt-key">TEAM LEAD</div>
+            <div class="receipt-value" id="confTeamLead"></div>
+          </div>
+          <div>
+            <div class="receipt-key">ORGANIZATION</div>
+            <div class="receipt-value" id="confOrg"></div>
+          </div>
+          <div style="grid-column: 1 / -1;">
+            <div class="receipt-key">SELECTED CHALLENGE</div>
+            <div class="receipt-value" id="confChallenge" style="color: var(--text-charcoal); font-size: 0.95rem;"></div>
+          </div>
+          <div>
+            <div class="receipt-key">SUBMISSION DATE</div>
+            <div class="receipt-value" id="confDate" style="font-size: 0.95rem; color: var(--text-muted);"></div>
+          </div>
+        </div>
+
+        <!-- Phase 1 PoC Submission Callout Box -->
+        <div class="poc-callout-box">
+          <div class="poc-callout-header">
+            <span>⚠️ CRITICAL ACTION: KEEP YOUR PoC SUBMISSION LINK</span>
+          </div>
+          <p class="poc-callout-note">
+            In Phase 1 of the hackathon, your team must submit your presentation and/or video demonstration of your solution. <strong>This must be completed by the prototype deadline on 9th October</strong> as ONLY the top 15–25 teams selected in the first round will be invited to appear for the in-person finals on <strong>10th October</strong> at the <strong>AU Incubation Center (ā hub) at 8:45 AM</strong>.
+          </p>
+          <div class="poc-url-row">
+            <input type="text" id="pocSubmissionUrl" class="poc-url-input" readonly value="">
+            <button class="btn btn-primary btn-sm" type="button" onclick="copyPocUrl()">Copy PoC Link</button>
+          </div>
+          <div style="margin-top: 1rem; display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center;">
+            <span style="font-size: 0.82rem; font-weight: 700; color: var(--text-charcoal);">Stay Updated:</span>
+            <a href="https://chat.whatsapp.com/DltHWrTLHpJHOanOm7AX8e" target="_blank" rel="noopener noreferrer" class="btn-whatsapp" style="font-size: 0.8rem; padding: 0.4rem 0.85rem;">
+              Join WhatsApp Group 1 ↗
+            </a>
+            <a href="https://chat.whatsapp.com/KQIIa7JDaSe7KlImP3D7SJ" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-outline" style="font-size: 0.8rem; padding: 0.4rem 0.85rem;">
+              Join Group 2 (If Full) ↗
+            </a>
+          </div>
+        </div>
+
+        <div class="receipt-buttons-row">
+          <button class="btn btn-outline btn-sm" onclick="editRegistration()">Edit Submission</button>
+          <button class="btn btn-primary btn-sm" onclick="window.print()">Print Receipt</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL MAJOR VISUAL MOMENT: EDITORIAL CALL TO ACTION (TYPE B - FIELD CONTRAST) -->
+  <section class="final-editorial-cta-section">
+    <div class="container final-cta-wrapper">
+      <span class="editorial-eyebrow light" style="margin-bottom: 0.75rem;">DECISION MOMENT</span>
+      <h2 class="final-cta-heading">
+        READY TO BUILD<br>THE NEXT STEP?
+      </h2>
+      <div class="final-cta-subtext">
+        <span>10 challenges.</span>
+        <span>Real enterprise problems.</span>
+        <span>Decentralized energy.</span>
+      </div>
+      <a href="#registration" class="btn btn-primary btn-large-cta">
+        REGISTER YOUR TEAM →
+      </a>
+    </div>
+  </section>
+
+  <!-- SECTION: FAQ (TYPE A - MINIMAL TWO-COLUMN EDITORIAL) -->
+  <section class="section-type-editorial" id="faq" style="background: var(--bg-white);">
+    <div class="container faq-grid-editorial">
+      <div>
+        <span class="editorial-eyebrow">QUESTIONS &amp; ANSWERS</span>
+        <h2 class="editorial-title">Frequently Asked Questions</h2>
+        <p class="editorial-lead">
+          Common queries regarding participation, problem selection, and technical frameworks.
+        </p>
+      </div>
+
+      <div class="faq-list-wrap">
+        <!-- Q1 -->
+        <div class="faq-entry">
+          <button class="faq-entry-btn" onclick="toggleFaqItem(this)">
+            <span>What is the DRE Hackathon?</span>
+            <span class="faq-chevron">▼</span>
+          </button>
+          <div class="faq-drawer-text">
+            The DRE Enterprise Hackathon is a technology innovation challenge focused on Decentralized Renewable Energy (DRE) for micro, small, and medium enterprises (MSMEs). It features 10 real-world problem statements across agriculture, aquaculture, industrial MSMEs, and tribal livelihoods.
+          </div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="faq-entry">
+          <button class="faq-entry-btn" onclick="toggleFaqItem(this)">
+            <span>Who can participate?</span>
+            <span class="faq-chevron">▼</span>
+          </button>
+          <div class="faq-drawer-text">
+            Official eligibility guidelines will be announced by the organizers.
+          </div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="faq-entry">
+          <button class="faq-entry-btn" onclick="toggleFaqItem(this)">
+            <span>How do I choose a problem statement?</span>
+            <span class="faq-chevron">▼</span>
+          </button>
+          <div class="faq-drawer-text">
+            Review the 10 Problem Statements under the Challenge Board. Each problem details its target value chain, operational challenge, required deliverables, and technical focus. Select the problem that best matches your team's skills.
+          </div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="faq-entry">
+          <button class="faq-entry-btn" onclick="toggleFaqItem(this)">
+            <span>Can a team work on multiple problems?</span>
+            <span class="faq-chevron">▼</span>
+          </button>
+          <div class="faq-drawer-text">
+            Official details will be announced by the organizers.
+          </div>
+        </div>
+
+        <!-- Q5 -->
+        <div class="faq-entry">
+          <button class="faq-entry-btn" onclick="toggleFaqItem(this)">
+            <span>What technologies can we use?</span>
+            <span class="faq-chevron">▼</span>
+          </button>
+          <div class="faq-drawer-text">
+            Teams can use any software languages, IoT protocols, emulators, or open-source tooling aligned with the deliverables—such as Python, WebSockets, Bluetooth Low Energy (BLE), Leaflet/Streamlit mapping, NLP speech models, or numerical simulators.
+          </div>
+        </div>
+
+        <!-- Q6 -->
+        <!-- Q6 -->
+        <div class="faq-entry">
+          <button class="faq-entry-btn" onclick="toggleFaqItem(this)">
+            <span>What are the prizes and awards?</span>
+            <span class="faq-chevron">▼</span>
+          </button>
+          <div class="faq-drawer-text">
+            The hackathon features an official total cash prize purse of <strong>₹36,000 INR</strong>:
+            <ul style="margin: 0.5rem 0 0.5rem 1.25rem; line-height: 1.6;">
+              <li><strong>1st Prize:</strong> ₹10,000 INR (10k INR) &plus; Grand Champion Trophy &plus; Pilot Incubation</li>
+              <li><strong>2nd Prize:</strong> ₹8,000 INR (8k INR) &plus; First Runner-Up Citation &plus; Architecture Advisory</li>
+              <li><strong>3rd Prize:</strong> ₹6,000 INR (6k INR) &plus; Second Runner-Up Citation &plus; State Showcase Commendation</li>
+              <li><strong>Consolation Prizes:</strong> ₹4,000 INR each for 3 additional teams (₹12,000 total)</li>
+            </ul>
+            All participating teams will receive official Participation &amp; Problem Solving Certificates.
+          </div>
+        </div>
+
+        <!-- Q7 -->
+        <div class="faq-entry">
+          <button class="faq-entry-btn" onclick="toggleFaqItem(this)">
+            <span>Where is the event secretariat located and how can I contact the desk?</span>
+            <span class="faq-chevron">▼</span>
+          </button>
+          <div class="faq-drawer-text">
+            The official Event Secretariat is located at: <strong>52-14-75 Survey No:44, National Highway 16, Near Rama Talkies Rd, Old TB Hospital Area, Resapuvanipalem, Dwaraka Nagar, Visakhapatnam, Andhra Pradesh 530013</strong> (GPS Coordinates: <strong>17.732, 83.315</strong>). You can contact the team directly by telephone at <strong>0891-2551630</strong>.
+          </div>
+        </div>
+
+        <!-- Q8 -->
+        <div class="faq-entry">
+          <button class="faq-entry-btn" onclick="toggleFaqItem(this)">
+            <span>What should we submit?</span>
+            <span class="faq-chevron">▼</span>
+          </button>
+          <div class="faq-drawer-text">
+            Teams should submit a GitHub/Git repository with documented source code, a functional prototype or simulation engine, system architecture schematics, and a brief pitch deck addressing the specific challenge deliverables.
+          </div>
+        </div>
+
+        <!-- Q9 -->
+        <div class="faq-entry">
+          <button class="faq-entry-btn" onclick="toggleFaqItem(this)">
+            <span>How will projects be evaluated?</span>
+            <span class="faq-chevron">▼</span>
+          </button>
+          <div class="faq-drawer-text">
+            Evaluation is carried out by clean-energy researchers and enterprise domain experts based on: (1) Technical Feasibility (30%), (2) Ground Enterprise Impact in Andhra Pradesh/India (30%), (3) Prototype Completeness (25%), and (4) Economic Viability (15%).
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: CONTACT & SECRETARIAT (TYPE A - EDITORIAL) -->
+  <section class="section-type-editorial" id="contact" style="background: var(--bg-ivory); border-top: 1px solid var(--border-editorial);">
+    <div class="container">
+      <div class="editorial-section-header">
+        <span class="editorial-eyebrow">OFFICIAL SECRETARIAT</span>
+        <h2 class="editorial-title">Contact &amp; Venue Details</h2>
+        <p class="editorial-lead">
+          Official headquarters, physical venue address, geographic coordinates, and direct telephone helpdesk for participant queries and team registration support.
+        </p>
+      </div>
+
+      <div class="contact-grid-editorial">
+        <!-- Main Secretariat Address & Coordinates Card -->
+        <div class="contact-card-main">
+          <!-- Physical Address -->
+          <div class="contact-item-group">
+            <div class="contact-icon-box">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div class="contact-content-box">
+              <span class="contact-label">Physical Venue &amp; Secretariat Address</span>
+              <div class="contact-value-lead">Dr. Lankapalli Bullayya College</div>
+              <div class="contact-value-text">
+                52-14-75 Survey No:44, National Highway 16, Near Rama Talkies Rd,<br>
+                Old TB Hospital Area, Resapuvanipalem, Dwaraka Nagar,<br>
+                Visakhapatnam, Andhra Pradesh 530013
+              </div>
+            </div>
+          </div>
+
+          <!-- Geographic Coordinates -->
+          <div class="contact-item-group">
+            <div class="contact-icon-box">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            </div>
+            <div class="contact-content-box">
+              <span class="contact-label">Geographic Coordinates</span>
+              <div class="contact-coords-badge">
+                <span>📍 17.732° N, 83.315° E</span>
+              </div>
+              <div class="contact-value-text" style="font-size: 0.88rem; color: var(--text-muted); margin-top: 0.25rem;">
+                Exact Coordinates: 17.732, 83.315 (Dwaraka Nagar / Resapuvanipalem, Visakhapatnam)
+              </div>
+            </div>
+          </div>
+
+          <!-- Telephone Support -->
+          <div class="contact-item-group">
+            <div class="contact-icon-box">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <div class="contact-content-box">
+              <span class="contact-label">Official Telephone Helpline</span>
+              <a href="tel:08912551630" class="contact-value-lead" style="color: var(--brand-forest); text-decoration: none;">
+                0891-2551630
+              </a>
+              <div class="contact-value-text" style="font-size: 0.88rem; color: var(--text-muted);">
+                Direct landline for registration queries, problem statement details, and venue assistance.
+              </div>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="contact-actions-row">
+            <a href="https://www.google.com/maps?q=17.732,83.315" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">
+              Open Coordinates in Maps (17.732, 83.315) ↗
+            </a>
+            <a href="tel:08912551630" class="btn btn-outline btn-sm">
+              Call 0891-2551630
+            </a>
+            <button class="btn btn-outline btn-sm" onclick="focusMapLocation('secretariat'); document.getElementById('ground-reality').scrollIntoView({behavior: 'smooth'});">
+              Locate on Map ↗
+            </button>
+          </div>
+        </div>
+
+        <!-- Helpdesk & Office Hours Card -->
+        <div class="contact-card-side">
+          <div>
+            <span class="contact-label">SECRETARIAT SCHEDULE</span>
+            <div class="contact-value-lead" style="margin: 0.35rem 0 1rem;">Hours &amp; Support</div>
+            <p style="font-size: 0.9rem; line-height: 1.55;">
+              The hackathon desk provides direct telephone and in-person assistance for participating teams across Andhra Pradesh and beyond.
+            </p>
+
+            <ul class="contact-side-schedule">
+              <li>
+                <span>Monday – Friday</span>
+                <span>09:00 – 18:00 IST</span>
+              </li>
+              <li>
+                <span>Saturday</span>
+                <span>09:30 – 16:30 IST</span>
+              </li>
+              <li>
+                <span>Sunday</span>
+                <span>Closed (Online Only)</span>
+              </li>
+              <li>
+                <span>Direct Phone</span>
+                <span>0891-2551630</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="contact-support-note">
+            <strong>Need help with your team registration?</strong> Reach the secretariat helpdesk directly at <strong>0891-2551630</strong> or visit our office in Dwaraka Nagar, Visakhapatnam.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER (DEEP FOREST CHARCOAL) -->
+  <footer class="footer-editorial">
+    <div class="container">
+      <div class="footer-columns-grid">
+        <div>
+          <div class="brand-wrapper" style="margin-bottom: 1rem;">
+            <div class="footer-logo-box">
+              <img src="assets/lgv-logo.png" alt="LGV - Growth With You" class="footer-logo-img">
+            </div>
+            <div class="brand-text-block">
+              <span class="brand-main" style="color: #FFFFFF;">DRE ENTERPRISE</span>
+              <span class="brand-sub" style="color: var(--brand-muted);">HACKATHON '26</span>
+            </div>
+          </div>
+          <p class="footer-summary-p">
+            Decentralized Renewable Energy (DRE) for Enterprise. Organized in official partnership with <strong>LGV — Growth With You</strong>. An inevitable next step toward resilient, autonomous, and zero-carbon enterprise infrastructure.
+          </p>
+        </div>
+
+        <div>
+          <div class="footer-list-title">Chapters</div>
+          <ul class="footer-nav-list">
+            <li><a href="#chapter-agri">01 Agri &amp; Horticulture</a></li>
+            <li><a href="#chapter-aqua">02 Aquaculture &amp; Cold Chain</a></li>
+            <li><a href="#chapter-msme">03 Industrial MSMEs</a></li>
+            <li><a href="#chapter-tribal">04 Tribal &amp; Field Ops</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-list-title">Navigation</div>
+          <ul class="footer-nav-list">
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#prizes">Prizes &amp; Grants</a></li>
+            <li><a href="#why-dre">Why DRE</a></li>
+            <li><a href="#ground-reality">Andhra Context</a></li>
+            <li><a href="#bottlenecks">Bottleneck Matrix</a></li>
+            <li><a href="#rules">Rules &amp; Guidelines</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-list-title">Action</div>
+          <ul class="footer-nav-list">
+            <li><a href="#registration">Register Your Team</a></li>
+            <li><a href="#contact">Contact Secretariat</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#challenges">Browse 10 Challenges</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-list-title">Secretariat &amp; Venue</div>
+          <div class="footer-contact-block">
+            <div class="footer-contact-item">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span>52-14-75 Survey No:44, NH 16, Near Rama Talkies Rd, Resapuvanipalem, Dwaraka Nagar, Visakhapatnam, AP 530013</span>
+            </div>
+            <div class="footer-contact-item">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              <a href="https://www.google.com/maps?q=17.732,83.315" target="_blank" rel="noopener noreferrer" style="color: #FFFFFF;">GPS: 17.732, 83.315 ↗</a>
+            </div>
+            <div class="footer-contact-item">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <a href="tel:08912551630" style="color: #FFFFFF; font-weight: 700; text-decoration: none;">0891-2551630</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <div>Decentralized Renewable Energy for Enterprise Hackathon 2026.</div>
+        <div>All Problem Statements derived from the Official Source Document.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Mobile Sticky Bar -->
+  <div class="mobile-sticky-bar">
+    <a href="#registration" class="btn btn-primary">REGISTER YOUR TEAM →</a>
+  </div>
+
+  <!-- Leaflet JS for Real Interactive Map -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <!-- Pure logic module (shared with the test suite) -->
+  <script src="logic.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

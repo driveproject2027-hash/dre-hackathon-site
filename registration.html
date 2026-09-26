@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DRE Hackathon — Team Registration</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap');
+
+  :root{
+    --ink:#161A1F; --paper:#EEF1F6; --line:#C7CEDA;
+    --teal:#0F8B8D; --teal-dark:#0B6668; --navy:#142433;
+    --error:#B3261E; --muted:#5B6472;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:'Inter',sans-serif; line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:640px; margin:0 auto; padding:56px 24px 96px;}
+  .kicker{font-family:'Space Grotesk',sans-serif; font-weight:500; font-size:15px; color:var(--teal-dark); margin:0 0 6px;}
+  h1{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(28px,5vw,40px); margin:0 0 12px; letter-spacing:-0.01em;}
+  .sub{color:var(--muted); max-width:52ch; margin:0 0 40px; font-size:16px;}
+  .rule{border:0; border-top:1px solid var(--line); margin:32px 0;}
+
+  fieldset{border:0; padding:0; margin:0 0 28px;}
+  legend{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:14px; color:var(--navy); padding:0 0 14px; width:100%;}
+  .row{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  @media (max-width:520px){.row{grid-template-columns:1fr;}}
+  label{display:block; font-size:14px; font-weight:500; margin:0 0 6px; color:var(--navy);}
+  .req{color:var(--teal-dark);}
+  input,select,textarea{
+    width:100%; padding:11px 12px; font:inherit; font-size:15px;
+    border:1px solid var(--line); border-radius:3px; background:#fff; color:var(--ink);
+    margin-bottom:18px;
+  }
+  input:focus,select:focus,textarea:focus{outline:2px solid var(--teal); outline-offset:1px; border-color:var(--teal);}
+  textarea{resize:vertical; min-height:88px;}
+  .hint{font-size:13px; color:var(--muted); margin:-14px 0 18px;}
+
+  button{
+    font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:16px;
+    background:var(--navy); color:#fff; border:0; border-radius:3px;
+    padding:14px 28px; cursor:pointer; width:100%;
+  }
+  button:hover{background:var(--teal-dark);}
+  button:disabled{background:var(--muted); cursor:not-allowed;}
+
+  #status{margin-top:18px; font-size:15px; display:none; padding:14px 16px; border-radius:3px;}
+  #status.ok{display:block; background:#E4F3F1; color:var(--teal-dark); border:1px solid var(--teal);}
+  #status.err{display:block; background:#FBEAE9; color:var(--error); border:1px solid var(--error);}
+  #status.pending{display:block; background:#EEF1F6; color:var(--muted); border:1px solid var(--line);}
+
+  .field-error{color:var(--error); font-size:13px; margin:-14px 0 18px; display:none;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">Team registration</p>
+  <h1>DRE Hackathon 2026</h1>
+  <p class="sub">Fill this in once per team. Your reply confirms the slot and the problem statement you've picked — check your email after submitting.</p>
+  <hr class="rule">
+
+  <form id="regForm" novalidate>
+    <fieldset>
+      <legend>Team</legend>
+      <label for="team_name">Team name <span class="req">*</span></label>
+      <input id="team_name" name="team_name" required>
+
+      <div class="row">
+        <div>
+          <label for="city">City <span class="req">*</span></label>
+          <input id="city" name="city" required>
+        </div>
+        <div>
+          <label for="state">State <span class="req">*</span></label>
+          <input id="state" name="state" required>
+        </div>
+      </div>
+
+      <label for="skills">Team skills</label>
+      <input id="skills" name="skills" placeholder="e.g. React, ML, hardware, design">
+    </fieldset>
+
+    <fieldset>
+      <legend>Team lead — we'll contact this person</legend>
+      <label for="team_lead">Full name <span class="req">*</span></label>
+      <input id="team_lead" name="team_lead" required>
+
+      <div class="row">
+        <div>
+          <label for="lead_email">Email <span class="req">*</span></label>
+          <input id="lead_email" name="lead_email" type="email" required>
+        </div>
+        <div>
+          <label for="lead_phone">Phone <span class="req">*</span></label>
+          <input id="lead_phone" name="lead_phone" type="tel" required>
+        </div>
+      </div>
+
+      <label for="lead_org">College / organisation</label>
+      <input id="lead_org" name="lead_org">
+    </fieldset>
+
+    <fieldset>
+      <legend>Problem statement</legend>
+      <label for="chosen_ps">Problem statement code <span class="req">*</span></label>
+      <input id="chosen_ps" name="chosen_ps" placeholder="e.g. PS-04" required>
+
+      <label for="ps_title">Problem statement title <span class="req">*</span></label>
+      <input id="ps_title" name="ps_title" required>
+
+      <label for="why_reason">Why this problem, in a few lines <span class="req">*</span></label>
+      <textarea id="why_reason" name="why_reason" required></textarea>
+    </fieldset>
+
+    <button type="submit" id="submitBtn">Register team</button>
+    <div id="status"></div>
+  </form>
+</div>
+
+<script>
+  // Paste your Apps Script Web App /exec URL here.
+  const WEB_APP_URL = "PASTE-YOUR-APPS-SCRIPT-WEB-APP-URL-HERE"; // same URL as BACKEND_URL in app.js
+
+  const form = document.getElementById("regForm");
+  const statusEl = document.getElementById("status");
+  const btn = document.getElementById("submitBtn");
+
+  function showStatus(kind, msg){
+    statusEl.className = kind;
+    statusEl.textContent = msg;
+  }
+
+  function makeRegId(){
+    return "REG-" + Date.now().toString(36).toUpperCase() + "-" + Math.random().toString(36).slice(2,6).toUpperCase();
+  }
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    if (WEB_APP_URL.includes("PASTE_YOUR_EXEC_URL_HERE")) {
+      showStatus("err", "This form isn't connected yet — set WEB_APP_URL in the page source to your Apps Script /exec URL.");
+      return;
+    }
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    btn.disabled = true;
+    showStatus("pending", "Submitting…");
+
+    const data = new FormData(form);
+    data.append("reg_id", makeRegId());
+
+    try {
+      const res = await fetch(WEB_APP_URL, { method: "POST", body: data });
+      const json = await res.json();
+      if (json.ok) {
+        showStatus("ok", "Registered! Your team is confirmed for " + (data.get("chosen_ps") || "your chosen problem statement") + ".");
+        form.reset();
+      } else if (json.error === "duplicate_email") {
+        showStatus("err", "This email is already registered. One registration per team lead — reach out to the organisers if this is a mistake.");
+      } else {
+        showStatus("err", "Something went wrong on our end: " + (json.error || "unknown error") + ". Please try again.");
+      }
+    } catch (err) {
+      showStatus("err", "Couldn't reach the registration server. Check your connection and try again.");
+    } finally {
+      btn.disabled = false;
+    }
+  });
+</script>
+</body>
+</html>
