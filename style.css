@@ -2382,9 +2382,9 @@ section[id], header[id] {
    ========================================================================== */
 .contact-grid-editorial {
   display: grid;
-  grid-template-columns: 1.25fr 0.75fr;
-  gap: 2.5rem;
-  margin-top: 2.5rem;
+  grid-template-columns: 1fr;
+  max-width: 800px;
+  margin: 2.5rem auto 0 auto;
 }
 
 .contact-card-main {
