@@ -555,9 +555,14 @@ function renderBottleneckMatrix() {
       </td>
       <td class="report-tech-col">${escapeHtml(item.techFocus)}</td>
       <td class="report-action-col">
-        <button class="btn btn-report-select" data-ps-id="${escapeHtml(item.id)}">
-          Select
-        </button>
+        <div style="display: flex; gap: 8px; justify-content: flex-end;">
+          <button class="btn btn-sm btn-outline" style="padding: 4px 12px; font-size: 0.8rem;" data-ps-id="${escapeHtml(item.id)}" data-action="view">
+            View Full Challenge
+          </button>
+          <button class="btn btn-report-select" data-ps-id="${escapeHtml(item.id)}">
+            Select
+          </button>
+        </div>
       </td>
     </tr>
   `).join('');
