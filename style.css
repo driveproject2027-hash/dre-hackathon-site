@@ -2945,11 +2945,13 @@ section[id], header[id] {
   
   /* Hero Section */
   .hero-section { padding: 40px 0 60px; }
-  .hero-headline { font-size: clamp(2rem, 8vw, 2.8rem); line-height: 1.1; }
+  .hero-grid, .hero-text-block, .hero-photo-wrapper { width: 100%; max-width: 100%; min-width: 0; box-sizing: border-box; }
+  .hero-eyebrow { width: 100%; max-width: 100%; min-width: 0; box-sizing: border-box; white-space: normal; word-wrap: break-word; }
+  .hero-headline { font-size: clamp(2rem, 8vw, 2.8rem); line-height: 1.1; width: 100%; max-width: 100%; min-width: 0; box-sizing: border-box; word-wrap: break-word; }
   .hero-campaign-line { font-size: clamp(1.1rem, 5vw, 1.35rem); margin-top: 8px; display: block; }
-  .hero-support-text { font-size: 1rem; padding-right: 0; }
-  .hero-cta-group { flex-direction: column; align-items: stretch; gap: 12px; }
-  .hero-cta-group .btn { width: 100%; text-align: center; padding: 14px; font-size: 1rem; }
+  .hero-support-text { font-size: 1rem; padding-right: 0; width: 100%; max-width: 100%; min-width: 0; box-sizing: border-box; word-wrap: break-word; }
+  .hero-cta-group { flex-direction: column; align-items: stretch; gap: 12px; width: 100%; max-width: 100%; min-width: 0; box-sizing: border-box; }
+  .hero-cta-group .btn { width: 100%; max-width: 100%; min-width: 0; box-sizing: border-box; text-align: center; padding: 14px; font-size: 1rem; }
   
   /* Partners */
   .hero-partners-strip { flex-direction: column; gap: 12px; padding: 16px; border-radius: 8px; }
@@ -3008,6 +3010,34 @@ section[id], header[id] {
     padding: 12px; 
   }
   textarea { resize: vertical; }
+
+  /* Physical Venue Fix */
+  .contact-card-main, .contact-card-side, .contact-item-group, .contact-content-box {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+  }
+  .contact-value-text, .contact-value-lead, .contact-label {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    white-space: normal !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+  .contact-coords-badge {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    white-space: normal;
+    word-wrap: break-word;
+  }
+  .contact-icon-box {
+    flex-shrink: 0;
+  }
   
   /* Checkbox Wrap Fix */
   .checkbox-label { display: flex; align-items: flex-start; gap: 12px; width: 100%; }
