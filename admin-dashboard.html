@@ -256,6 +256,7 @@
           <th data-key="ps_title">Problem Statement</th>
           <th data-key="skills">Skills</th>
           <th data-key="created_at">Registered</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody id="tbody"></tbody>
@@ -402,8 +403,9 @@
           <td class="cell-title">${esc(r.ps_title)}</td>
           <td class="cell-skills">${esc(r.skills)}</td>
           <td class="cell-date">${formatDate(r.created_at)}</td>
+          <td><button class="btn btn-danger delete-btn" data-id="${esc(id)}">Delete</button></td>
         </tr>
-        ${isOpen ? `<tr class="detail-row"><td colspan="12">
+        ${isOpen ? `<tr class="detail-row"><td colspan="13">
           <div class="detail-inner">
             <div><div class="field-label">Registration ID</div><div class="field-value" style="font-family:var(--font-mono);font-size:0.82rem;">${esc(id)}</div></div>
             <div><div class="field-label">Full Name</div><div class="field-value">${esc(r.team_lead)}</div></div>
@@ -415,9 +417,6 @@
             <div class="full-width"><div class="field-label">Motivation & Approach</div><div class="field-value">${esc(r.why_reason) || '<span style="color:var(--text-subtle);">Not provided</span>'}</div></div>
             <div class="full-width"><div class="field-label">Tech Stack & Skills</div><div class="field-value">${esc(r.skills)}</div></div>
             <div><div class="field-label">Registered At</div><div class="field-value">${formatDate(r.created_at)}</div></div>
-            <div style="text-align:right; align-self:end;">
-              <button class="btn btn-danger delete-btn" data-id="${esc(id)}">🗑 Delete Team</button>
-            </div>
           </div>
         </td></tr>` : ""}`;
       }).join("");
