@@ -456,10 +456,13 @@
         deleteBtn.disabled = true;
 
         try {
+          const bodyData = new URLSearchParams({
+            action: "delete",
+            reg_id: id
+          });
           const res = await fetch(WEB_APP_URL, {
             method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: `action=delete&reg_id=${encodeURIComponent(id)}`
+            body: bodyData
           });
           const json = await res.json();
           if (json.ok) {
