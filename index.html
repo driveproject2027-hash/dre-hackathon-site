@@ -14,7 +14,7 @@
   <!-- Leaflet CSS for Real Map -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
 
-  <link rel="stylesheet" href="style.css?v=31">
+  <link rel="stylesheet" href="style.css?v=32">
 </head>
 <body>
 
@@ -1272,10 +1272,44 @@
     <a href="#registration" class="btn btn-primary">REGISTER YOUR TEAM →</a>
   </div>
 
+  <!-- Poster Modal (Auto Popup) -->
+  <div id="posterModal" class="poster-modal-overlay">
+    <div class="poster-modal-content">
+      <button class="poster-close-btn" aria-label="Close Poster" onclick="closePosterModal()">&times;</button>
+      <div class="poster-inner-wrap">
+        <div class="poster-header">
+          <div class="poster-eyebrow">DRE HACKATHON 2026</div>
+          <h2 class="poster-headline">DECENTRALIZED <span class="headline-accent">RENEWABLE</span><br>ENERGY FOR ENTERPRISE</h2>
+          <div class="poster-tagline">An Inevitable Next Step.</div>
+        </div>
+        
+        <div class="poster-logos">
+          <div class="poster-logo-label">IN PARTNERSHIP WITH</div>
+          <div class="poster-logos-grid">
+            <img src="assets/lgv-logo.png" alt="LGV">
+            <img src="assets/prajna-logo.png" alt="Prajna">
+            <img src="assets/iic-logo-final.jpg" alt="IIC" class="poster-logo-iic">
+            <img src="assets/new-partner-logo.png" alt="LB College" class="poster-logo-lb">
+            <img src="assets/game-logo.png" alt="GAME" class="poster-logo-game">
+          </div>
+        </div>
+        
+        <div class="poster-footer">
+          <div class="poster-stats">
+            <div><strong>10</strong> CHALLENGES</div>
+            <div><strong>₹36K</strong> PRIZE POOL</div>
+            <div><strong>10 OCT</strong> FINALS</div>
+          </div>
+          <a href="#registration" class="btn btn-primary poster-cta" onclick="closePosterModal()">REGISTER YOUR TEAM →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Leaflet JS for Real Interactive Map -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <!-- Pure logic module (shared with the test suite) -->
   <script src="logic.js"></script>
-  <script src="app.js?v=4"></script>
+  <script src="app.js?v=5"></script>
 </body>
 </html>

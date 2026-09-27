@@ -1265,3 +1265,24 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+// Poster Modal Logic
+function closePosterModal() {
+  const modal = document.getElementById('posterModal');
+  if(modal) {
+    modal.classList.remove('active');
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Show poster modal on initial load (only once per session)
+  if (!sessionStorage.getItem('posterShown')) {
+    setTimeout(() => {
+      const modal = document.getElementById('posterModal');
+      if(modal) {
+        modal.classList.add('active');
+        sessionStorage.setItem('posterShown', 'true');
+      }
+    }, 500); // 500ms delay for nice effect
+  }
+});

@@ -3112,3 +3112,187 @@ section[id], header[id] {
   .prize-card-large { padding: 24px 16px; }
   .prize-amount { font-size: 2.5rem; }
 }
+
+/* Poster Modal */
+.poster-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.poster-modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.poster-modal-content {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  background: url('assets/field_hero.jpg') center/cover no-repeat;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+  transform: translateY(20px) scale(0.95);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.poster-modal-overlay.active .poster-modal-content {
+  transform: translateY(0) scale(1);
+}
+
+.poster-inner-wrap {
+  padding: 40px 30px;
+  background: linear-gradient(135deg, rgba(20,40,25,0.95) 0%, rgba(10,25,15,0.85) 100%);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  text-align: center;
+}
+
+.poster-close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(255,255,255,0.2);
+  border: none;
+  color: #fff;
+  font-size: 24px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+  transition: background 0.3s ease;
+}
+.poster-close-btn:hover {
+  background: rgba(255,255,255,0.4);
+}
+
+.poster-eyebrow {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #EBD494;
+  margin-bottom: 10px;
+}
+
+.poster-headline {
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  line-height: 1.1;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.poster-headline .headline-accent {
+  color: #a3d9a5;
+}
+
+.poster-tagline {
+  font-size: 1.1rem;
+  font-style: italic;
+  opacity: 0.9;
+}
+
+.poster-logos {
+  background: rgba(255,255,255,0.05);
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.poster-logo-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 15px;
+}
+
+.poster-logos-grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.poster-logos-grid img {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+  background: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+.poster-logos-grid img.poster-logo-iic {
+  height: 50px; padding: 5px; border-radius: 50%;
+}
+.poster-logos-grid img.poster-logo-lb {
+  height: 45px;
+}
+.poster-logos-grid img.poster-logo-game {
+  height: 45px;
+}
+
+.poster-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+
+.poster-stats {
+  display: flex;
+  gap: 20px;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  color: rgba(255,255,255,0.8);
+}
+
+.poster-stats strong {
+  color: #fff;
+  font-size: 1.1rem;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.poster-cta {
+  width: 100%;
+  font-size: 1.1rem;
+  padding: 16px;
+  background: #EBD494;
+  color: var(--brand-forest);
+  border: none;
+  font-weight: 700;
+  text-align: center;
+  display: inline-block;
+  box-sizing: border-box;
+}
+.poster-cta:hover {
+  background: #d6be7c;
+  color: var(--brand-forest);
+}
+
+@media (max-width: 600px) {
+  .poster-headline { font-size: 1.8rem; }
+  .poster-stats { flex-direction: column; gap: 10px; }
+  .poster-inner-wrap { padding: 30px 20px; }
+}
