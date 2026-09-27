@@ -838,9 +838,13 @@
               <label class="field-label" for="regTeamName">Team Name <span class="req">*</span></label>
               <input type="text" id="regTeamName" class="field-input" placeholder="e.g. Araku Energy Systems" required>
             </div>
-            <div class="form-field-group full">
-              <label class="field-label" for="regTeamMembers">Team Members (Must be 2 to 5 members) <span class="req">*</span></label>
-              <textarea id="regTeamMembers" class="field-textarea" placeholder="List your members: e.g. 1. Ramesh Varma (Lead), 2. Priya Rao, 3. Ananya S." required></textarea>
+            <div class="form-field-group full" id="dynamicTeamContainer">
+              <label class="field-label">Team Members (Must be 2 to 5 members) <span class="req">*</span></label>
+              <div id="teamMembersList" style="display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 0.75rem;">
+                <input type="text" class="field-input dynamic-member-input" placeholder="Member 1 Name (Team Lead)" required>
+                <input type="text" class="field-input dynamic-member-input" placeholder="Member 2 Name" required>
+              </div>
+              <button type="button" id="addMemberBtn" class="btn btn-outline" style="padding: 0.4rem 0.8rem; font-size: 0.85rem; width: max-content;">+ Add Member</button>
             </div>
           </div>
 
@@ -1328,6 +1332,6 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <!-- Pure logic module (shared with the test suite) -->
   <script src="logic.js"></script>
-  <script src="app.js?v=7"></script>
+  <script src="app.js?v=8"></script>
 </body>
 </html>

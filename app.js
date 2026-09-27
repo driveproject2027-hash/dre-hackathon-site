@@ -653,6 +653,27 @@ function initRegistrationForm() {
   const form = document.getElementById("dreRegistrationForm");
   if (!form) return;
 
+  const addMemberBtn = document.getElementById("addMemberBtn");
+  const teamMembersList = document.getElementById("teamMembersList");
+
+  if (addMemberBtn && teamMembersList) {
+    addMemberBtn.addEventListener("click", () => {
+      const currentCount = teamMembersList.querySelectorAll(".dynamic-member-input").length;
+      if (currentCount < 5) {
+        const input = document.createElement("input");
+        input.type = "text";
+        input.className = "field-input dynamic-member-input";
+        input.placeholder = `Member ${currentCount + 1} Name`;
+        input.required = true;
+        teamMembersList.appendChild(input);
+
+        if (currentCount + 1 >= 5) {
+          addMemberBtn.style.display = "none";
+        }
+      }
+    });
+  }
+
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -667,6 +688,11 @@ function initRegistrationForm() {
     const whyReason = document.getElementById("regWhyChosen")?.value.trim();
     const skills = document.getElementById("regSkills")?.value.trim();
     const terms = document.getElementById("regTerms")?.checked;
+    
+    // Gather dynamic team members
+    const memberInputs = document.querySelectorAll(".dynamic-member-input");
+    const membersList = Array.from(memberInputs).map(inp => inp.value.trim()).filter(v => v !== "");
+    const teamMembersString = membersList.join(", ");
 
     if (!teamName || !teamLead || !leadEmail || !leadPhone || !leadOrg || !city || !state || !chosenPs) {
       showToast("Please fill in all mandatory fields (*)", "warning");
@@ -693,6 +719,7 @@ function initRegistrationForm() {
       state,
       chosenPs,
       psTitle: selectedObj ? selectedObj.title : chosenPs,
+      teamMembers: teamMembersString,
       whyReason,
       skills,
       submittedAt: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
