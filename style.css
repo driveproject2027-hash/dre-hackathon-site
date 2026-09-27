@@ -2604,6 +2604,13 @@ section[id], header[id] {
   object-fit: contain;
 }
 
+.hero-partner-logo-tie {
+  height: 80px;
+  width: auto;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+}
+
 .footer-partner-card {
   margin-top: 1.25rem;
   display: inline-flex;
@@ -3314,6 +3321,10 @@ section[id], header[id] {
 }
 .poster-logos-grid img.poster-logo-game {
   height: 45px;
+}
+.poster-logos-grid img.poster-logo-tie {
+  height: 50px;
+  mix-blend-mode: multiply;
 }
 
 .poster-footer {
