@@ -501,6 +501,11 @@ function openProblemModal(psId) {
   const overlay = document.getElementById("modalOverlay");
   if (!modal || !overlay) return;
 
+  // Ensure any inline expanded detail box is closed when viewing full challenge
+  const detailBox = document.getElementById("matrixDetailBox");
+  if (detailBox) detailBox.style.display = "none";
+  document.querySelectorAll(".report-row").forEach(r => r.classList.remove("row-selected"));
+
   document.getElementById("modalPsId").textContent = item.id;
   document.getElementById("modalThemeBadge").textContent = item.themeName;
   document.getElementById("modalTitle").textContent = item.title;
