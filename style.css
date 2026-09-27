@@ -2938,7 +2938,7 @@ section[id], header[id] {
   .brand-sub { font-size: 0.55rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; }
   
   /* Hero Section */
-  .hero-section { padding: 40px 0 60px; }
+  .hero-section { padding: 24px 0 32px; }
   .hero-grid, .hero-text-block, .hero-photo-wrapper { width: 100%; max-width: 100%; min-width: 0; box-sizing: border-box; }
   .hero-eyebrow { width: 100%; max-width: 100%; min-width: 0; box-sizing: border-box; white-space: normal; word-wrap: break-word; }
   .hero-headline { font-size: clamp(2rem, 8vw, 2.8rem); line-height: 1.1; width: 100%; max-width: 100%; min-width: 0; box-sizing: border-box; word-wrap: break-word; }
@@ -3013,7 +3013,7 @@ section[id], header[id] {
   }
   .andhra-pill-bar::-webkit-scrollbar { display: none; }
   .corridor-pill { white-space: nowrap; font-size: 0.85rem; padding: 8px 14px; flex-shrink: 0; }
-  .real-leaflet-map { min-height: 350px; height: 50vh; width: 100%; }
+  .real-leaflet-map { min-height: 250px; height: 40vh; width: 100%; }
   .map-header-left { flex-direction: column; align-items: flex-start; gap: 6px; }
   
   /* Challenge Cards & Matrix */
@@ -3023,8 +3023,25 @@ section[id], header[id] {
     overflow-x: auto !important;
     -webkit-overflow-scrolling: touch;
   }
-  .chapter-cards-grid { grid-template-columns: 1fr; gap: 16px; }
-  .editorial-challenge-card { padding: 20px 16px; }
+  
+  .chapter-cards-grid { 
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    gap: 12px; 
+    padding-bottom: 12px;
+  }
+  .chapter-cards-grid::-webkit-scrollbar { height: 4px; }
+  .chapter-cards-grid::-webkit-scrollbar-thumb { background: var(--border-editorial); border-radius: 4px; }
+  
+  .editorial-challenge-card { 
+    padding: 16px; 
+    flex: 0 0 85%;
+    max-width: 85%;
+    scroll-snap-align: center;
+  }
   .challenge-card-footer { flex-direction: column; }
   .challenge-card-footer .btn { width: 100%; text-align: center; }
   
