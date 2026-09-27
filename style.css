@@ -2567,8 +2567,14 @@ section[id], header[id] {
 .hero-partners-logos {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 1.25rem 1rem;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
+  justify-content: space-between;
+}
+.hero-partners-logos img {
+  flex-shrink: 1;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .hero-partner-logo {
@@ -2999,7 +3005,7 @@ section[id], header[id] {
   
   /* Partners */
   .hero-partners-strip { flex-direction: column; gap: 16px; padding: 24px 16px; border-radius: 8px; }
-  .hero-partners-logos { display: flex; flex-wrap: wrap; gap: 24px 16px; align-items: center; justify-content: center; width: 100%; }
+  .hero-partners-logos { display: flex; flex-wrap: nowrap; gap: 8px; align-items: center; justify-content: space-between; width: 100%; }
   .hero-partner-logo { height: 48px; width: auto; max-width: 100%; object-fit: contain; }
   .hero-partner-logo-game { height: 60px; width: auto; max-width: 100%; object-fit: contain; }
   .hero-partner-logo-round { height: 80px; width: auto; max-width: 100%; object-fit: contain; border-radius: 0; }
@@ -3173,8 +3179,8 @@ section[id], header[id] {
   .hero-headline { font-size: clamp(1.8rem, 10vw, 2.2rem); }
   .hero-campaign-line { font-size: 1.1rem; }
   
-  .hero-partners-logos { gap: 12px; }
-  .hero-partner-logo { max-height: 28px; }
+  .hero-partners-logos { gap: 4px; }
+  .hero-partner-logo { max-height: 28px; flex-shrink: 1; min-width: 0; }
   
   .editorial-section-header .editorial-title { font-size: 2rem; }
   .editorial-lead { font-size: 1rem; }
