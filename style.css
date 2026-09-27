@@ -2547,7 +2547,8 @@ section[id], header[id] {
   border-radius: var(--radius-md);
   margin-bottom: 1.25rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-  max-width: fit-content;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .hero-partner-label {
@@ -2561,7 +2562,8 @@ section[id], header[id] {
 .hero-partners-logos {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  flex-wrap: wrap;
+  gap: 1.25rem 1rem;
 }
 
 .hero-partner-logo {
@@ -2579,7 +2581,7 @@ section[id], header[id] {
 }
 
 .hero-partner-logo-lb {
-  height: 88px;
+  height: 100px;
   width: auto;
   object-fit: contain;
 }
@@ -2592,7 +2594,7 @@ section[id], header[id] {
 }
 
 .hero-partner-logo-game {
-  height: 72px;
+  height: 88px;
   width: auto;
   object-fit: contain;
 }
