@@ -875,9 +875,13 @@
               <label class="field-label" for="regState">State</label>
               <input type="text" id="regState" class="field-input" value="Andhra Pradesh">
             </div>
-            <div class="form-field-group full">
-              <label class="field-label" for="regLinks">GitHub / LinkedIn Profile</label>
-              <input type="url" id="regLinks" class="field-input" placeholder="https://github.com/your-profile">
+            <div class="form-field-group">
+              <label class="field-label" for="regGithub">GitHub Profile <span class="req">*</span></label>
+              <input type="url" id="regGithub" class="field-input" placeholder="https://github.com/your-profile" required>
+            </div>
+            <div class="form-field-group">
+              <label class="field-label" for="regLinkedin">LinkedIn Profile <span class="req">*</span></label>
+              <input type="url" id="regLinkedin" class="field-input" placeholder="https://linkedin.com/in/your-profile" required>
             </div>
           </div>
 
@@ -1332,6 +1336,6 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <!-- Pure logic module (shared with the test suite) -->
   <script src="logic.js"></script>
-  <script src="app.js?v=8"></script>
+  <script src="app.js?v=9"></script>
 </body>
 </html>

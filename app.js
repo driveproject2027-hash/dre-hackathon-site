@@ -684,6 +684,8 @@ function initRegistrationForm() {
     const leadOrg = document.getElementById("regLeadOrg")?.value.trim();
     const city = document.getElementById("regCity")?.value.trim();
     const state = document.getElementById("regState")?.value.trim();
+    const githubLink = document.getElementById("regGithub")?.value.trim();
+    const linkedinLink = document.getElementById("regLinkedin")?.value.trim();
     const chosenPs = document.getElementById("regProblemDropdown")?.value;
     const whyReason = document.getElementById("regWhyChosen")?.value.trim();
     const skills = document.getElementById("regSkills")?.value.trim();
@@ -694,7 +696,7 @@ function initRegistrationForm() {
     const membersList = Array.from(memberInputs).map(inp => inp.value.trim()).filter(v => v !== "");
     const teamMembersString = membersList.join(", ");
 
-    if (!teamName || !teamLead || !leadEmail || !leadPhone || !leadOrg || !city || !state || !chosenPs) {
+    if (!teamName || !teamLead || !leadEmail || !leadPhone || !leadOrg || !city || !state || !chosenPs || !githubLink || !linkedinLink) {
       showToast("Please fill in all mandatory fields (*)", "warning");
       return;
     }
@@ -720,6 +722,8 @@ function initRegistrationForm() {
       chosenPs,
       psTitle: selectedObj ? selectedObj.title : chosenPs,
       teamMembers: teamMembersString,
+      githubLink,
+      linkedinLink,
       whyReason,
       skills,
       submittedAt: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
