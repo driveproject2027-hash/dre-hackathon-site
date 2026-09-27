@@ -1124,12 +1124,13 @@ section[id], header[id] {
 
 /* Interactive Corridor Quick Jump Cards */
 .andhra-corridors-interactive {
-  display: flex;
-  flex-direction: column;
-  gap: 0.85rem;
-  margin-top: 0.5rem;
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 1rem;
   border-top: 1px solid var(--border-dark-section);
-  padding-top: 1.5rem;
+  padding-top: 2.5rem;
 }
 
 .corridor-card-interactive {
@@ -3056,6 +3057,7 @@ section[id], header[id] {
   .corridor-pill { white-space: nowrap; font-size: 0.85rem; padding: 8px 14px; flex-shrink: 0; }
   .real-leaflet-map { min-height: 250px; height: 40vh; width: 100%; }
   .map-header-left { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .andhra-corridors-interactive { grid-template-columns: 1fr; padding-top: 1.5rem; margin-top: 0; }
   
   /* Challenge Cards & Matrix */
   .report-matrix-wrapper {
