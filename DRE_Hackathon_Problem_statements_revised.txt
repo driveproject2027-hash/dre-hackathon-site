@@ -1,0 +1,311 @@
+HACKATHON ANNOUNCEMENT
+Decentralized Renewable Energy (DRE) for Enterprise
+An inevitable next step. Join the DRE revolution.
+[Event dates, venue and registration details to be added by the organizers]
+Why this is important
+The global commercial landscape is undergoing a silent structural shift. For decades, micro, small, and medium enterprises (MSMEs) and large-scale industries alike have relied on centralized grids to fuel their daily operational needs. However, this top-down dependency introduces significant vulnerabilities: grid instability, thermal overloads, fluctuating commercial tariffs, and severe carbon footprints.
+Why should enterprises shift to DRE?
+	•	Substantial improvements measured directly in operational continuity and baseline productivity.
+	•	Enables up to a 35% increase in annual business income, bridging the gap where centralized grid power remains expensive or unreliable.
+	•	Generates close to half a million direct jobs globally (and 1.7 million indirect jobs), matching the traditional footprint of localized oil and gas workforces.
+
+Today, Decentralized Renewable Energy (DRE) solutions, ranging from rooftop solar installations and local microgrids to IoT-enabled productive-use appliances, are transforming from alternative backup options into primary drivers of corporate productivity and operational resilience. The world is moving at a fast pace towards clean infrastructure. Renewables account for 49% of all global installed power capacity. Almost all of these net additions (96.8%) came from variable solar and wind systems, proving that decentralization is no longer a future concept, but a current reality.
+What is happening in our region?
+India installed 55.3 GW of non-fossil capacity additions in the last fiscal year and now stands third globally in installed renewable capacity. Andhra Pradesh is among the top states in India, holding 9.1% of the entire nation's renewable energy generation potential. Despite the massive potential (up to 167 GW), less than 6% of this capacity is being used.
+The state's policy identifies wind and pumped hydro storage as the two main sources of renewable energy in north coastal districts, in addition to solar. While the government pushes to meet its policy goals, the ground reality of our region throws up challenges that need innovative solutions:
+	•	Rapid, uncoordinated commercial solar adoption in dense corridors like Gajuwaka or Atchutapuram pushes heavy, volatile reverse power back into localized distribution networks during sunny afternoons, causing voltage spikes that stress substation transformers.
+	•	Hilly topography and dense forest cover make expanding the central grid physically and financially prohibitive. Tribal processing cooperatives (handling coffee, pepper, and millets in Paderu or Chintapalli) are apprehensive about investing in processing capacity due to unreliable or expensive power. Isolated DRE machinery is a good fit for their needs. However, when an inverter or motor faces an electrical fault, the complete lack of local diagnostic tools or skilled technicians creates weeks of downtime, risking spoiled harvests.
+	•	Agricultural and shrimp-farming enterprises require continuous energy to run cold storage and pond aerators. However, heavy inductive machinery draws massive inrush currents (surge spikes) that trip low-cost rural solar microgrids and accelerate battery degradation, making solar-plus-storage financially difficult for local cooperatives.
+
+These result in specific challenges for enterprises. Below are 10 problem statements divided into four themes. Pick one and provide a solution.
+How this hackathon works
+Energy problems are physical problems. Heat, moisture, motors and batteries behave the way physics says they do, not the way a dashboard says they do. So this hackathon rewards teams that build, measure and explain, not teams that only present.
+Three kinds of problems
+	•	Physical prototype required (PS 1, 2, 4, 8). You must bring a working, bench-scale prototype and run it live. A slide deck or simulation cannot replace it.
+	•	Hybrid (PS 5). A software system plus a working physical component (a real lock mechanism).
+	•	Software on a hidden scenario (PS 3, 6, 7, 9, 10). Your tool will be run live on a scenario or dataset that the organizers reveal only on demo day.
+Using AI tools
+AI tools are allowed. They are useful for routine work such as debugging or drafting code. What they cannot do is build and tune your hardware, learn what a jaggery maker or a hatchery operator actually needs, or answer the judges' questions for you. Marks are therefore weighted toward the live demo, your reasoning and your field understanding. Every team must:
+	•	Keep a design notebook (paper or digital) with sketches, hand calculations, assumptions, decisions and failed attempts. Bring it to the demo.
+	•	Speak to at least one real user or expert (a processor, farmer, operator, technician or engineer) and submit five lines on what you learned and what you changed because of it.
+	•	Submit a one-page AI-use log: which tools you used, for what, and at least one case where the AI's output was wrong or unsuitable and how you corrected it. Teams that catch and fix AI errors earn bonus marks.
+	•	Respect the constraint sheet: component budget cap of [₹5,000, to be confirmed]; the demo runs without internet; the solution must be usable by an operator with basic literacy and no technical training; prefer locally available materials.
+	•	Expect a surprise test and an oral defence. On demo day the judges will change a condition without warning, and will question the whole team. Any member may be asked to explain any part of the solution.
+Safety
+No open flames at the venue. Keep prototypes at low voltage wherever possible. Any mains-powered heater or motor needs a fuse or breaker, a thermal cut-off where relevant, and a mentor sign-off before it is switched on.
+
+The problem statements
+Theme A: Agriculture & Horticulture Value Chains
+PS 1. Solar-Assisted Jaggery Processing: Closed-Loop Heat Control Rig
+  PHYSICAL PROTOTYPE REQUIRED
+Value chain: Sugarcane and jaggery.
+The problem. Local micro-enterprises struggle with inconsistent quality during sugarcane juice boiling due to uneven biomass or solar hybrid heat distribution. Overheating or underheating ruins the jaggery grade.
+Your task. Build a bench-scale controller that keeps a boiling vessel on a target temperature profile even when the heat source varies. A hot plate or heating element can stand in for the biomass and solar hybrid heat.
+Deliverables
+	•	A working rig: a vessel (water or sugar syrup), at least two temperature sensors at different positions, and at least one actuator (damper, valve, heater dimmer or relay) under closed-loop control.
+	•	A predictive "pour now" alert (light, buzzer or display) based on the measured rate of temperature change, not a fixed timer.
+	•	An automatic batch record that grades the batch from temperature consistency, viewable on a phone or a simple display.
+	•	A bill of materials with total cost, and a short note on how the design would scale to a real jaggery pan.
+Live test on demo day
+	•	Standard test: follow a scaled-down, safe temperature profile issued on the day, within the tolerance announced with it.
+	•	Surprise test: judges disturb the system (change the heat input, add cooler liquid, or open the lid) and the controller must recover.
+Show your thinking
+	•	Estimate by hand the heat needed to raise and hold the batch temperature and to evaporate a stated quantity of water. Compare it with what your rig measured.
+	•	Explain which control method you chose (on/off, proportional, PID or other) and why.
+PS 2. Solar Dryer Moisture Tracker: Weight-Based Drying Monitor
+  PHYSICAL PROTOTYPE REQUIRED
+Value chain: Coffee cultivation and cocoa beans.
+The problem. Most farmers dry their produce under open sun, vulnerable to changing local weather. Solar tunnel dryers or large collective covered solar drying infrastructure will help. Those using tunnel dryers guess when the beans are perfectly dried. Taking them out too early causes mold, while leaving them in too long reduces weight and profits.
+Your task. Build a small instrumented dryer (enclosure or drying tray) that estimates the moisture of a sample and predicts the remaining drying time.
+Deliverables
+	•	A dryer enclosure or tray with a fan or vents, temperature and humidity sensors, and a load cell that tracks the sample's weight.
+	•	A moisture estimate computed from weight loss and the starting moisture, with a live remaining-time estimate that updates as conditions change.
+	•	An on-device alert (buzzer, light or display) when the target moisture is reached, for example 7% for coffee. SMS or WhatsApp alerts are a bonus, but the device must work without a network.
+	•	An exportable drying log suitable for quality certification. Weather APIs may be used to improve predictions, but the device must still work when they are unavailable.
+Live test on demo day
+	•	Standard test: organizers supply a pre-weighed damp sample with its starting moisture. Your device must call the moment the target moisture is reached. Judges verify with a reference scale or moisture meter.
+	•	Surprise test: judges change the airflow or heat (cover the vents, switch off the heat source) and your remaining-time estimate must adapt.
+Show your thinking
+	•	Show the drying curve from your own measurements and explain why drying slows down as the sample dries.
+	•	State the accuracy you achieved and what limits it.
+PS 3. DRE-Powered Jackfruit & Banana Flower Processing: Solar-Aware Scheduler
+  SOFTWARE: JUDGED ON A HIDDEN SCENARIO
+Value chain: Secondary produce processing.
+The problem. Tribal women's cooperatives could use solar-powered cutting, slicing, and dehydration machinery. Processing must happen immediately after harvest, but variable weather can cause the solar microgrid batteries to drain mid-operation.
+Your task. Build a production scheduling and load balancing tool for a decentralized food processing hub.
+Deliverables
+	•	A scheduler that takes harvest volumes, machine power ratings, battery capacity and a solar forecast, and recommends the best hours to run heavy slicing machines versus low-power dehydrators while avoiding battery depletion.
+	•	A one-page printed schedule that a cooperative member can follow without a smartphone.
+	•	A plain-language explanation of why each machine runs when it does.
+Live test on demo day
+	•	Standard test: organizers issue a three-day scenario on demo day (harvest volumes, forecast, battery size, machine list). Your scheduler is scored on batches completed without battery depletion.
+	•	Surprise test: judges change the forecast (a cloudy afternoon) or take a machine offline mid-plan, and your tool must re-plan live.
+Show your thinking
+	•	State in writing what you are optimizing and which limits are hard constraints.
+	•	Explain why you chose your method (rules, optimization or heuristic) over the alternatives.
+Theme B: Aquaculture & Cold Chain Resilience
+PS 4. Shrimp Hatcheries & Cold Storage: Thermal Pre-Cooling and Aerator Soft-Start Rig
+  PHYSICAL PROTOTYPE REQUIRED
+Value chain: Shrimp and prawn farming.
+The problem. Shifting rural cold rooms and hatchery aerators completely to solar-plus-storage mini-grids is expensive due to high battery costs. Hatcheries face immediate crop spoilage if the power drops abruptly.
+Your task. Build a small-scale rig that demonstrates two ideas: store cold while the sun is available so less energy is drawn at night, and start motors gently so surge currents do not trip the system or wear the battery.
+Deliverables
+	•	An insulated mini cold box with thermal mass (water bottles or ice packs), temperature sensors, and a controller that safely over-cools during a "solar window" (a bench supply or small panel running a compressed 10 to 15 minute "day").
+	•	A small motor or pump (aerator stand-in) with a soft-start or ramp circuit and a current sensor that records the start-up surge with and without it.
+	•	An emergency low-battery protocol that protects the aerator first and reduces the cold box load, demonstrated on a simulated battery state of charge.
+	•	A measured comparison of energy drawn during the "night" phase with and without pre-cooling.
+Live test on demo day
+	•	Standard test: run the compressed day and night cycle while judges read energy and current from an independent meter.
+	•	Surprise test: judges cut the "sun" early or add a second load, and the protocol must keep the aerator running.
+Show your thinking
+	•	Calculate by hand the thermal energy stored (mass, specific heat, temperature change) and compare it with what you measured.
+	•	State the safe temperature band for the stored product and how it limits how far you can over-cool. A Peltier module is acceptable as a stand-in but is inefficient, so explain how your results would scale to a real compressor system.
+PS 5. Shared Solar Cooling Hub: Pay-As-You-Go Locker with a Real Lock
+  HYBRID: PHYSICAL COMPONENT + SOFTWARE
+Value chain: Marine fisheries and fresh vegetables.
+The problem. Smallholder marginal farmers and fishermen cannot afford to buy their own solar refrigerators. Shared community cooling hubs exist, but managing manual slot bookings and transparent payment collection can be chaotic.
+Your task. Build a booking and micro-billing system for shared solar cooling lockers, including a physical locker mechanism that only opens for a valid booking.
+Deliverables
+	•	A working locker prototype (solenoid or servo latch with a controller) that opens only after a valid booking token is presented by QR code or RFID.
+	•	A mock UPI payment flow (no real money) that bills per hour and per kg. A load cell for weight is a bonus.
+	•	Offline tolerance: if connectivity drops, bookings and payments are queued and reconciled later without double charging.
+	•	A dashboard showing diesel emissions avoided by the village, with the formula and the source of the emission factor stated.
+Live test on demo day
+	•	Standard test: present valid, expired and double-booked tokens to the physical lock. Cut the network mid-transaction.
+	•	Hidden cases: organizers issue a set of billing edge cases on the day (partial hours, early release, overweight loads) and score the amounts your system charges.
+Show your thinking
+	•	Describe a fisherman's actual day at the hub: who books, when, and how a user without a smartphone still gets access.
+	•	Show how the emissions figure is calculated and where each number comes from.
+Theme C: Urban Infrastructure & Industrial MSMEs
+PS 6. Commercial Rooftop Solar Clusters: Transformer Hosting Capacity Simulator
+  SOFTWARE: JUDGED ON A HIDDEN SCENARIO
+Value chain: Industrial MSMEs, pharma clusters and large commercial establishments.
+The problem. Rapid, uncoordinated rooftop solar adoption by commercial buildings pushes heavy reverse power back into local distribution transformers during sunny afternoons, risking grid failure.
+Your task. Build a geospatial solar penetration and transformer hosting capacity simulator for local utility networks.
+Deliverables
+	•	An interactive map (Streamlit, Leaflet or similar) showing local transformers, where a user can drop a pin to simulate adding a new rooftop system.
+	•	A "Grid Safety Impact Score" and a capacity threshold warning, with the method written out: which criterion you use (for example reverse power as a share of transformer rating, or voltage rise) and why.
+	•	A clear statement of what data a real utility would need to make the tool reliable.
+Live test on demo day
+	•	Standard test: organizers supply anonymized data for one distribution cluster and a set of test cases with reference answers prepared by a power-systems engineer. Scored on agreement with the reference and sensible warnings.
+	•	Surprise test: judges add a second system near the first, so your tool must account for cumulative impact.
+Show your thinking
+	•	Explain where your simplifications could mislead a utility engineer.
+	•	Show a hand calculation for one transformer that matches the tool's output.
+PS 7. Manufacturing Clusters: Solar-Aware Demand Shifting Scheduler
+  SOFTWARE: JUDGED ON A HIDDEN SCENARIO
+Value chain: Heavy fabrication, engineering and apparel manufacturing.
+The problem. Industrial units run heavy machinery during peak grid hours, driving up power costs, while their rooftop solar arrays generate excess power that goes to waste when the factories are dampening operations.
+Your task. Build a demand shifting scheduler that matches production schedules with solar availability and time-of-use (ToU) tariffs.
+Deliverables
+	•	A scheduling tool where factory managers enter order deadlines, machinery power ratings, ToU tariff slabs and a solar profile.
+	•	An optimized shift schedule that maximizes direct solar consumption and minimizes peak-hour grid consumption, with the cost and solar share compared against a naive schedule.
+	•	A list of the real-world constraints you handled (machine order, changeovers, operator shifts, maximum demand charges) and those you did not.
+Live test on demo day
+	•	Standard test: organizers issue a hidden factory case on demo day. Scored on schedule cost, deadlines met and solar share.
+	•	Surprise test: judges move a deadline or take a machine offline, and the tool must re-plan live.
+Show your thinking
+	•	Argue how close your schedule is to the best possible and how you know.
+	•	Explain how a factory manager would learn to trust the schedule.
+Theme D: Tribal Livelihoods, Eco-Tourism and Field Operations
+PS 8. Tribal Machinery: Offline Fault Diagnostics on a Fault-Injectable Rig
+  PHYSICAL PROTOTYPE REQUIRED
+Value chain: Non-timber forest produce (pepper thrashers, solar cleaners, millet hullers in remote Paderu and Chintapalli).
+The problem. Processing machinery operates in remote valleys with zero or minimal internet connectivity. When an inverter or motor acts up, local operators cannot diagnose it, resulting in extended downtimes.
+Your task. Build a small machine rig and an offline diagnostic reader that identifies faults and guides an operator through simple repairs.
+Deliverables
+	•	A rig with a motor and driver (or inverter stand-in), sensors for current, voltage, temperature and speed, and at least four faults that can be physically introduced (for example a stalled load, low supply voltage, over-temperature, a disconnected wire).
+	•	An offline diagnostic device or app (phone via Bluetooth or local Wi-Fi, or a handheld with a display) that reads fault codes with no internet and walks the operator through simple repair steps using icons or Telugu prompts.
+	•	A log compressed to fit a single SMS (160 characters) holding the device ID, fault, time and key readings, ready to send when a cell tower is found. Sending a real SMS is optional.
+Live test on demo day
+	•	Standard test: judges introduce a fault while the team looks away. The device must identify it and give the correct first step.
+	•	Surprise test: judges introduce a fault the team did not plan for. The device should say it is unknown, not give a wrong diagnosis.
+Show your thinking
+	•	Explain how each fault shows up in the sensor readings and why your readings can tell them apart.
+	•	List what a first-time operator can safely fix and what must wait for a technician.
+PS 9. Eco-Tourism Homestays: Microgrid Sizing Planner
+  SOFTWARE: JUDGED ON A HIDDEN SCENARIO
+Value chain: Experiential tribal homestays and eco-resorts.
+The problem. Homestay owners want to go 100% green using solar and micro-hydro options, but they struggle to calculate how many panels or batteries they need without buying overly expensive commercial configurations.
+Your task. Create an eco-resort microgrid planner and green metric tracker.
+Deliverables
+	•	A simple, multilingual (Telugu and English) web form where the owner enters room count and appliances and receives a DRE blueprint (panels, battery, inverter and, where relevant, micro-hydro) with a cost range.
+	•	Visible, editable assumptions (sun hours, battery depth of discharge, losses, days of autonomy).
+	•	A guest-facing display of green metrics, such as "Your stay today ran on 100% solar power, saving 12 kg of CO₂." Every figure must come from a stated calculation and source. A low-cost physical display is a bonus.
+Live test on demo day
+	•	Standard test: organizers issue three homestay cases with awkward constraints (a partly shaded roof, seasonal occupancy, a small stream with low head, diesel backup). An engineer reviews each blueprint for over- or under-sizing.
+	•	Surprise test: judges add rooms or appliances and the blueprint must update.
+Show your thinking
+	•	Work through the sizing of one case by hand (daily energy, peak sun hours, battery autonomy, depth of discharge, losses).
+	•	Explain what an owner should do when the plan turns out to be too expensive.
+PS 10. Rural Enterprise Mobilization: Voice-Based Energy Audit Assistant
+  SOFTWARE: JUDGED ON A HIDDEN SCENARIO
+Value chain: Rural enterprise mobilization and NGO field operations.
+The problem. Field coordinators conducting energy audits across hundreds of tribal villages spend hours manually filling out forms to check if a solar pump or food processor is viable for a specific community cluster.
+Your task. Build a voice-based audit and baseline tool that works in regional languages. AI or NLP tools may be used but are not required; a guided voice question flow is acceptable. What is assessed is the audit logic and how well the tool handles real speech.
+Deliverables
+	•	Voice input in Telugu and English that captures village data such as the number of active shops, current diesel costs and daily operating hours.
+	•	Detection of missing or unclear values, with a follow-up question instead of a guess.
+	•	A technical and economic feasibility summary in which every number traces to an input and a visible formula. No unexplained figures.
+	•	Support for poor connectivity: record now, process later.
+Live test on demo day
+	•	Standard test: organizers supply recorded field-style clips (Telugu and English, noisy, with ambiguous numbers and units and self-corrections). Scored on extraction accuracy and handling of ambiguity.
+	•	Surprise test: judges speak a new clip with a mid-sentence correction ("no, 8 hours, not 6").
+Show your thinking
+	•	Before demo day, test with at least one Telugu speaker outside your team and show what failed and what you fixed.
+	•	Explain which parts of a feasibility summary need human or engineering judgment and should not be automated.
+Problem to bottleneck mapping
+Problem statement
+Type
+Primary global bottleneck addressed
+Core technical focus for participants
+PS1: Solar-Biomass Heat Control Rig
+Physical
+Industrial heat decarbonization gap
+Closed-loop control of variable heat sources using dampers, valves or heater control, measured against a temperature profile.
+PS2: Solar Dryer Moisture Tracker
+Physical
+Agricultural metrology and quality risk
+Weight-based moisture estimation and drying-curve prediction, checked against a reference.
+PS3: Processing Scheduler
+Software
+Production and intermittency mismatch
+Load balancing that matches machinery run times to solar generation and battery limits.
+PS4: Thermal Storage and Aerator Soft-Start
+Physical
+Chemical battery capacity and lifetime cost
+Soft-starting high-inrush induction motors and shifting load using thermal mass, measured on a real rig.
+PS5: PAYG Shared Cooling Hub
+Hybrid
+Upfront capital expense (CapEx) barrier
+Physical locker access, offline-tolerant micro-billing and slot reservation (CapEx to OpEx).
+PS6: Rooftop Solar Grid Safety Tool
+Software
+One-way distribution grid volatility
+Geospatial transformer hosting capacity simulation and reverse-power warnings, checked against reference cases.
+PS7: Solar-Aware ToU Scheduler
+Software
+Demand-side flexibility deficit
+Time-of-use scheduling that absorbs solar abundance under real production constraints.
+PS8: Offline Machinery Diagnostics
+Physical
+"Last-mile" diagnostic and maintenance gap
+Offline fault detection on a real rig, guided repair and SMS-sized logging.
+PS9: Homestay Sizing Planner
+Software
+Technical sizing and planning illiteracy
+Converting appliance inventories into a verifiable clean-energy blueprint.
+PS10: Voice-Based Energy Audit Assistant
+Software
+Feasibility study and energy audit delays
+Voice-to-structured-data extraction with transparent feasibility calculations in regional languages.
+
+Judging
+All teams are scored out of 100 on the same four criteria. For software problems, "live demo" means running your tool on the hidden scenario, followed by the surprise change.
+Criterion and weight
+Points
+What strong looks like
+A. Live performance (40)
+Meets the standard test: 20
+Handles the surprise test: 15
+Safety and build quality (or robustness, for software): 5
+Works as specified in front of the judges, recovers or adapts when conditions change, and fails honestly (says "unknown" rather than guessing).
+B. Reasoning and oral defence (25)
+Hand calculations and assumptions are correct and documented: 10
+Each team member can explain the design when asked: 10
+Trade-offs and rejected alternatives: 5
+Numbers in the notebook match what the rig or tool does. Answers come from understanding, not from reading notes. The team can say why it did not choose another approach.
+C. Field validation and user fit (20)
+Real user or expert contact, and design changes because of it: 10
+Usable by the target operator (offline, language, low literacy): 10
+The team learned something that changed the design, and the solution suits a real operator in Paderu, a hatchery or a homestay, not a developer.
+D. Documentation, cost and scalability (15)
+Bill of materials or cost estimate and a scale-up note: 8
+AI-use log and design notebook completeness: 4
+Clarity of documentation: 3
+Costs are realistic, the path from prototype to real use is credible, and the AI-use log is candid.
+Bonus (up to +5)
+Caught and corrected an AI error, and can show how
+Documented in the AI-use log and confirmed in the oral defence.
+Demo day format
+Stage
+Time
+What happens
+1. Setup and safety check
+10 min
+A mentor checks wiring, power sources and any heat source. No open flames.
+2. Standard test
+5 min
+The team runs the announced test: the prototype for physical problems, or the hidden scenario for software problems.
+3. Surprise test
+3 to 5 min
+Judges change a condition without warning. The team adapts, or explains what would have to change.
+4. Oral defence
+8 to 10 min
+Questions to the whole team. Judges choose who answers, and every member should be able to explain any part of the solution.
+5. Scoring
+After each team
+Judges score independently against the rubric, then discuss any large differences.
+
+The judging panel includes at least one electrical or electronics expert, one domain expert (agri-processing, aquaculture or rural energy) and one software or data expert.
+
+Organizer notes (remove before sharing with participants)
+Materials to prepare before the event
+	•	Hidden scenarios, sealed until demo day: PS3 three-day scenario; PS6 anonymized cluster data plus reference cases from a power-systems engineer; PS7 factory case; PS9 three homestay cases; PS10 recorded Telugu and English clips. If teams present on different days, prepare two versions.
+	•	PS2 samples: pre-weigh identical damp samples and record their moisture with a reference meter. Keep a reference scale at the demo table.
+	•	PS5 edge-case list with the correct billing amount for each case.
+	•	Surprise-test props: a heat gun or hair dryer, cold water, a spare load and a variable supply, so surprises are quick to set up and fair across teams.
+Indicative component list for physical prototype teams
+Adjust to your budget cap, and consider giving a common kit to all physical teams so that hardware does not favor better-funded teams.
+	•	ESP32 or similar microcontroller board; breadboard, wires, fuses
+	•	Temperature sensors (thermistor, DS18B20 or thermocouple with amplifier); humidity sensor
+	•	Load cell with HX711 amplifier; current sensor (INA219 or ACS712)
+	•	Relay or MOSFET modules; servo; small DC motor or pump
+	•	Small solar panel, charge controller and 12 V battery (or a bench supply to simulate the sun)
+	•	Buzzer, LEDs, OLED display; optional GSM module and RFID reader; solenoid latch for PS5
+Logistics and safety
+	•	Extension boards with MCB or RCCB protection, thermal cut-offs for heaters, a fire extinguisher and a first-aid kit at the venue.
+	•	A mentor bench on day one for soldering, wiring and safety sign-off.
+	•	Brief judges on the rubric and encourage "why" and "what if" questions. Publish the rubric and the AI policy to teams up front.
+Placeholders to complete
+	•	Event dates, venue and registration process; budget cap; submission deadlines; prizes.

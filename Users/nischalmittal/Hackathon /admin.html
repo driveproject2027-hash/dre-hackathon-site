@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin — Registrations | DRE Enterprise Hackathon '26</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family:
+          -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        background: #f5f3ed;
+        color: #17211d;
+        padding: 2rem 1.5rem;
+      }
+      .wrap {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      h1 {
+        font-size: 1.6rem;
+        margin-bottom: 0.25rem;
+      }
+      .sub {
+        color: #5e6964;
+        font-size: 0.9rem;
+        margin-bottom: 1.5rem;
+      }
+      .toolbar {
+        display: flex;
+        gap: 0.75rem;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-bottom: 1rem;
+      }
+      .toolbar input {
+        padding: 0.55rem 0.8rem;
+        border: 1px solid #d9d6cd;
+        border-radius: 6px;
+        font-size: 0.9rem;
+        width: 260px;
+        background: #fff;
+      }
+      .toolbar button {
+        padding: 0.55rem 1rem;
+        border: 1px solid #14634d;
+        border-radius: 6px;
+        background: #14634d;
+        color: #fff;
+        font-weight: 600;
+        cursor: pointer;
+        font-size: 0.85rem;
+      }
+      .toolbar button.ghost {
+        background: transparent;
+        color: #14634d;
+      }
+      .toolbar .count {
+        font-size: 0.85rem;
+        color: #5e6964;
+      }
+      .status {
+        font-size: 0.85rem;
+        margin-bottom: 1rem;
+        color: #5e6964;
+      }
+      .status.err {
+        color: #b3261e;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: #fff;
+        border: 1px solid #d9d6cd;
+        border-radius: 8px;
+        overflow: hidden;
+        font-size: 0.85rem;
+      }
+      th {
+        text-align: left;
+        background: #0e3b2f;
+        color: #f5f3ed;
+        padding: 0.65rem 0.75rem;
+        font-size: 0.72rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+      td {
+        padding: 0.6rem 0.75rem;
+        border-top: 1px solid #eceae3;
+        vertical-align: top;
+      }
+      tr:hover td {
+        background: #f4f7f5;
+      }
+      .regid {
+        font-weight: 700;
+        color: #14634d;
+        white-space: nowrap;
+      }
+      .empty {
+        padding: 2.5rem;
+        text-align: center;
+        color: #5e6964;
+      }
+      .config-box {
+        background: #fff;
+        border: 1px solid #d9d6cd;
+        border-radius: 8px;
+        padding: 1.25rem;
+        margin-bottom: 1.5rem;
+        font-size: 0.9rem;
+      }
+      .config-box code {
+        background: #f0eee7;
+        padding: 0.1rem 0.35rem;
+        border-radius: 4px;
+        font-size: 0.8rem;
+      }
+      @media (max-width: 800px) {
+        .table-scroll {
+          overflow-x: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <h1>Registered Teams — DRE Hackathon '26</h1>
+      <p class="sub">
+        Live data from the Supabase <code>registrations</code> table. Click
+        Refresh after new registrations come in.
+      </p>
+
+      <div class="toolbar">
+        <input
+          type="search"
+          id="search"
+          placeholder="Search team, name, email, PS…"
+        />
+        <button id="refreshBtn">↻ Refresh</button>
+        <button id="csvBtn" class="ghost">⬇ Export CSV</button>
+        <span class="count" id="countLabel"></span>
+      </div>
+      <div class="status" id="status">Loading…</div>
+
+      <div class="table-scroll">
+        <table id="table" hidden>
+          <thead>
+            <tr>
+              <th>Reg ID</th>
+              <th>Team</th>
+              <th>Team Lead</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Organization</th>
+              <th>City</th>
+              <th>State</th>
+              <th>Problem Statement</th>
+              <th>Registered At</th>
+            </tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+      <div class="empty" id="empty" hidden>No registrations yet.</div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script>
+      // ==== SAME CREDENTIALS AS app.js — KEEP IN SYNC ====
+      const SUPABASE_URL = "https://YOUR-PROJECT-ID.supabase.co";
+      const SUPABASE_ANON_KEY = "YOUR-ANON-PUBLIC-KEY";
+      // ===================================================
+
+      const configured =
+        !SUPABASE_URL.includes("YOUR-PROJECT-ID") &&
+        !SUPABASE_ANON_KEY.includes("YOUR-ANON");
+      const client = configured
+        ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+        : null;
+
+      let allRows = [];
+
+      const esc = (v) =>
+        String(v ?? "").replace(
+          /[&<>"']/g,
+          (c) =>
+            ({
+              "&": "&amp;",
+              "<": "&lt;",
+              ">": "&gt;",
+              '"': "&quot;",
+              "'": "&#39;",
+            })[c],
+        );
+
+      async function load() {
+        const status = document.getElementById("status");
+        const table = document.getElementById("table");
+        const empty = document.getElementById("empty");
+
+        if (!configured) {
+          status.textContent =
+            "⚠️ Supabase not configured. Set SUPABASE_URL and SUPABASE_ANON_KEY in admin.html (and app.js).";
+          status.className = "status err";
+          return;
+        }
+
+        status.textContent = "Loading registrations…";
+        status.className = "status";
+
+        const { data, error } = await client
+          .from("registrations")
+          .select("*")
+          .order("created_at", { ascending: false });
+
+        if (error) {
+          status.textContent = "❌ Error: " + error.message;
+          status.className = "status err";
+          return;
+        }
+
+        allRows = data || [];
+        render(allRows);
+        status.textContent = `✅ Loaded ${allRows.length} registration${allRows.length === 1 ? "" : "s"}.`;
+      }
+
+      function render(rows) {
+        const table = document.getElementById("table");
+        const empty = document.getElementById("empty");
+        const tbody = document.getElementById("tbody");
+        document.getElementById("countLabel").textContent =
+          `${rows.length} shown`;
+
+        if (!rows.length) {
+          table.hidden = true;
+          empty.hidden = false;
+          tbody.innerHTML = "";
+          return;
+        }
+        table.hidden = false;
+        empty.hidden = true;
+        tbody.innerHTML = rows
+          .map(
+            (r) => `
+        <tr>
+          <td class="regid">${esc(r.reg_id)}</td>
+          <td><strong>${esc(r.team_name)}</strong></td>
+          <td>${esc(r.team_lead)}</td>
+          <td>${esc(r.lead_email)}</td>
+          <td>${esc(r.lead_phone)}</td>
+          <td>${esc(r.lead_org)}</td>
+          <td>${esc(r.city)}</td>
+          <td>${esc(r.state)}</td>
+          <td>${esc(r.chosen_ps)}${r.ps_title ? `<br><small style="color:#5E6964">${esc(r.ps_title)}</small>` : ""}</td>
+          <td>${r.created_at ? new Date(r.created_at).toLocaleString() : "—"}</td>
+        </tr>`,
+          )
+          .join("");
+      }
+
+      document.getElementById("search").addEventListener("input", (e) => {
+        const q = e.target.value.trim().toLowerCase();
+        if (!q) return render(allRows);
+        render(
+          allRows.filter((r) =>
+            Object.values(r).some((v) =>
+              String(v ?? "")
+                .toLowerCase()
+                .includes(q),
+            ),
+          ),
+        );
+      });
+
+      document.getElementById("refreshBtn").addEventListener("click", load);
+
+      document.getElementById("csvBtn").addEventListener("click", () => {
+        if (!allRows.length) return alert("Nothing to export yet.");
+        const cols = [
+          "reg_id",
+          "team_name",
+          "team_lead",
+          "lead_email",
+          "lead_phone",
+          "lead_org",
+          "city",
+          "state",
+          "chosen_ps",
+          "ps_title",
+          "why_reason",
+          "skills",
+          "created_at",
+        ];
+        const csv = [cols.join(",")]
+          .concat(
+            allRows.map((r) =>
+              cols
+                .map((c) => {
+                  const v = String(r[c] ?? "");
+                  return /[",\n]/.test(v) ? `"${v.replace(/"/g, '""')}"` : v;
+                })
+                .join(","),
+            ),
+          )
+          .join("\n");
+        const blob = new Blob([csv], { type: "text/csv" });
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = "dre-hackathon-registrations.csv";
+        a.click();
+        URL.revokeObjectURL(a.href);
+      });
+
+      load();
+    </script>
+  </body>
+</html>
