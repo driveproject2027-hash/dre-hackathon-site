@@ -11,7 +11,7 @@
 // SETUP: see DRIVE-BACKEND-SETUP.md in the project root.
 // Paste your Apps Script Web App URL below (ends in /exec):
 // ============================================================
-const BACKEND_URL = "https://script.google.com/macros/s/AKfycbx9cUy81uIMGC1j35Vfn8ALAX149FeVEF_iLuVOxcu4t9ObukiZPtKPlOC6CBVRDLrcsQ/exec";
+const BACKEND_URL = "https://script.google.com/macros/s/AKfycbyOE8E3IQK4kbbZ7yiFszgtdK2nXBxTan4tAwOHUl7BmvoAH7uH0Lm7NyRkGPYK1HJpMA/exec";
 
 const backendReady = true;
 
