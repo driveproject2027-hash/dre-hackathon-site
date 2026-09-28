@@ -93,18 +93,19 @@ const PROBLEM_STATEMENTS = [
     theme: "agri",
     themeName: "Agriculture & Horticulture",
     chapterNum: "01",
-    title: "Solar-Assisted Jaggery Processing Optimization & Heat Tracking",
+    title: "Solar-Assisted Jaggery Processing: Closed-Loop Heat Control Rig",
     valueChain: "Sugarcane and jaggery.",
-    oneSentence: "Inconsistent heat during juice boiling can ruin jaggery crystallization; monitor pan heat with sensors and balance auxiliary dampers.",
+    oneSentence: "Build a bench-scale controller that keeps a boiling vessel on a target temperature profile even when the heat source varies.",
     challenge: "Local micro-enterprises struggle with inconsistent quality during sugarcane juice boiling due to uneven biomass or solar hybrid heat distribution. Overheating or underheating ruins the jaggery grade.",
-    build: "An IoT-Simulator & Heat Optimization Dashboard that monitors temperature sensors along the clarifying and boiling pans.",
+    build: "A working rig with closed-loop control to manage uneven heat distribution.",
     deliverables: [
-      "A mobile dashboard showing heat thresholds.",
-      "A predictive timer alerting the worker when to pour the juice.",
-      "An automated ledger tracking the batch grade based on temperature consistency."
+      "A working rig: a vessel (water or sugar syrup), at least two temperature sensors at different positions, and at least one actuator (damper, valve, heater dimmer or relay) under closed-loop control.",
+      "A predictive 'pour now' alert (light, buzzer or display) based on the measured rate of temperature change, not a fixed timer.",
+      "An automatic batch record that grades the batch from temperature consistency, viewable on a phone or a simple display.",
+      "A bill of materials with total cost, and a short note on how the design would scale to a real jaggery pan."
     ],
-    bottleneck: "Industrial Heat Decarbonization Gap",
-    techFocus: "Automated electromechanical air/fluid dampers balancing variable heat sources."
+    bottleneck: "Industrial heat decarbonization gap",
+    techFocus: "Closed-loop control of variable heat sources using dampers, valves or heater control, measured against a temperature profile."
   },
   {
     id: "PS 02",
@@ -112,18 +113,19 @@ const PROBLEM_STATEMENTS = [
     theme: "agri",
     themeName: "Agriculture & Horticulture",
     chapterNum: "01",
-    title: "Solar Dryer Predictive Yield & Moisture Tracker for Cocoa and Coffee",
-    valueChain: "Coffee Cultivation and Cocoa Beans.",
-    oneSentence: "Eliminate guessing when beans are dried to prevent mold risks from under-drying and profit weight loss from over-drying.",
-    challenge: "Majority of the farmers dry their produce under open sun, vulnerable to changing local weather. Solar tunnel dryers or large collective covered solar drying infrastructure will help. Those using tunnel dryers guess when the beans are perfectly dried. Taking them out too early causes mold, while leaving them in too long reduces weight and profits.",
-    build: "A data-driven Moisture Evaporation Predictor App. Using ambient weather APIs (humidity, cloud cover) and internal dryer sensors, the app calculates drying curves.",
+    title: "Solar Dryer Moisture Tracker: Weight-Based Drying Monitor",
+    valueChain: "Coffee cultivation and cocoa beans.",
+    oneSentence: "Build a small instrumented dryer that estimates the moisture of a sample and predicts the remaining drying time based on weight.",
+    challenge: "Most farmers dry their produce under open sun, vulnerable to changing local weather. Solar tunnel dryers or large collective covered solar drying infrastructure will help. Those using tunnel dryers guess when the beans are perfectly dried. Taking them out too early causes mold, while leaving them in too long reduces weight and profits.",
+    build: "A small instrumented dryer (enclosure or drying tray) that estimates the moisture of a sample and predicts the remaining drying time.",
     deliverables: [
-      "A real-time tracking interface showing estimated remaining dry time.",
-      "Automated WhatsApp/SMS alerts when target moisture (e.g., 7% for coffee) is reached.",
-      "A historic drying log for quality certification."
+      "A dryer enclosure or tray with a fan or vents, temperature and humidity sensors, and a load cell that tracks the sample's weight.",
+      "A moisture estimate computed from weight loss and the starting moisture, with a live remaining-time estimate that updates as conditions change.",
+      "An on-device alert (buzzer, light or display) when the target moisture is reached, for example 7% for coffee.",
+      "An exportable drying log suitable for quality certification."
     ],
-    bottleneck: "Agricultural Metrology & Quality Risk",
-    techFocus: "Data-driven drying curves syncing ambient weather APIs with moisture thresholds."
+    bottleneck: "Agricultural metrology and quality risk",
+    techFocus: "Weight-based moisture estimation and drying-curve prediction, checked against a reference."
   },
   {
     id: "PS 03",
@@ -131,16 +133,18 @@ const PROBLEM_STATEMENTS = [
     theme: "agri",
     themeName: "Agriculture & Horticulture",
     chapterNum: "01",
-    title: "DRE-Powered Jackfruit & Banana Flower Processing Scheduler",
-    valueChain: "Secondary Produce Processing.",
-    oneSentence: "Balance daily harvest volume with solar forecasts to schedule heavy slicing machines vs. low-power dehydrators without battery drain.",
-    challenge: "Tribal women’s cooperatives could use solar-powered cutting, slicing, and dehydration machinery. Processing must happen immediately after harvest, but variable weather can cause the solar microgrid batteries to drain mid-operation.",
-    build: "A Production Scheduling & Load Balancing Web App for decentralized food processing hubs.",
+    title: "DRE-Powered Jackfruit & Banana Flower Processing: Solar-Aware Scheduler",
+    valueChain: "Secondary produce processing.",
+    oneSentence: "Build a production scheduling and load balancing tool for a decentralized food processing hub.",
+    challenge: "Tribal women's cooperatives could use solar-powered cutting, slicing, and dehydration machinery. Processing must happen immediately after harvest, but variable weather can cause the solar microgrid batteries to drain mid-operation.",
+    build: "A production scheduling and load balancing tool for a decentralized food processing hub.",
     deliverables: [
-      "An algorithm that looks at daily harvest volumes and solar generation forecasts to recommend the best hours to run heavy slicing machines vs. low-power dehydrators, avoiding battery depletion."
+      "A scheduler that takes harvest volumes, machine power ratings, battery capacity and a solar forecast, and recommends the best hours to run heavy slicing machines versus low-power dehydrators while avoiding battery depletion.",
+      "A one-page printed schedule that a cooperative member can follow without a smartphone.",
+      "A plain-language explanation of why each machine runs when it does."
     ],
-    bottleneck: "Production & Intermittency Mismatch",
-    techFocus: "Production load balancing algorithms matching machinery run times to solar generation maps."
+    bottleneck: "Production and intermittency mismatch",
+    techFocus: "Load balancing that matches machinery run times to solar generation and battery limits."
   },
   {
     id: "PS 04",
@@ -148,17 +152,19 @@ const PROBLEM_STATEMENTS = [
     theme: "aqua",
     themeName: "Aquaculture & Cold Chain",
     chapterNum: "02",
-    title: "Smart Thermal Load Shifting for Shrimp Hatcheries & Cold Storage",
-    valueChain: "Shrimp & Prawn Farming.",
-    oneSentence: "Over-cool storage units safely during peak sunlight to store thermal energy, saving battery reserves for night aerators.",
+    title: "Shrimp Hatcheries & Cold Storage: Thermal Pre-Cooling and Aerator Soft-Start Rig",
+    valueChain: "Shrimp and prawn farming.",
+    oneSentence: "Build a rig that stores cold when solar is available and starts motors gently to avoid surge currents.",
     challenge: "Shifting rural cold rooms and hatchery aerators completely to solar-plus-storage mini-grids is expensive due to high battery costs. Hatcheries face immediate crop spoilage if the power drops abruptly.",
-    build: "An Intelligent Thermal & Aeration Balancing Engine. The software dynamically adjusts energy use based on peak sunlight.",
+    build: "A small-scale rig that demonstrates thermal storage and soft-starting high-inrush motors.",
     deliverables: [
-      "A prototype that 'over-cools' storage units safely during peak sunlight hours (storing thermal energy) to minimize energy draw at night.",
-      "An emergency battery-saving protocol for aerators during low-light days."
+      "An insulated mini cold box with thermal mass (water bottles or ice packs), temperature sensors, and a controller that safely over-cools during a 'solar window'.",
+      "A small motor or pump (aerator stand-in) with a soft-start or ramp circuit and a current sensor that records the start-up surge with and without it.",
+      "An emergency low-battery protocol that protects the aerator first and reduces the cold box load, demonstrated on a simulated battery state of charge.",
+      "A measured comparison of energy drawn during the 'night' phase with and without pre-cooling."
     ],
-    bottleneck: "Chemical Battery Capacity & Lifetime Cost",
-    techFocus: "Soft-starting high inrush induction motors and leveraging thermodynamic thermal mass shifts."
+    bottleneck: "Chemical battery capacity and lifetime cost",
+    techFocus: "Soft-starting high-inrush induction motors and shifting load using thermal mass, measured on a real rig."
   },
   {
     id: "PS 05",
@@ -166,19 +172,19 @@ const PROBLEM_STATEMENTS = [
     theme: "aqua",
     themeName: "Aquaculture & Cold Chain",
     chapterNum: "02",
-    title: "Pay-As-You-Go (PAYG) Shared Solar Cooling Hub Wallet",
-    valueChain: "Marine Fisheries and Fresh Vegetables.",
-    oneSentence: "Allow smallholder farmers and fishers to scan QR codes on shared cooling lockers, pay per hour/kg via UPI, and track diesel savings.",
+    title: "Shared Solar Cooling Hub: Pay-As-You-Go Locker with a Real Lock",
+    valueChain: "Marine fisheries and fresh vegetables.",
+    oneSentence: "Build a booking and micro-billing system for shared solar cooling lockers, including a physical locker mechanism.",
     challenge: "Smallholder marginal farmers and fishermen cannot afford to buy their own solar refrigerators. Shared community cooling hubs exist, but managing manual slot bookings and transparent payment collection can be chaotic.",
-    build: "A UPI-Integrated PAYG Booking & Micro-Billing Mobile App for shared solar cooling grids.",
+    build: "A booking and micro-billing system for shared solar cooling lockers, including a physical locker mechanism that only opens for a valid booking.",
     deliverables: [
-      "A consumer app where users scan a QR code on a specific cooling locker.",
-      "Digital handshake unlocking protocol.",
-      "Seamless pay per hour/kg via a mock UPI gateway.",
-      "A live dashboard tracking total diesel emissions saved by the village."
+      "A working locker prototype (solenoid or servo latch with a controller) that opens only after a valid booking token is presented by QR code or RFID.",
+      "A mock UPI payment flow (no real money) that bills per hour and per kg. A load cell for weight is a bonus.",
+      "Offline tolerance: if connectivity drops, bookings and payments are queued and reconciled later without double charging.",
+      "A dashboard showing diesel emissions avoided by the village, with the formula and the source of the emission factor stated."
     ],
-    bottleneck: "Upfront Capital Expense (CapEx) Barrier",
-    techFocus: "UPI-integrated micro-billing and dynamic slot reservation architecture (CapEx to OpEx)."
+    bottleneck: "Upfront capital expense (CapEx) barrier",
+    techFocus: "Physical locker access, offline-tolerant micro-billing and slot reservation (CapEx to OpEx)."
   },
   {
     id: "PS 06",
@@ -186,18 +192,18 @@ const PROBLEM_STATEMENTS = [
     theme: "msme",
     themeName: "Urban Infrastructure & Industrial MSMEs",
     chapterNum: "03",
-    title: "Commercial Rooftop Solar Cluster Feasibility & Grid Transformer Safety Tool",
-    valueChain: "Industrial MSMEs, Pharma Clusters, and Large Commercial Establishments.",
-    oneSentence: "Simulate adding commercial rooftop solar to distribution transformers to forecast reverse power voltage spikes and safety scores.",
+    title: "Commercial Rooftop Solar Clusters: Transformer Hosting Capacity Simulator",
+    valueChain: "Industrial MSMEs, pharma clusters and large commercial establishments.",
+    oneSentence: "Build a geospatial solar penetration and transformer hosting capacity simulator for local utility networks.",
     challenge: "Rapid, uncoordinated rooftop solar adoption by commercial buildings pushes heavy reverse power back into local distribution transformers during sunny afternoons, risking grid failure.",
-    build: "A Geospatial Solar Penetration & Transformer Hosting Capacity Simulator for local utility networks.",
+    build: "A geospatial solar penetration and transformer hosting capacity simulator for local utility networks.",
     deliverables: [
-      "An interactive map (using Streamlit or Leaflet) mapping local transformers.",
-      "Pin-drop simulation allowing users to simulate adding a new rooftop system.",
-      "Instant 'Grid Safety Impact Score' output and capacity threshold warning."
+      "An interactive map (Streamlit, Leaflet or similar) showing local transformers, where a user can drop a pin to simulate adding a new rooftop system.",
+      "A 'Grid Safety Impact Score' and a capacity threshold warning, with the method written out: which criterion you use and why.",
+      "A clear statement of what data a real utility would need to make the tool reliable."
     ],
-    bottleneck: "One-Way Distribution Grid Volatility",
-    techFocus: "Geospatial transformer hosting capacity simulation and reverse power throttling."
+    bottleneck: "One-way distribution grid volatility",
+    techFocus: "Geospatial transformer hosting capacity simulation and reverse-power warnings, checked against reference cases."
   },
   {
     id: "PS 07",
@@ -205,17 +211,18 @@ const PROBLEM_STATEMENTS = [
     theme: "msme",
     themeName: "Urban Infrastructure & Industrial MSMEs",
     chapterNum: "03",
-    title: "Dynamic Time-of-Use (ToU) Tariff Engine for Manufacturing Clusters",
-    valueChain: "Heavy Fabrication, Engineering, and Apparel Manufacturing.",
-    oneSentence: "Match factory machinery run schedules with real-time solar availability to reduce peak tariff bills and absorb solar abundance.",
-    challenge: "Industrial units run heavy machinery during peak grid hours, driving up power costs, while their rooftop solar arrays generate excess power that goes waste when the factories are dampening operations.",
-    build: "An AI-Based Power Demand Shifting Engine that matches industrial production schedules with real-time solar availability.",
+    title: "Manufacturing Clusters: Solar-Aware Demand Shifting Scheduler",
+    valueChain: "Heavy fabrication, engineering and apparel manufacturing.",
+    oneSentence: "Build a demand shifting scheduler that matches production schedules with solar availability and time-of-use (ToU) tariffs.",
+    challenge: "Industrial units run heavy machinery during peak grid hours, driving up power costs, while their rooftop solar arrays generate excess power that goes to waste when the factories are dampening operations.",
+    build: "A demand shifting scheduler that matches production schedules with solar availability and time-of-use (ToU) tariffs.",
     deliverables: [
-      "A scheduling tool where factory managers input order deadlines and machinery power ratings.",
-      "An optimized shift schedule that maximizes direct solar consumption and minimizes peak-hour grid consumption."
+      "A scheduling tool where factory managers enter order deadlines, machinery power ratings, ToU tariff slabs and a solar profile.",
+      "An optimized shift schedule that maximizes direct solar consumption and minimizes peak-hour grid consumption, with the cost and solar share compared against a naive schedule.",
+      "A list of the real-world constraints you handled (machine order, changeovers, operator shifts, maximum demand charges) and those you did not."
     ],
-    bottleneck: "Demand-Side Flexibility Deficit",
-    techFocus: "Production scheduling tools that use time-of-use pricing models to absorb solar abundance."
+    bottleneck: "Demand-side flexibility deficit",
+    techFocus: "Time-of-use scheduling that absorbs solar abundance under real production constraints."
   },
   {
     id: "PS 08",
@@ -223,18 +230,18 @@ const PROBLEM_STATEMENTS = [
     theme: "tribal",
     themeName: "Tribal Livelihoods, Eco-Tourism & Field Operations",
     chapterNum: "04",
-    title: "Low-Bandwidth Remote Diagnostic App for Tribal Machinery (Offline-First)",
-    valueChain: "Non-Timber Forest Produce (Pepper Thrashers, Solar Cleaners, Millet Hullers in remote Paderu/Chintapalli).",
-    oneSentence: "Interface with isolated processing machinery via local Bluetooth to guide operators through repairs without internet, syncing via SMS.",
-    challenge: "Processing machinery operates in remote valleys with zero or minimal internet connectivity. When an inverter or motor acts up, local operators cannot diagnose it, resulting in extended down-times.",
-    build: "An Offline-First IoT Health Diagnostic Application that interfaces with machinery via local Bluetooth or Wi-Fi hotspots.",
+    title: "Tribal Machinery: Offline Fault Diagnostics on a Fault-Injectable Rig",
+    valueChain: "Non-timber forest produce (pepper thrashers, solar cleaners, millet hullers in remote Paderu and Chintapalli).",
+    oneSentence: "Build a small machine rig and an offline diagnostic reader that identifies faults and guides an operator through simple repairs.",
+    challenge: "Processing machinery operates in remote valleys with zero or minimal internet connectivity. When an inverter or motor acts up, local operators cannot diagnose it, resulting in extended downtimes.",
+    build: "A small machine rig and an offline diagnostic reader that identifies faults and guides an operator through simple repairs.",
     deliverables: [
-      "An app that reads machine fault codes locally without internet.",
-      "A lightweight embedded diagnostic tree to guide the operator through simple repairs.",
-      "Packaging of tech logs into a compressed text format to automatically sync over SMS when a cell tower is found."
+      "A rig with a motor and driver (or inverter stand-in), sensors for current, voltage, temperature and speed, and at least four faults that can be physically introduced.",
+      "An offline diagnostic device or app (phone via Bluetooth or local Wi-Fi, or a handheld with a display) that reads fault codes with no internet and walks the operator through simple repair steps using icons or Telugu prompts.",
+      "A log compressed to fit a single SMS (160 characters) holding the device ID, fault, time and key readings, ready to send when a cell tower is found. Sending a real SMS is optional."
     ],
-    bottleneck: "\"Last-Mile\" Diagnostic & Maintenance Gap",
-    techFocus: "Offline-first local Bluetooth diagnostic trees and compressed text-over-SMS logging."
+    bottleneck: ""Last-mile" diagnostic and maintenance gap",
+    techFocus: "Offline fault detection on a real rig, guided repair and SMS-sized logging."
   },
   {
     id: "PS 09",
@@ -242,17 +249,18 @@ const PROBLEM_STATEMENTS = [
     theme: "tribal",
     themeName: "Tribal Livelihoods, Eco-Tourism & Field Operations",
     chapterNum: "04",
-    title: "Eco-Tourism Microgrid Sizing Calculator & Guest Visibility Dashboard",
-    valueChain: "Experiential Tribal Homestays and Eco-resorts.",
-    oneSentence: "A bilingual (Telugu/English) sizing planner for homestay microgrids with an interactive guest display showcasing real-time green metrics.",
+    title: "Eco-Tourism Homestays: Microgrid Sizing Planner",
+    valueChain: "Experiential tribal homestays and eco-resorts.",
+    oneSentence: "Create an eco-resort microgrid planner and green metric tracker.",
     challenge: "Homestay owners want to go 100% green using solar and micro-hydro options, but they struggle to calculate how many panels or batteries they need without buying overly expensive commercial configurations.",
-    build: "An Eco-Resort Microgrid Planner & Green Metric Tracker.",
+    build: "An eco-resort microgrid planner and green metric tracker.",
     deliverables: [
-      "A simple, multi-lingual (Telugu/English) web form where a homestay owner enters room count and appliances to receive an optimal DRE blueprint.",
-      "An interactive guest display showcasing real-time metrics (e.g., 'Your stay today ran on 100% solar power, saving 12kg of CO₂')."
+      "A simple, multilingual (Telugu and English) web form where the owner enters room count and appliances and receives a DRE blueprint (panels, battery, inverter and, where relevant, micro-hydro) with a cost range.",
+      "Visible, editable assumptions (sun hours, battery depth of discharge, losses, days of autonomy).",
+      "A guest-facing display of green metrics, such as 'Your stay today ran on 100% solar power, saving 12 kg of CO₂.' Every figure must come from a stated calculation and source."
     ],
-    bottleneck: "Technical Sizing & Planning Illiteracy",
-    techFocus: "Sizing optimization forms converting basic appliance inventories into clean-energy prints."
+    bottleneck: "Technical sizing and planning illiteracy",
+    techFocus: "Converting appliance inventories into a verifiable clean-energy blueprint."
   },
   {
     id: "PS 10",
@@ -260,17 +268,19 @@ const PROBLEM_STATEMENTS = [
     theme: "tribal",
     themeName: "Tribal Livelihoods, Eco-Tourism & Field Operations",
     chapterNum: "04",
-    title: "AI Field Assistant for DRE Energy Audits & Livelihood Assessment",
-    valueChain: "Rural Enterprise Mobilization & NGO Field Operations.",
-    oneSentence: "A voice-to-text assistant in Telugu and English parsing village energy audits into instant technical and economic feasibility profiles.",
+    title: "Rural Enterprise Mobilization: Voice-Based Energy Audit Assistant",
+    valueChain: "Rural enterprise mobilization and NGO field operations.",
+    oneSentence: "Build a voice-based audit and baseline tool that works in regional languages.",
     challenge: "Field coordinators conducting energy audits across hundreds of tribal villages spend hours manually filling out forms to check if a solar pump or food processor is viable for a specific community cluster.",
-    build: "An AI-Powered Voice-Based Energy Audit & Baseline Assistant that works flawlessly in regional languages.",
+    build: "A voice-based audit and baseline tool that works in regional languages.",
     deliverables: [
-      "A voice-to-text mobile tool where field agents speak naturally in Telugu or English to record village data (e.g., active shops, diesel costs, operating hours).",
-      "Lightweight NLP parsing to immediately generate a standardized technical and economic feasibility summary."
+      "Voice input in Telugu and English that captures village data such as the number of active shops, current diesel costs and daily operating hours.",
+      "Detection of missing or unclear values, with a follow-up question instead of a guess.",
+      "A technical and economic feasibility summary in which every number traces to an input and a visible formula. No unexplained figures.",
+      "Support for poor connectivity: record now, process later."
     ],
-    bottleneck: "Feasibility Study & Energy Audit Delays",
-    techFocus: "Voice-to-text NLP processing for instant, standardized rural economic profiles in regional tongues."
+    bottleneck: "Feasibility study and energy audit delays",
+    techFocus: "Voice-to-structured-data extraction with transparent feasibility calculations in regional languages."
   }
 ];
 
