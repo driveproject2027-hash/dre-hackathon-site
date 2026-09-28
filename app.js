@@ -240,7 +240,7 @@ const PROBLEM_STATEMENTS = [
       "An offline diagnostic device or app (phone via Bluetooth or local Wi-Fi, or a handheld with a display) that reads fault codes with no internet and walks the operator through simple repair steps using icons or Telugu prompts.",
       "A log compressed to fit a single SMS (160 characters) holding the device ID, fault, time and key readings, ready to send when a cell tower is found. Sending a real SMS is optional."
     ],
-    bottleneck: ""Last-mile" diagnostic and maintenance gap",
+    bottleneck: "\"Last-mile\" diagnostic and maintenance gap",
     techFocus: "Offline fault detection on a real rig, guided repair and SMS-sized logging."
   },
   {
