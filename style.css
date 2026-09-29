@@ -1529,7 +1529,8 @@ section[id], header[id] {
   width: 100%;
   border-collapse: collapse;
   text-align: left;
-  min-width: 860px;
+  min-width: 1000px !important;
+  table-layout: fixed;
 }
 
 .report-table th {
