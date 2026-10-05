@@ -810,7 +810,7 @@ function renderRegistrationSuccess(data) {
 
   const pocInput = document.getElementById("pocSubmissionUrl");
   if (pocInput) {
-    pocInput.value = `https://alcovepartners.com/assets/hackap-mar26/poc-submission.html?team=${encodeURIComponent(data.regId)}`;
+    pocInput.value = `${window.location.origin}/poc-submission.html?team=${encodeURIComponent(data.regId)}`;
   }
 
   formCard.style.display = "none";

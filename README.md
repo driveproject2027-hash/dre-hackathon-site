@@ -46,7 +46,7 @@ A human art-directed editorial web platform, designed for a national clean-energ
    - **Bottleneck Matrix**: Professional consulting report table (*PS*, *PROBLEM*, *GLOBAL BOTTLENECK*, *TECHNICAL FOCUS*) with light forest-green selection state.
    - **Rules & Guidelines**: Official competition framework:
      - *01 Immediate Start & Registration Deadline*: Hackathon starts upon registration; last day to register is **6th October**.
-     - *02 Problem Statements*: 10 challenges with MVP/prototype deliverables ([PDF Download](https://alcovepartners.com/assets/hackap-mar26/hackap-iot-problem-statements.pdf)).
+     - *02 Problem Statements*: 10 challenges with MVP/prototype deliverables ([PDF Download](assets/Final_Plus_Plus_Plus.pdf)).
      - *03 Phase 1 Prototype Submission*: Last date to submit PoC presentation/video is **9th October** via unique registration link.
      - *04 Evaluation Standard*: Top 15–25 teams selected for finals based on MVP quality.
      - *05 Phase 2 In-Person Finals*: AU Incubation Center (ā hub) @ 8:45 AM (5-minute live demo to judges).
